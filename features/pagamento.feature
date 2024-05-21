@@ -19,12 +19,12 @@ Scenario: Adicionar novo método de pagamento com sucesso
 	5555” e type “debit” na lista de métodos de pagamento
 	registrados
 	When eu seleciono a opção “Adicionar” 
-    And eu preencho os campos card_number: “5555
+    	And eu preencho os campos card_number: “5555
 	5555 5555 5555”, name: “Iasmin Gomes”, expire_date:
 	“06/2100”, type: “debit” e cvv: “123”
 	And eu seleciono a opção “Salvar”
 	Then eu estou na página de “Métodos de Pagamento”
-    And eu vejo o cartão com card_number “5555 5555 5555
+    	And eu vejo o cartão com card_number “5555 5555 5555
 	5555” e type “debit” na lista de métodos de pagamento
 	registrados
 
@@ -34,13 +34,13 @@ Scenario: Adicionar novo método de pagamento sem sucesso
 	5555” e type “debit” na lista de métodos de pagamento
 	registrados
 	When eu seleciono a opção “Adicionar” 
-    And eu preencho os campos card_number: “5555
+    	And eu preencho os campos card_number: “5555
 	5555 5555 5555”, name: “Iasmin Gomes”, expire_date:
 	“06/2100”, type: “debit” e cvv: “”
 	And eu seleciono a opção “Salvar”
 	Then eu vejo uma mensagem de erro “Dados inválidos”
-    And eu estou na página de “Métodos de Pagamento” 
-    And eu não vejo o cartão com card_number “5555 5555 5555
+    	And eu estou na página de “Métodos de Pagamento” 
+    	And eu não vejo o cartão com card_number “5555 5555 5555
 	5555” e type “debit” na lista de métodos de pagamento
 	registrados
 
@@ -110,7 +110,7 @@ Scenario: Adicionar novo método de pagamento sem sucesso
 	“06/2100”, type: “debit” e cvv: “”
 	Then o cartão com card_number “5555 5555 5555
 	5555” e type “debit” não é registrado no seu cadastro
-    And o código de resposta é “400”
+    	And o código de resposta é “400”
 
 Scenario: Remover método de pagamento
 	Given o usuário com e-mail “iasmin@protonmail.com” está
