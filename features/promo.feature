@@ -52,7 +52,7 @@ Scenario: Cadastro de promoções bem sucedido
     And o adm
 
 Scenario: Cadastro de promoções mal-sucedido por falta de campos prenchidos
-    Given "Fernando" está na tela "Cadastrar promoção"
+    Given "Fernando" está na tela "Promoções cadastradas"
     And ele possui pelo menos um imóvel disponível para ser resevado pelo usuário
     And não existem promoções cadastradas para esse imóvel
     When "Fernando" seleciona a opção de cadastrar uma nova promoção
@@ -61,7 +61,7 @@ Scenario: Cadastro de promoções mal-sucedido por falta de campos prenchidos
 
 ## extra: 
 Scenario: Cadastro de promoções mal-sucedido por campos prenchidos indevidadamente
-    Given "Fernando" está na tela "Cadastrar promoção"
+    Given "Fernando" está na tela "Promoções cadastradas"
     And ele possui pelo menos um imóvel disponível para ser resevado pelo usuário
     And não existem promoções cadastradas para esse imóvel
     When "Fernando" seleciona a opção de cadastrar uma nova promoção
@@ -69,6 +69,14 @@ Scenario: Cadastro de promoções mal-sucedido por campos prenchidos indevidadam
     And "Fernando" preenche indevidadamente ou com uma formatação diferente da esperada pelo campos ou não é escrito nada no campos
     And não é possível enviar as informações para cadastro de nova promoção
 ##
+
+Scenario: Cadastro de mais de uma promoção por id
+    Given "Fernando" está na tela "Promoções cadastradas" 
+    And há uma lista de promoções cadastradas vazia
+    And "Fernando" fez o cadastro de promoções bem sucedido de um hotel com id "000000"
+    When "Fernando" tenta fazer o cadastro de promoções bem sucedido de outra promoção de hotel
+    And o sistema identifica outra promoção cadastrada com o mesmo id
+    Then o sistema desabilita a opção de saltar e enviar promoção para aquele imóvel até que sejam 
 
 Scenario: Excluir promoções com promoções cadastradas (lixeira)
     Given "Iasmin" está na tela "Promoções cadastradas"
@@ -94,16 +102,22 @@ Scenario: Edição de promoção mal-sucedida
     When "Marcos" faz o preenchimento incorreto dos campos na tela "Editar promoções"
     Then "Marcos" não consegue salvar sua edição 
 
-Scenario: Editar promoções com promoções cadastradas
-    Given "Marcos" está na tela "Editar promoções"
-    When "Marcos" faz uma edição bem-sucedida 
-    Then
-
-Scenario: Editar promoções sem promoções cadastradas
-    Given
-    When
-    Then
-
-
 ------------
 Como a promoção afeta a tela de hoteis disponíveis
+
+Scenario: Promoções ativas na tela "Home"
+    Given o usuário "Matheus" está navegando em uma tela diferente de "Home"
+    And existe uma lista de promoções cadastradas não vazia
+    When "Matheus" acessa a tela "Home" 
+    Then as promoções ativas são exibidas no header da tela "Home"
+
+Scenario: há promoção existente para aquele id
+    Given o usuário "Felipe" está na página "Detalhes da acomodação"
+    When "Felipe" seleciona a opção de promoção disponível
+    Then o sistema requisita as informações da promoção associada ao id do hotel 
+    And as informções da promoção associadas ao id do hotel são mostradas
+
+Scenario: não há promoção existente para aquele id
+    Given o usuário "Felipe" está na página "Detalhes da acomodação"
+    When "Felipe" seleciona a opção de promoções disponíveis
+    Then uma mensagem indicando a falta de promoções para aquele hotel é mostrada
