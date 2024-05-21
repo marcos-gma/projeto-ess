@@ -60,7 +60,7 @@ Scenario: Selecionar método de pagamento
 	5555” e type “debit” na lista de métodos de pagamento
 	registrados
 	When eu seleciono a opção “Selecionar”
-	Then eu estou na página de "Confirmação de Reserva" 
+	Then eu estou na página de "Confirmação de Reserva"
 	And eu vejo o cartão com card_number “5555 5555 5555
 	5555” e type “debit” como método de pagamento escolhido
 
@@ -128,6 +128,6 @@ Scenario: Selecionar método de pagamento
 	And o cartão com card_number “5555 5555 5555
 	5555” e type “debit” está registrado no seu cadastro
 	When o usuário seleciona o cartão com card_number “5555 5555 5555
-	5555” e type “debit” está registrado no seu cadastro
+	5555” e type “debit”
 	Then o cartão com card_number “5555 5555 5555
 	5555” e type “debit” se torna o método de pagamento escolhido
