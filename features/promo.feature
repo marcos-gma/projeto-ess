@@ -3,113 +3,91 @@ As a administrador do sistema
 I want to ser capaz de criar, remover e atualizar promoções
 So that o usuário possa fazer reservas com valores promocionais
 
-Scenario: Lista de promoções cadastradas vazia
-    Given existe pelo menos uma promoção cadastrada pelo administrador "Gabriel"
-    When "Gabriel" abrir a tela "Cadastrar promoção"
-    Then vai ser exibido uma lista com todos as promoções cadastradas para cada imóvel na tela de "Promoções cadastradas"
+Scenario: Lista de Promoções Cadastradas não vazia OK
+    Given o administrador "Gabriel" já cadastrou uma promoção para a prorpriedade de nome "Casa em Porto"
+    When "Gabriel" abrir a tela "Promoções Cadastradas"
+    Then vai ser exibido as informações da promoção associada a propriedade de nome "Casa em Porto"
 
-Scenario: Lista de promoções cadastradas não vazia
+Scenario: Lista de Promoções Cadastradas vazia OK
     Given nenhuma promoção foi cadastrada pelo administrador "Gabriel"
-    When "Gabriel" abrir a tela "Cadastrar promoção"
-    Then vai ser exibido uma mensagem indicando que nenhuma promoção foi cadastrado no sistema na tela de "Promoções cadastradas"
+    When "Gabriel" abrir a tela "Promoções Cadastradas"
+    Then vai ser exibido uma mensagem indicando que nenhuma promoção foi cadastrado no sistema na tela de "Promoções Cadastradas"
 
-Scenario: Preenchimento correto dos campos na tela "Cadastrar promoção"
-    Given o administrador "João" está na tela "Cadastrar promoção"
-    When "João" preenche todos os campos obrigatórios corretamente, ou seja, sem nenhum erro de formatação
-    Then o sistema desabilita a opção de salvar e enviar promoção para aquele imóvel até que todos os campos sejam preenchidos
-    And "João" pode salvar e enviar a opção as informações cadastradas no sistema 
-    And o sistema salva as informações preenchidas com o id "050505"
-
-Scenario: Preenchimento incorreto dos campos na tela "Cadastrar promoção"
-    Given o administrador "João" está na tela "Cadastrar promoção"
-    When "João" faz o preenchimento incorreto dos campos na tela "Cadastrar promoção"
-    Then o sistema desabilita a opção de salvar e enviar promoção para aquele imóvel até que todos os campos sejam preenchidos
-
-Scenario: Preenchimento correto dos campos na tela "Editar promoções"
-    Given o administrador "Maria" está na tela "Editar promoções"
-    When "Maria" preenche todos os campos obrigatórios corretamente, ou seja, sem nenhum erro de formatação
-    Then "Maria" pode salvar e enviar as edições para o sistema 
-    And o sistema salva as informações preenchidas com o id "060606"
-
-Scenario: Preenchimento incorreto dos campos na tela "Editar promoções"
-    Given o administrador "Maria" está na tela "Editar promoções"
-    When "Maria" faz o não faz o preenchimento correto dos campos na tela "Editar Promoções"
-    Then o sistema desabilita a opção de salvar alterações 
-
-Scenario: administrador seleciona a opção para cadastrar uma nova promoção
+Scenario: Seleção da opção "Cadastrar Nova Promoção" OK
     Given "Beatriz" está na página "Cadastrar promoção"
-    When "Beatriz" seleciona a opção para cadastrar uma nova promoção
-    Then "Beatriz" é direcionada a tela "Inserir informações"
-    And os campos "Desconto percentual", "nome da promoção", "data de início" e "data de fim" são disponibilizados para preenchimento
+    When "Beatriz" seleciona a opção "Cadastrar Nova Promoção"
+    Then "Beatriz" é direcionada a tela "Cadastrar Promoção"
 
-Scenario: Cadastro de promoções bem sucedido
-    Given "Fernando" está na tela "Cadastrar promoção"
-    And ele possui um imóvel disponível para ser resevado pelo usuário
-    And não existem promoções cadastradas para esse imóvel
-    When "Fernando" seleciona a opção de cadastrar uma nova promoção
-    And "Fernando" faz o preenchimento correto dos campos na tela "Cadastrar promoção"
-    Then o sistema habilita a opção de  salvar e enviar promoção para aquele imóvel até que todos os campos sejam preenchidos
-    And o adm
+Scenario: Cadastro com sucesso de nova promoção OK
+    Given o adm "João" está na tela "Cadastrar Promoção".
+    When "Joao" preenche os campos nomeProp:
+    "Park Hotel Caruaru", desconto: "20%", promoname:
+    "Dia das mães", data_inicio: "12/05/2024", data_fim "20/05/2024".
+    And "João" seleciona a opção "Salvar e Enviar"
+    Then uma mensagem de sucesso é exibida para João.
+    And "João" é direcionado para a tela "Promoções Cadastradas"
+    And a promoção da prorpriedade de nomeProp "Park Hotel Caruaru" é mostrada na tela
 
-Scenario: Cadastro de promoções mal-sucedido por falta de campos prenchidos
-    Given "Fernando" está na tela "Promoções cadastradas"
-    And ele possui pelo menos um imóvel disponível para ser resevado pelo usuário
-    And não existem promoções cadastradas para esse imóvel
-    When "Fernando" seleciona a opção de cadastrar uma nova promoção
-    And "Fernando" faz o preenchimento incorreto dos campos na tela "Cadastrar promoção"
-    And não é possível enviar as informações para cadastro de nova promoção
+Scenario: Cadastro falho de nova promoção por falta de informação OK
+    Given o adm "João" está na tela "Cadastrar Promoção".
+    When "Joao" preenche os campos nomeProp:
+    "Park Hotel Caruaru", desconto: "20%", promoname:
+    "", data_inicio: "12/05/2024", data_fim "20/05/2024".
+    Then uma mensagem de erro indicando o preenchimento inadequado das informações.
+    And "João" é direcionado para a tela "Cadastrar Promoção" 
+    And os campos campos nomeProp, desconto, promoname, data_inicio e data_fim estão vazios
 
-## extra: 
-Scenario: Cadastro de promoções mal-sucedido por campos prenchidos indevidadamente
-    Given "Fernando" está na tela "Promoções cadastradas"
-    And ele possui pelo menos um imóvel disponível para ser resevado pelo usuário
-    And não existem promoções cadastradas para esse imóvel
-    When "Fernando" seleciona a opção de cadastrar uma nova promoção
-    Then uma nova página é aberta para preenchimentos dos campos "Desconto percentual", "nome da promoção", "data de início" e "data de fim"
-    And "Fernando" preenche indevidadamente ou com uma formatação diferente da esperada pelo campos ou não é escrito nada no campos
-    And não é possível enviar as informações para cadastro de nova promoção
-##
+Scenario: Cadastro de mais de uma promoção por prorpriedade OK
+    Given "Fernando" seleciona a opção "Cadastrar Nova Promoção"
+    And a propriedade de nomeProp "Casa em Gravatá" já tem uma promoção cadastrada por "Fernando"
+    And "Fernando" preenche o campo nomeProp com "Casa em Gravatá"
+    When "Fernando" seleciona a opção "Salvar e Enviar"
+    Then é exibida uma mensagem de erro indicando o preenchimento inadequado das informações
+    And "João" é direcionado para a tela "Cadastrar Promoção" 
+    And os campos campos nomeProp, desconto, promoname, data_inicio e data_fim estão vazios
 
-Scenario: Cadastro de mais de uma promoção por id
-    Given "Fernando" está na tela "Promoções cadastradas" 
-    And há uma lista de promoções cadastradas vazia
-    And "Fernando" fez o cadastro de promoções bem sucedido de um hotel com id "000000"
-    When "Fernando" tenta fazer o cadastro de promoções bem sucedido de outra promoção de hotel
-    And o sistema identifica outra promoção cadastrada com o mesmo id
-    Then o sistema desabilita a opção de saltar e enviar promoção para aquele imóvel até que sejam 
 
-Scenario: Excluir promoções com promoções cadastradas (lixeira)
-    Given "Iasmin" está na tela "Promoções cadastradas"
-    And a lista de promoções cadastradas não está vazia
+Scenario: Excluir promoções na tela Promoções Cadastradas (lixeira) OK
+    Given "Iasmin" está na tela "Promoções Cadastradas"
+    And a lista de Promoções Cadastradas tem duas promoções de nomeProp: "Casa em Tamandaré" e "Quarto em BV"
     And "Iasmin" quer excluir uma promoção cadastrada
-    When "Iasmin" seleciona a opção para excluir promoção de id "020202" cadastrada 
-    Then o sistema remove a promoção de id "020202" e atualiza a tela
+    When "Iasmin" seleciona a opção para excluir promoção de nomeProp: "Casa em Tamandaré" 
+    Then o sistema remove a promoção de id de nomeProp: "Casa em Tamandaré"
     And uma mensagen de confirmação de exclusão é mostrada ao administrador 
+    Then "Iasmin" é redirecioanda à tela "Promoções Cadastradas"
+    And somente a promoção de nomeProp: "Quarto em BV" é exibida para "Iasmin"
 
 Scenario: administrador é redirecionado para a tela "Editar promoções" (caneta)
-    Given "Marcos" está na tela "Promoções cadastradas"
-    And a lista de promoções cadastradas não está vazia 
-    When "Marcos" seleciona a opção para editar promoção de id "030303"
+    Given "Marcos" está na tela "Promoções Cadastradas"
+    And "Marcos" tem duas promoções associadas ao nomeProp: "Quarto em Olinda" e "Kitnet em Recife" 
+    When "Marcos" seleciona a opção para editar promoção de nomeProp "Quarto em Olinda"
     Then "Marcos" é redirecionado para a tela "Editar promoções"
 
-Scenario: Edição de promoção bem-sucedida
-    Given "Marcos" está na tela "Editar promoções"
-    When "Marcos" faz o preenchimento correto dos campos na tela "Editar promoções"
-    Then uma mensagem de confirmação de edição é mostrada a "Marcos"  
+Scenario: Edutar com sucesso na tela "Editar promoções"
+    Given o administrador "Maria" está na tela "Editar promoções"
+    When "Maria" preenche os campos nomeProp: "Park Hotel Caruaru", desconto: "20%", promoname: 
+    "Dia das mães", data_inicio: "12/05/2024", data_fim "20/05/2024".
+    And "Maria" seleciona a opção "Salvar e Enviar"
+    Then uma mensagem de sucesso é exibida para Maria.
+    And "Maria" é direcionada para a tela "Promoções Cadastradas"
+    And a promoção da prorpriedade de nomeProp "Park Hotel Caruaru" é mostrada na tela
+    And informações editadas são mostradas no lugar das antigas
 
-Scenario: Edição de promoção mal-sucedida
-    Given "Marcos" está na tela "Editar promoções"
-    When "Marcos" faz o preenchimento incorreto dos campos na tela "Editar promoções"
-    Then "Marcos" não consegue salvar sua edição 
-
+Scenario: Editar sem sucesso na tela "Editar promoções"
+    Given o administrador "Maria" está na tela "Editar promoções"
+    When "Maria" preenche os campos nomeProp: "Park Hotel Caruaru", desconto: "20%", promoname:
+    "", data_inicio: "12/05/2024", data_fim "20/05/2024".
+    Then uma mensagem de erro indicando o preenchimento inadequado das informações é exibida para "Maria".
+    And "Maria" é direcionada para a tela "Editar Promoções" 
+    And os campos campos nomeProp, desconto, promoname, data_inicio e data_fim estão vazios
 ------------
 Como a promoção afeta a tela de hoteis disponíveis
 
 Scenario: Promoções ativas na tela "Home"
-    Given o usuário "Matheus" está navegando em uma tela diferente de "Home"
-    And existe uma lista de promoções cadastradas não vazia
+    Given o usuário "Matheus" está navegando na tela "Detalhes de Acomodação"
+    And O administrador "Gabriel" fez o Cadastro com sucesso de uma nova promoção com nomeProp "Quarto em Paulista"
     When "Matheus" acessa a tela "Home" 
-    Then as promoções ativas são exibidas no header da tela "Home"
+    Then a promoção do "Quarto em Paulista" é exibida no header da tela "Home"
 
 Scenario: há promoção existente para aquele id
     Given o usuário "Felipe" está na página "Detalhes da acomodação"
