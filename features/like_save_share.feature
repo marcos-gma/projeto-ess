@@ -1,6 +1,6 @@
 Feature: Gostar, Salvar e Compartilhar
     Como um usuário 
-    Eu quero gostar, salvar e compartilhar hoteis
+    Eu quero curtir, salvar e compartilhar hoteis
     Para que eu possa guardar hoteis que gostei e recomenda-los para outras pessoas
     
     Scenario: Visualizar Página
