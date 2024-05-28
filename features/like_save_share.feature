@@ -42,4 +42,5 @@ Feature: Gostar, Salvar e Compartilhar
     Scenario: Compartilhar hotel
         Given o usuário “Guilherme” está visualizando a página de “Pousada Maresia”
         When “Guilherme” clica em compartilhar a “Pousada Maresia” 
-        Then  Uma lista de opções de lugares para enviar “Pousada Maresia” aparece contendo “Whatsapp”, “Instagram” e “X”   
+        Then  Uma lista de opções de lugares para enviar “Pousada Maresia” aparece contendo “Whatsapp”, “Instagram” e “X”  
+        And um link de "Pousada Maresia" aparece na tela para poder ser copiado por "“Guilherme” 
