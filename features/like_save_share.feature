@@ -31,16 +31,28 @@ Feature: Gostar, Salvar e Compartilhar
         When “Guilherme” clica em salvar a  “Pousada Maresia”
         Then  a “Lista de hotéis salvos” no perfil de “Guilherme” contém a “Pousada Maresia” e “Hotel Brisa”
 
-    
     Scenario: Gerenciar a lista de hotéis salvos
         Given o usuário “Guilherme” está visualizando a página de “Perfil do usuário”
         And a lista de hotéis salvos contém a “Pousada Maresia”
         When “Guilherme” clica em deletar a “Pousada Maresia” 
         Then  a lista de hotéis salvos não contém a “Pousada Maresia”
 
-
     Scenario: Compartilhar hotel
         Given o usuário “Guilherme” está visualizando a página de “Pousada Maresia”
         When “Guilherme” clica em compartilhar a “Pousada Maresia” 
         Then  Uma lista de opções de lugares para enviar “Pousada Maresia” aparece contendo “Whatsapp”, “Instagram” e “X”  
         And um link de "Pousada Maresia" aparece na tela para poder ser copiado por "“Guilherme” 
+
+    Scenario: Nova Curtida no Servidor
+        Given o usuário “Guilherme” está visualizando a página de “Pousada Maresia”
+        And a lista de hotéis curtidos por “Guilherme” está vazia
+        When “Guilherme” clica em curtir a  “Pousada Maresia”
+        Then peço ao servidor para armazenar a “Pousada Maresia” na “Lista de Curtidas” associada ao usuário “Guilherme”
+        And a “Lista de Curtidas” associada a “Guilherme” no servidor contém apenas “Pousada Maresia” 
+
+    Scenario: Novo Item Salvo no Servidor
+        Given o usuário “Guilherme” está visualizando a página de “Pousada Maresia”
+        And a lista de hotéis salvos por “Guilherme” está vazia
+        When “Guilherme” clica em salvar a  “Pousada Maresia”
+        Then peço ao servidor para armazenar a “Pousada Maresia” na “Lista de Itens Salvos”” associada ao usuário “Guilherme”
+        And a “Lista de Itens Salvos” associada a “Guilherme” no servidor contém apenas “Pousada Maresia” 
