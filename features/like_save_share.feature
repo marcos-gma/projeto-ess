@@ -52,7 +52,7 @@ Feature: Gostar, Salvar e Compartilhar
 
     Scenario: Novo Item Salvo no Servidor
         Given o usuário “Guilherme” está visualizando a página de “Pousada Maresia”
-        And a lista de hotéis salvos por “Guilherme” está vazia
+        And a lista de hotéis salvos por “Guilherme” contém “Hotel Brisa”
         When “Guilherme” clica em salvar a  “Pousada Maresia”
         Then peço ao servidor para armazenar a “Pousada Maresia” na “Lista de Itens Salvos”” associada ao usuário “Guilherme”
-        And a “Lista de Itens Salvos” associada a “Guilherme” no servidor contém apenas “Pousada Maresia” 
+        And a “Lista de Itens Salvos” associada a “Guilherme” no servidor contém a “Pousada Maresia” e “Hotel Brisa”
