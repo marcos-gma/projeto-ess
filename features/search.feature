@@ -27,7 +27,7 @@ Feature: Busca com Filtros
         Then uma mensagem de erro aparece na tela indicando que a falta da informação de “quantidade de pessoas”
         And volta para a tela de pesquisa com os dados da data de ida como “21/05” e de volta no dia “24/05”
         And destino como “Fernando de Noronha” 
-        And quantidade de pessoas “_”
+        And quantidade de pessoas como “_”
     
     Scenario: Busca Básica no Servidor
         Given o hotel “Pousada Maresia” em “Fernando de Noronha” está armazenados no sistema com vagas de “21/05” a “24/05” para “2” pessoas por menos de “3000” reais e sendo “Pet Friendly” 
