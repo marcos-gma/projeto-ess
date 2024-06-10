@@ -1,16 +1,13 @@
-Feature: Usuário Comum
+# Funcionalidade: Página de Cadastro e Login
 
-    Cuida da parte de interação do programa com o usuário comum (hóspede ou proprietários)
 
-    # Funcionalidade: Página de Cadastro e Login
+# Funcionalidade: Publicar Reservas
+Feature: Publicar Reserva
+    Como um usuário comum
+    Eu quero publicar uma acomodação
+    Para que outras pessoas possam reservar meu espaço
 
-    # Funcionalidade: Publicar Reservas
-    Feature: Publicar Reserva
-      Como um usuário comum
-      Eu quero publicar uma acomodação
-      Para que outras pessoas possam reservar meu espaço
-    
-      Scenario: Inserir dados da acomodação
+    Scenario: Inserir dados da acomodação
         Given que eu sou um usuário autenticado
         When eu acesso a opção de publicar acomodação
         And eu insiro a quantidade de quartos como 2
@@ -21,8 +18,8 @@ Feature: Usuário Comum
         And eu adiciono fotos da acomodação
         And eu confirmo a publicação
         Then minha acomodação deve ser publicada com os dados fornecidos
-    
-      Scenario: Inserir dados incompletos
+
+    Scenario: Inserir dados incompletos
         Given que eu sou um usuário autenticado
         When eu acesso a opção de publicar acomodação
         And eu insiro a quantidade de quartos como 2
@@ -34,21 +31,21 @@ Feature: Usuário Comum
         And eu tento confirmar a publicação
         Then eu devo ver uma mensagem de erro indicando que a localização é obrigatória
         And a acomodação não deve ser publicada
-    
-      Scenario: Publicar acomodação sem fotos
+
+    Scenario: Publicar acomodação sem fotos
         Given que eu sou um usuário autenticado
         When eu acesso a opção de publicar acomodação
         And eu insiro a quantidade de quartos como 2
         And eu insiro a quantidade máxima de hóspedes como 4
         And eu insiro a quantidade de banheiros como 1
         And eu insiro a localização como "Rua Exemplo, 123, Cidade Exemplo"
-        And eu insiro o preço por noite como '$'150
+        And eu insiro o preço por noite como '$' 150
         And eu não adiciono fotos da acomodação
         And eu confirmo a publicação
         Then eu devo ver uma mensagem de erro indicando que ao menos uma foto é obrigatória
         And a acomodação não deve ser publicada
-    
-      Scenario: Cancelar publicação da acomodação
+
+    Scenario: Cancelar publicação da acomodação
         Given que eu sou um usuário autenticado
         When eu acesso a opção de publicar acomodação
         And eu insiro a quantidade de quartos como 2
@@ -61,19 +58,19 @@ Feature: Usuário Comum
         Then a acomodação não deve ser publicada
         And os dados inseridos não devem ser salvos
 
-    # Funcionalidade: Gerenciar Reservas
-    Feature: Gerenciar Reservas
-      Como um hóspede
-      Eu quero gerenciar minhas reservas
-      Para que eu possa editar ou cancelar minhas reservas conforme necessário
-    
+# Funcionalidade: Gerenciar Reservas
+Feature: Gerenciar Reservas
+    Como um hóspede
+    Eu quero gerenciar minhas reservas
+    Para que eu possa editar ou cancelar minhas reservas conforme necessário
+
     Scenario: Editar a duração da reserva
         Given que eu tenho uma reserva confirmada
         When eu acesso a opção de editar reserva
         And eu altero a duração da minha reserva
         And eu confirmo a alteração
         Then a duração da minha reserva deve ser atualizada
-    
+
     Scenario: Editar a quantidade de hóspedes
         Given que eu tenho uma reserva confirmada
         When eu acesso a opção de editar reserva
@@ -88,15 +85,19 @@ Feature: Usuário Comum
         And eu altero o 'tipo de quarto' para 'duplo'
         And eu confirmo a alteração
         Then o tipo de quarto na minha reserva deve ser atualizado para duplo
-    
-      Scenario: Cancelar a reserva
+
+    Scenario: Cancelar a reserva
         Given que eu tenho uma reserva confirmada
         When eu acesso a opção de cancelar reserva
         And eu confirmo o cancelamento
         Then minha reserva deve ser cancelada
         And eu devo receber uma confirmação de cancelamento
 
-    # Funcionalidade: Realizar Reserva (Felipe)
+Feature: Realizar reserva
+    Como um hóspede
+    Quero realizar uma reserva em uma acomodação
+    Para que eu possa usufruir da minha estadia nessa acomodação
+
     Scenario: Procurar disponibilidade da Hospedagem para determinadas informações de Estadia
         Given Usuário "felipe" está na página da hospedagem "KM Hostel"
         When Usuário insere data de check-in "25/08/2024"
@@ -109,15 +110,14 @@ Feature: Usuário Comum
         Given Usuário "felipe" que selecionou a modalidades "Quarto Duplo" em quantidade "2"
         And Escolheu prosseguir com o processo de reserva
         When Usuário "felipe" confirmaa dados prenchidos no login
-        And Confere tudo o que sua estadia inclui
         And prossegue com o processo de reserva
-        Then Usuário é levado para a página de pagamentos
+        Then Usuário é redirecionado para a página de pagamentos
 
     Scenario: Página de Realização da Reserva com usuário não logado e cadastrado
         Given Usuário "Null" que selecionou a modalidades "Quarto Duplo" em quantidade "2"
         And Escolheu prosseguir com o processo de reserva
         When Usuário "Null" realiza login para realizar reserva com dados do cadastro
-        Then Usuário "felipe" é levado até mesma página com seus dados de reserva preenchidos
+        Then Usuário "felipe" é redirecionado até mesma página com seus dados de reserva preenchidos
 
     Scenario: Página de Realização da Reserva com usuário não logado e não cadastrado
         Given Usuário "Null" que selecionou a modalidade "Quarto Duplo" em quantidade "2"
@@ -128,18 +128,20 @@ Feature: Usuário Comum
         And insere "81996968484" em Número
         And prossegue com o processo de reserva
         And Confere tudo o que sua estadia inclui
-        Then Usuário é levado para a página de pagamentos
+        Then Usuário é redirecionado para a página de pagamentos
 
 
-Feature: Conteúdo
+Feature: Avaliação
 
-    Cuida da parte de interação entre hóspedes e proprietários
+    Como um hóspede
+    Quero poder verificar avaliações da hospedagem de interesse
+    Também quero poder avaliar uma hospedagem após estadia
+    Para que eu possa ver e compartilhar experiências nessa estadia com outros usuários
 
-    # Funcionalidade: Avaliação de Reservas (Felipe)
     Scenario: Acesso a página de Avaliações de uma Hospedagem
         Given usuário "felipe" está na página da hospedagem "KM Hostel"
         When usuário "felipe" seleciona a seção de avaliações
-        Then usuário "felipe" é levado até a página de avaliações da hospedagem "KM Hostel"
+        Then usuário "felipe" é redirecionado até a página de avaliações da hospedagem "KM Hostel"
 
     Scenario: Escrever avaliação não logado
         Given usuário "Null" está na página de avaliações da hospedagem "KM Hostel"
@@ -147,7 +149,7 @@ Feature: Conteúdo
         When usuário "Null" seleciona para escrever uma avaliação da hospedagem "KM Hostel"
         Then programa solicita login para prosseguir
         And usuário "felipe" é logado com sucesso
-        And usuário "felipe" é levado até página de avaliações da hospedagem "KM Hostel"
+        And usuário "felipe" é redirecionado até página de avaliações da hospedagem "KM Hostel"
 
     Scenario: Autorização de avaliação da hospedagem
         Given usuário "felipe" está na página de avaliações da hospedagem "KM Hostel"
@@ -160,7 +162,7 @@ Feature: Conteúdo
         And programa solicitou número da reserva
         When usuário "felipe" inseriu "2233445566" em número da reserva
         And número de reserva é válido
-        Then usuário "felipe" É levado até a página de Escrita da avaliação sobre a hospedagem "KM Hostel"
+        Then usuário "felipe" É redirecionado até a página de Escrita da avaliação sobre a hospedagem "KM Hostel"
 
     Scenario: Número de Reserva negado
         Given usuário "felipe" quer escrever uma avaliação sobre a hospedagem "KM Hostel"
@@ -194,7 +196,7 @@ Feature: Conteúdo
         And insere data de check-in "25/08/2024" e data de check-out "28/08/2024"
         And e insere que os hóspedes serão "2" adultos e "1" criança
         And insere "2" na quantidade de quartos
-        Then Usuário é levado até página de procura que contém hospedagem "KM Hostel"
+        Then Usuário é redirecionado até página de procura que contém hospedagem "KM Hostel"
         And Preço "350" é mostrado pelo custo de "2" diárias
 
 # Funcionalidade: Salvar, Gostar e Compartilhar
