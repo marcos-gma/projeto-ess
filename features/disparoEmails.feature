@@ -22,3 +22,5 @@ Service:
         Then uma requisição GET é enviada ao sistema 
         Then o sistema confirma a requisição      
         Then um Email é enviado com os dados fornecidos pelo sistema para “José Maria”
+
+     ##teste 
