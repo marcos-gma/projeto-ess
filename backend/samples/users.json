@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "fullName": "José Maria",
+    "birthday": "05/15/2000",
+    "email": "JS@email.com",
+    "cellphone": "81998138209",
+    "password": "$2a$10$C0zPbFvhQTGIUjYIMIKp3O/gNa.CQUwPAYRm4zKId9xqrrQAmPp.a",
+    "reservationsId": [],
+    "accommodationsId": []
+  },
+  {
+    "id": "2",
+    "fullName": "José Roberto",
+    "birthday": "09/09/1998",
+    "email": "JR@email.com",
+    "cellphone": "81995532312",
+    "password": "$2a$10$C0zPbFvhQTGIUjYIMIKp3O/gNa.CQUwPAYRm4zKId9xqrrQAmPp.a",
+    "reservationsId": [],
+    "accommodationsId": []
+  },
+  {
+    "id": "5e3ff57b-3917-4092-83ed-9c2b696bac69",
+    "fullName": "Matheus Pinheiro",
+    "birthday": "01/01/2000",
+    "email": "matheus@email.com",
+    "cellphone": "81998138209",
+    "password": "$2a$10$V0tEX8rXO3KBTzuq/mqU0e.0Oal23wuK.7l2E.4l/1a0rhHAkwMMS",
+    "reservationsId": [],
+    "accommodationsId": []
+  }
+]
