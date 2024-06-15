@@ -3,115 +3,307 @@ As a administrador do sistema
 I want to ser capaz de criar, remover e atualizar promoções
 So that o usuário possa fazer reservas com valores promocionais
 
-Scenario: Lista de Promoções Cadastradas não vazia OK
-    Given o administrador "Gabriel" já cadastrou uma promoção para a prorpriedade de nome "Casa em Porto"
-    When "Gabriel" abrir a tela "Promoções Cadastradas"
-    Then vai ser exibido as informações da promoção associada a propriedade de nome "Casa em Porto"
-
+Scenario: Lista de Promoções Cadastradas não vazia 
+    Given o administrador "Gabriel" já cadastrou uma promoção para a prorpriedade de nomeProp "Casa em Porto"
+    Then "Gabriel" visualiza a promoção associada à propriedade de nomeProp "Casa em Porto"
+    And todas as promoções cadastradas são exibidas na lista
+    
 Scenario: Lista de Promoções Cadastradas vazia OK
     Given nenhuma promoção foi cadastrada pelo administrador "Gabriel"
-    When "Gabriel" abrir a tela "Promoções Cadastradas"
-    Then vai ser exibido uma mensagem indicando que nenhuma promoção foi cadastrado no sistema na tela de "Promoções Cadastradas"
-
-Scenario: Seleção da opção "Cadastrar Nova Promoção" OK
-    Given "Beatriz" está na página "Cadastrar promoção"
+    When "Gabriel" abre a tela "Promoções Cadastradas"
+    Then uma mensagem indicando que nenhuma promoção foi cadastrada é exibida
+    And a lista de promoções está vazia
+    
+Scenario: Seleção da opção "Cadastrar Nova Promoção"
+    Given "Beatriz" está na página "Promoções Cadastradas"
     When "Beatriz" seleciona a opção "Cadastrar Nova Promoção"
-    Then "Beatriz" é direcionada a tela "Cadastrar Promoção"
+    Then ela é direcionada para a tela "Cadastrar Promoção"
+    And os campos para preenchimento das informações da nova promoção são exibidos
 
-Scenario: Cadastro com sucesso de nova promoção OK
-    Given o adm "João" está na tela "Cadastrar Promoção".
-    When "Joao" preenche os campos nomeProp:
-    "Park Hotel Caruaru", desconto: "20%", promoname:
-    "Dia das mães", data_inicio: "12/05/2024", data_fim "20/05/2024".
+
+Scenario: Cadastro com sucesso de nova promoção
+    Given o administrador "João" está na tela "Cadastrar Promoção"
+    When "João" preenche os campos:
+    | nomeProp       | desconto | promoName       | data_inicio | data_fim    |
+    | Casa em Porto  | 20%      | Dia das mães    | 12/05/2024  | 20/05/2024  |
     And "João" seleciona a opção "Salvar e Enviar"
-    Then uma mensagem de sucesso é exibida para João.
-    And "João" é direcionado para a tela "Promoções Cadastradas"
-    And a promoção da prorpriedade de nomeProp "Park Hotel Caruaru" é mostrada na tela
-
-Scenario: Cadastro falho de nova promoção por falta de informação OK
-    Given o adm "João" está na tela "Cadastrar Promoção".
-    When "Joao" preenche os campos nomeProp:
-    "Park Hotel Caruaru", desconto: "20%", promoname:
-    "", data_inicio: "12/05/2024", data_fim "20/05/2024".
-    Then uma mensagem de erro indicando o preenchimento inadequado das informações.
-    And "João" é direcionado para a tela "Cadastrar Promoção" 
-    And os campos campos nomeProp, desconto, promoname, data_inicio e data_fim estão vazios
-
-Scenario: Cadastro de mais de uma promoção por prorpriedade OK
-    Given "Fernando" seleciona a opção "Cadastrar Nova Promoção"
-    And a propriedade de nomeProp "Casa em Gravatá" já tem uma promoção cadastrada por "Fernando"
-    And "Fernando" preenche o campo nomeProp com "Casa em Gravatá"
-    When "Fernando" seleciona a opção "Salvar e Enviar"
-    Then é exibida uma mensagem de erro indicando o preenchimento inadequado das informações
-    And "João" é direcionado para a tela "Cadastrar Promoção" 
-    And os campos campos nomeProp, desconto, promoname, data_inicio e data_fim estão vazios
+    Then uma mensagem de sucesso é exibida para "João"
+    And "João" é redirecionado para a tela "Promoções Cadastradas"
+    And a nova promoção cadastrada é exibida na lista de promoções
 
 
-Scenario: Excluir promoções na tela Promoções Cadastradas (lixeira) OK
+Scenario: Cadastro com sucesso de nova promoção
+    Given o administrador "João" está na tela "Cadastrar Promoção"
+    When "João" preenche os campos:
+    | nomeProp       | desconto | promoName       | data_inicio | data_fim    |
+    | Casa em Porto  | 20%      | "          "    | 12/05/2024  | 20/05/2024  |
+    And "João" seleciona a opção "Salvar e Enviar"
+    Then uma mensagem de erro indicando o preenchimento inadequado das informações é exibida para "João"
+    And "João" permanece na tela "Cadastrar Promoção"
+    And os campos preenchidos previamente são mantidos com seus valores
+
+Scenario: Excluir promoções na tela "Promoções Cadastradas"
     Given "Iasmin" está na tela "Promoções Cadastradas"
-    And a lista de Promoções Cadastradas tem duas promoções de nomeProp: "Casa em Tamandaré" e "Quarto em BV"
-    And "Iasmin" quer excluir uma promoção cadastrada
-    When "Iasmin" seleciona a opção para excluir promoção de nomeProp: "Casa em Tamandaré" 
-    Then o sistema remove a promoção de id de nomeProp: "Casa em Tamandaré"
-    And uma mensagen de confirmação de exclusão é mostrada ao administrador 
-    Then "Iasmin" é redirecioanda à tela "Promoções Cadastradas"
-    And somente a promoção de nomeProp: "Quarto em BV" é exibida para "Iasmin"
+    And a lista de promoções cadastradas contém as promoções:
+    | id  | nomeProp       | desconto | promoName       | data_inicio | data_fim    |
+    |  1  | Casa em Porto  | 20%      | Dia das mães    | 12/05/2024  | 20/05/2024  |
+    |  2  | Apartamento SP | 15%      | Black Friday    | 24/11/2024  | 28/11/2024  |
+    When "Iasmin" seleciona a opção para excluir a promoção associada à propriedade "Casa em Porto"
+    Then uma mensagem de confirmação de exclusão é exibida para "Iasmin"
+    And a promoção "Casa em Porto" é removida da lista de promoções cadastradas
+    And somente a promoção "Apartamento SP" permanece visível na lista
 
-Scenario: administrador é redirecionado para a tela "Editar promoções" (caneta) OK
+
+Scenario: Administrador é redirecionado para a tela "Editar promoções"
     Given "Marcos" está na tela "Promoções Cadastradas"
-    And "Marcos" tem duas promoções associadas ao nomeProp: "Quarto em Olinda" e "Kitnet em Recife" 
-    When "Marcos" seleciona a opção para editar promoção de nomeProp "Quarto em Olinda"
-    Then "Marcos" é redirecionado para a tela "Editar promoções"
+    And "Marcos" visualiza a lista de promoções cadastradas com as promoções:
+    | id  | nomeProp        | desconto | promoName       | data_inicio | data_fim    |
+    |  1  | Quarto em Olinda| 20%      | Dia das mães    | 12/05/2024  | 20/05/2024  |
+    |  2  | Apartamento SP  | 15%      | Black Friday    | 24/11/2024  | 28/11/2024  |
+    When "Marcos" seleciona a opção para editar a promoção associada à propriedade "Quarto em Olinda"
+    Then "Marcos" é redirecionado para a tela "Editar Promoções"
+    And os campos da promoção "Quarto em Olinda" são exibidos para edição
 
-Scenario: Edutar com sucesso na tela "Editar promoções" OK
+
+Scenario: Editar com sucesso na tela "Editar promoções"
     Given o administrador "Maria" está na tela "Editar promoções"
-    When "Maria" preenche os campos nomeProp: "Park Hotel Caruaru", desconto: "20%", promoname: 
-    "Dia das mães", data_inicio: "12/05/2024", data_fim "20/05/2024".
+    And "Maria" visualiza os campos preenchidos da promoção associada à propriedade "Casa em Porto":
+    | nomeProp       | desconto | promoName       | data_inicio | data_fim    |
+    | Casa em Porto  | 10%      | Dia das mães    | 12/05/2024  | 20/05/2024  |
+    When "Maria" edita os campos:
+    | nomeProp       | desconto | promoName       | data_inicio | data_fim    |
+    | Casa em Porto  | 20%      | Dia das mães    | 12/05/2024  | 20/05/2024  |
     And "Maria" seleciona a opção "Salvar e Enviar"
-    Then uma mensagem de sucesso é exibida para Maria.
-    And "Maria" é direcionada para a tela "Promoções Cadastradas"
-    And a promoção da prorpriedade de nomeProp "Park Hotel Caruaru" é mostrada na tela
-    And informações editadas são mostradas no lugar das antigas
+    Then uma mensagem de sucesso é exibida para "Maria"
+    And "Maria" é redirecionada para a tela "Promoções Cadastradas"
+    And a promoção "Park Hotel Caruaru" é atualizada com o desconto de 25% na lista de promoções
 
-Scenario: Editar sem sucesso na tela "Editar promoções" OK
+
+Scenario: Editar com sucesso na tela "Editar promoções"
     Given o administrador "Maria" está na tela "Editar promoções"
-    When "Maria" preenche os campos nomeProp: "Park Hotel Caruaru", desconto: "20%", promoname:
-    "", data_inicio: "12/05/2024", data_fim "20/05/2024".
-    Then uma mensagem de erro indicando o preenchimento inadequado das informações é exibida para "Maria".
-    And "Maria" é direcionada para a tela "Editar Promoções" 
-    And os campos campos nomeProp, desconto, promoname, data_inicio e data_fim estão vazios
+    And "Maria" visualiza os campos preenchidos da promoção associada à propriedade "Casa em Porto":
+    | nomeProp       | desconto | promoName       | data_inicio | data_fim    |
+    | Casa em Porto  | 10%      | Dia das mães    | 12/05/2024  | 20/05/2024  |
+    When "Maria" edita os campos:
+    | nomeProp       | desconto | promoName       | data_inicio | data_fim    |
+    | Casa em Porto  | 20%      | Dia das mães    | 12/05/2024  | 20/05/2024  |
+    And "Maria" seleciona a opção "Salvar e Enviar"
+    Then uma mensagem de erro indicando o preenchimento inadequado das informações é exibida para "Maria"
+    And "Maria" permanece na tela "Editar Promoções"
+    And os campos preenchidos previamente são mantidos com seus valores
+    
 ------------
-Como a promoção afeta a tela de hoteis disponíveis
+SOBRE O HOME:
 
-Scenario: Promoções ativas na tela "Home"
-    Given o usuário "Matheus" está navegando na tela "Detalhes de Acomodação"
-    And O administrador "Gabriel" fez o Cadastro com sucesso de uma nova promoção com nomeProp "Quarto em Paulista"
-    When "Matheus" acessa a tela "Home" 
-    Then a promoção do "Quarto em Paulista" é exibida no header da tela "Home"
+Scenario: Há promoções ativas
+    Given o administrador "Gabriel" cadastrou uma nova promoção com sucesso para a propriedade com corpo:
+        { 
+            "nomeProp": "Casa em Porto",
+            "desconto": "20%",
+            "promoName": "Dia das mães",
+            "data_inicio": "12/05/2024",
+            "data_fim": "20/05/2024"
+        }
+    And "Matheus" está na tela "Home"
+    When "Matheus" seleciona a opção para ver as promoções ativas
+    Then ele vê a promoção cadastrada por "Gabriel" com corpo:
+        { 
+            "nomeProp": "Casa em Porto",
+            "desconto": "20%",
+            "promoName": "Dia das mães",
+            "data_inicio": "12/05/2024",
+            "data_fim": "20/05/2024"
+        }
 
-Scenario: há promoção existente para aquele id
-    Given o usuário "Felipe" está na página "Detalhes da acomodação"
-    And "Felipe" está navegando pelos detalhes da propriedade de nomeProp "Hotel Mcqueen"
-    And há uma promoção cadastrada para o nomeProp "Hotel Mcqueen"
-    When "Felipe" seleciona a opção de pagamento da reserva
-    Then uma mensagem indicando a existência de uma promoção relacionada à acomodação "Hotel Mcqueen" é mostrada a "Felipe"
-    And "Felipe" é redirecionado à página de "confirmação de reserva"
-    Then "Felipe" seleciona a opção "Prosseguir para Reserva"
-    Then "Felipe" reserva um quarto em "Hotel Mcqueen" com um valor descontado
 
-Scenario: não há promoção existente para aquele id
-    Given o usuário "Felipe" está na página "Detalhes da acomodação"
-    And "Felipe" está navegando pelos detalhes da propriedade de nomeProp "Hotel Sally"
-    And não há uma promoção cadastrada para o nomeProp "Hotel Sally"
-    When "Felipe" seleciona a opção de pagamento da reserva
-    Then uma mensagem indicando a ausência de promoções relacionadas à acomodação "Hotel Sally"
-    Then "Felipe" seleciona a opção "Prosseguir para Reserva"
-    And "Felipe" é redirecionado à página de "confirmação de reserva"
-    Then "Felipe" realiza a reserva com o valor original
+Scenario: Não há promoções ativas
+    Given a lista de promoções cadastradas é vazia
+    And "Matheus" está na tela "Home"
+    When "Matheus" seleciona as opções para ver as promoções ativas
+    Then o sistema retorna uma mensagem indicando a ausência de promoções cadastradas
 
-Scenario: Usuário seleciona a opção "Saiba Mais" na tela "confirmação de Reserva - Aviso"
-    Given "Duda" esá na tela "Confirmação de Reserva - Aviso"
-    When ela seleciona a opção "Saiba Mais"
-    Then "Duda" é direcionada à tela "Saiba Mais"
-    And as informações nomeProp: "Park Hotel Caruaru", desconto: "20%", promoname:
-    "Dia das mães", data_inicio: "12/05/2024" e data_fim "20/05/2024" da promoção são exibidas
+
+Scenario: Usuário reserva propriedade em promoção
+    Given as seguintes promoções estão ativas no sistema:
+      | nomeProp            | desconto | promoName      | data_inicio | data_fim   |
+      | "Park Hotel Caruaru"| "20%"    | "Dia das mães" | "12/05/2024"| "20/05/2024" |
+      | "Casa em Gravatá"   | "15%"    | "Black Friday" | "24/11/2024"| "28/11/2024" |
+      | "Chalé MG"          | "30%"    | "Natal"        | "20/12/2024"| "26/12/2024" |
+
+    And "Duda" está na tela "Promoções Ativas"
+    When "Duda" seleciona a opção de realizar reserva para a propriedade "Chalé MG"
+    Then "Duda" é direcionada a tela "Realizar Reserva"
+
+    
+---------------------------------
+SERVICE:
+Scenario: Lista de promoções cadastradas não vazia
+    Given há as seguintes promoções cadastradas no sistema:
+        | id  | nomeProp       | desconto | promoName       | data_inicio | data_fim    |
+        |  1  | Casa em Porto  | 20%      | Dia das mães    | 12/05/2024  | 20/05/2024  |
+        |  2  | Apartamento SP | 15%      | Black Friday    | 24/11/2024  | 28/11/2024  |
+        |  3  | Chalé MG       | 30%      | Natal           | 20/12/2024  | 26/12/2024  |
+    When uma nova requisição GET é feita para o endpoint "/promocoes_cadastradas"
+    And o código de resposta é "200" # 200 ok
+    Then o sistema retorna as promoções com corpo:
+        [
+            { 
+                "id": 1,
+                "nomeProp": "Casa em Porto",
+                "desconto": "20%",
+                "promoName": "Dia das mães",
+                "data_inicio": "12/05/2024",
+                "data_fim": "20/05/2024"
+            },
+            { 
+                "id": 2,
+                "nomeProp": "Apartamento SP",
+                "desconto": "15%",
+                "promoName": "Black Friday",
+                "data_inicio": "24/11/2024",
+                "data_fim": "28/11/2024"
+            },
+            { 
+                "id": 3,
+                "nomeProp": "Chalé MG",
+                "desconto": "30%",
+                "promoName": "Natal",
+                "data_inicio": "20/12/2024",
+                "data_fim": "26/12/2024"
+            }
+        ]
+
+
+Scenario: Lista de promoções cadastradas vazia
+    Given o administrador "Gabriel" não cadastrou nenhuma promoção no sistema
+    When uma nova requisição GET é feita para o endpoint "/promocoes_cadastradas"
+    And o código de resposta é "200"
+    Then o sistema retorna uma lista vazia 
+
+
+Scenario: Cadastro com sucesso de nova promoção
+    Given o administrador "João" deseja cadastrar uma nova promoção
+    When "João" faz uma requisição POST para o endpoint "/cadastrar_promocao" com o corpo:
+        {
+            "nomeProp": "Park Hotel Caruaru",
+            "desconto": "20%",
+            "promoName": "Dia das mães",
+            "data_inicio": "12/05/2024",
+            "data_fim": "20/05/2024"
+          }
+    Then o sistema retorna o código de resposta "201" # created
+    And o sistema retorna a promoção cadastrada com o corpo:
+        {
+            "id": 1,
+            "nomeProp": "Park Hotel Caruaru",
+            "desconto": "20%",
+            "promoName": "Dia das mães",
+            "data_inicio": "12/05/2024",
+            "data_fim": "20/05/2024"
+          }
+
+
+Scenario: Cadastro falho de nova promoção malsucedido
+    Given o administrador "João" deseja cadastrar uma nova promoção
+    When "João" faz uma requisição POST para o endpoint "/cadastrar_promocao" com o corpo:
+      {
+        "nomeProp": "Park Hotel Caruaru",
+        "desconto": "20%",
+        "promoName": "",
+        "data_inicio": "12/05/2024",
+        "data_fim": "20/05/2024"
+      }
+    Then o sistema retorna o código de resposta "400" # bad request
+    And o sistema retorna uma mensagem de erro indicando o preenchimento inadequado das informações
+
+
+Scenario: Excluir promoções
+    Given há as seguintes promoções cadastradas no sistema:
+    | id  | nomeProp       | desconto | promoName       | data_inicio | data_fim    |
+    |  1  | Casa em Porto  | 20%      | Dia das mães    | 12/05/2024  | 20/05/2024  |
+    |  2  | Apartamento SP | 15%      | Black Friday    | 24/11/2024  | 28/11/2024  |
+    When "Iasmin" faz uma requisição DELETE para o endpoint "/promocoes_cadastradas/1" # (ID da promoção)
+    Then o sistema retorna o código de resposta "200" # ok
+    And o sistema retorna uma mensagem de confirmação de exclusão
+    And ao fazer uma requisição GET para o endpoint "/promocoes_cadastradas"
+    Then a única promoção visível é a de corpo:
+    { 
+        "id": 2,
+        "nomeProp": "Apartamento SP",
+        "desconto": "15%",
+        "promoName": "Black Friday",
+        "data_inicio": "24/11/2024",
+        "data_fim": "28/11/2024"
+    }
+
+
+Scenario: Editar promoção com sucesso
+    Given há as seguintes promoções cadastradas no sistema:
+    | id  | nomeProp       | desconto | promoName       | data_inicio | data_fim    |
+    |  1  | Casa em Porto  | 20%      | Dia das mães    | 12/05/2024  | 20/05/2024  |
+    When "Maria" faz uma requisição PUT para o endpoint "/promocoes_cadastradas/1" (ID da promoção) com o corpo:
+      {
+        "nomeProp": "Casa em Porto",
+        "desconto": "25%", # mudou aqui
+        "promoName": "Dia das mães",
+        "data_inicio": "12/05/2024",
+        "data_fim": "20/05/2024"
+      }
+    Then o sistema retorna o código de resposta "200" # ok
+    And o sistema retorna a promoção atualizada com o corpo:
+      {
+        "id": 1,
+        "nomeProp": "Casa em Porto",
+        "desconto": "25%",
+        "promoName": "Dia das mães",
+        "data_inicio": "12/05/2024",
+        "data_fim": "20/05/2024"
+      }
+
+
+Scenario: Editar promoção sem sucesso
+    Given há as seguintes promoções cadastradas no sistema:
+    | id  | nomeProp       | desconto | promoName       | data_inicio | data_fim    |
+    |  1  | Casa em Porto  | 20%      | Dia das mães    | 12/05/2024  | 20/05/2024  |
+    When "Maria" faz uma requisição PUT para o endpoint "/promocoes_cadastradas/1" (ID da promoção) com o corpo:
+      {
+        "nomeProp": "Casa em Porto",
+        "desconto": "20%",
+        "promoName": "",
+        "data_inicio": "12/05/2024",
+        "data_fim": "20/05/2024"
+      }
+    Then o sistema retorna o código de resposta "400" # bad request
+    And o sistema retorna uma mensagem de erro indicando o preenchimento inadequado das informações
+
+--------------------
+SOBRE O HOME:
+
+Scenario: Há promoções ativas
+    Given o administrador "Gabriel" cadastrou uma nova promoção com sucesso para a propriedade com nomeProp "Quarto em Paulista"
+    And "Matheus" está no endpoint "/home"
+    When "Matheus" faz uma requisição GET para o endpoint "/promocoes"
+    Then o sistema retorna a promoção com nomeProp "Quarto em Paulista" no header da tela "Home"
+
+
+Scenario: Não há promoções ativas
+    Given a lista de promoções cadastradas é vazia
+    And "Matheus" está no endpoint "/home"
+    When "Matheus" faz uma requisição GET para o endpoint "/promocoes"
+    Then o sistema retorna uma mensagem indicando a ausência de promoções cadastradas
+
+
+Scenario: Usuário reserva propriedade em promoção
+    Given as seguintes promoções estão ativas no sistema:
+      | nomeProp            | desconto | promoName      | data_inicio | data_fim   |
+      | "Park Hotel Caruaru"| "20%"    | "Dia das mães" | "12/05/2024"| "20/05/2024" |
+      | "Casa em Gravatá"   | "15%"    | "Black Friday" | "24/11/2024"| "28/11/2024" |
+      | "Chalé MG"          | "30%"    | "Natal"        | "20/12/2024"| "26/12/2024" |
+
+    And "Duda" está no endpoint "/promocoes"
+    When "Duda" faz uma requisição POST para o endpoint "/realizar_reserva/1"
+    Then o sistema o código de resposta "200"
+
+
+
+
