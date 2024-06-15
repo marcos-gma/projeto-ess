@@ -29,10 +29,12 @@ Scenario: Cadastro com sucesso de nova promoção
     And "João" seleciona a opção "Salvar e Enviar"
     Then uma mensagem de sucesso é exibida para "João"
     And "João" é redirecionado para a tela "Promoções Cadastradas"
-    And a nova promoção cadastrada é exibida na lista de promoções
+    And a nova promoção cadastrada é exibida na lista de promoções com os dados:
+    | nomeProp       | desconto | promoName       | data_inicio | data_fim    |
+    | Casa em Porto  | 20%      | Dia das mães    | 12/05/2024  | 20/05/2024  |
 
 
-Scenario: Cadastro com sucesso de nova promoção
+Scenario: Cadastro falho de nova promoção
     Given o administrador "João" está na tela "Cadastrar Promoção"
     When "João" preenche os campos:
     | nomeProp       | desconto | promoName       | data_inicio | data_fim    |
@@ -41,6 +43,7 @@ Scenario: Cadastro com sucesso de nova promoção
     Then uma mensagem de erro indicando o preenchimento inadequado das informações é exibida para "João"
     And "João" permanece na tela "Cadastrar Promoção"
     And os campos preenchidos previamente são mantidos com seus valores
+    And a promoção não é adicionada à lista de promoções cadastradas
 
 Scenario: Excluir promoções na tela "Promoções Cadastradas"
     Given "Iasmin" está na tela "Promoções Cadastradas"
@@ -69,17 +72,17 @@ Scenario: Editar com sucesso na tela "Editar promoções"
     Given o administrador "Maria" está na tela "Editar promoções"
     And "Maria" visualiza os campos preenchidos da promoção associada à propriedade "Casa em Porto":
     | nomeProp       | desconto | promoName       | data_inicio | data_fim    |
-    | Casa em Porto  | 10%      | Dia das mães    | 12/05/2024  | 20/05/2024  |
+    | Casa em Porto  | 20%      | Dia das mães    | 12/05/2024  | 20/05/2024  |
     When "Maria" edita os campos:
     | nomeProp       | desconto | promoName       | data_inicio | data_fim    |
-    | Casa em Porto  | 20%      | Dia das mães    | 12/05/2024  | 20/05/2024  |
+    | Casa em Porto  | 25%      | Dia das mães    | 12/05/2024  | 20/05/2024  |
     And "Maria" seleciona a opção "Salvar e Enviar"
     Then uma mensagem de sucesso é exibida para "Maria"
     And "Maria" é redirecionada para a tela "Promoções Cadastradas"
-    And a promoção "Park Hotel Caruaru" é atualizada com o desconto de 25% na lista de promoções
+    And a promoção "Casa em Porto" é atualizada com o desconto de 25% na lista de promoções cadastradas
 
 
-Scenario: Editar com sucesso na tela "Editar promoções"
+Scenario: Editar sem sucesso na tela "Editar promoções"
     Given o administrador "Maria" está na tela "Editar promoções"
     And "Maria" visualiza os campos preenchidos da promoção associada à propriedade "Casa em Porto":
     | nomeProp       | desconto | promoName       | data_inicio | data_fim    |
