@@ -3,8 +3,8 @@ import path from 'path';
 
 import { v4 as uuidv4 } from 'uuid';
 
-function withDiscount(hotel, desconto) {
-    return (desconto / 100) * hotel.valor; // retorna o novo valor com base no desconto
+function withDiscount(originalValue, discountPercentage) {
+    return originalValue * ((100 - discountPercentage) / 100);
 }
 
 function noDiscount(hotel) {
@@ -26,7 +26,7 @@ var data = JSON.parse(fs.readFileSync(path.resolve('./samples/hotels.json'), 'ut
 // criar promoção
 export const createPromo = (req, res) => {
     try {
-        const { idHotel, desconto, promoName, promoId, data_inicio, data_fim } = req.body; // pega os dados da requisição
+        const { idHotel, desconto, promoName, data_inicio, data_fim } = req.body; // pega os dados da requisição
         const hotelIndex = data.findIndex(hotel => hotel.idHotel === idHotel); // encontra o hotel pelo id
         
         if (hotelIndex === -1) { // verifica se o hotel existe
@@ -38,11 +38,12 @@ export const createPromo = (req, res) => {
             return res.status(400).json({ error: 'Invalid discount. It should be between 1 and 100' });
         }
 
-        const newDiscountValue = withDiscount(hotel, desconto); // calcula o novo valor com base no desconto
+        const newDiscountValue = withDiscount(hotel.valor, desconto); // calcula o novo valor com base no desconto
+        hotel.valor = newDiscountValue; // atualiza o valor com o novo valor calculado
 
         hotel.desconto = desconto;
         hotel.promoName = promoName;
-        promoId ? hotel.promoId = promoId : hotel.promoId = uuidv4(); // gera um id único para a promoção
+        hotel.promoId = uuidv4(); 
         
         if (!validateDate(data_inicio, data_fim)) { // verifica se a data de início é menor que a data de fim
             return res.status(400).json({ error: 'Invalid date.' });
@@ -50,7 +51,6 @@ export const createPromo = (req, res) => {
         hotel.data_inicio = data_inicio;
         hotel.data_fim = data_fim;
 
-        hotel.valor = newDiscountValue; // atualiza o valor com o novo valor calculado
         data[hotelIndex] = hotel; // atualiza o hotel no banco de dados
         res.status(201).json(hotel); // retorna o hotel atualizado
     
