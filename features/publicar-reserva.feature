@@ -3,53 +3,55 @@ Feature: Publicar Reserva
   Eu quero publicar uma acomodação
   Para que outras pessoas possam reservar meu espaço
 
-  Scenario: Inserir dados da acomodação
-    Given que eu sou um usuário autenticado
-    When eu acesso a opção de publicar acomodação
-    And eu insiro a quantidade de quartos como 2
-    And eu insiro a quantidade máxima de hóspedes como 4
-    And eu insiro a quantidade de banheiros como 1
-    And eu insiro a localização como "Rua Exemplo, 123, Cidade Exemplo"
-    And eu insiro o preço por noite como 150
-    And eu adiciono fotos da acomodação
-    And eu confirmo a publicação
-    Then minha acomodação deve ser publicada com os dados fornecidos
+  GUI:
 
-  Scenario: Inserir dados incompletos
-    Given que eu sou um usuário autenticado
-    When eu acesso a opção de publicar acomodação
-    And eu insiro a quantidade de quartos como 2
-    And eu insiro a quantidade máxima de hóspedes como 4
-    And eu insiro a quantidade de banheiros como 1
-    And eu deixo a localização em branco
-    And eu insiro o preço por noite como 150
-    And eu adiciono fotos da acomodação
-    And eu tento confirmar a publicação
-    Then eu devo ver uma mensagem de erro indicando que a localização é obrigatória
+  Scenario: Publicar uma acomodação com sucesso
+    Given que estou na página "Publicar Acomodação"
+    When eu preencho "Nome da acomodação" com "Chalé do porto"
+    And eu preencho "Quantidade de quartos" com "3"
+    And eu preencho "Lotação maxima" com "6"
+    And eu preencho "Preço por noite" com "150"
+    And eu clico no botão "Publicar"
+    Then eu devo ver uma mensagem de sucesso "Acomodação publicada com sucesso"
+    And o sistema deve gerar um ID único para a acomodação
+    And eu devo ver o ID da acomodação na tela de confirmação
+
+  Scenario: Tentar publicar acomodação com dados incompletos
+    Given que estou na página "Publicar Acomodação"
+    When eu preencho "Nome da acomodação" com "Chalé do porto"
+    And eu deixo o campo "Quantidade de quartos" vazio
+    And eu preencho "Lotação maxima" com "6"
+    And eu preencho "Preço por noite" com "150"
+    And eu clico no botão "Publicar"
+    Then eu devo ver uma mensagem de erro "Quantidade de quartos é um campo obrigatório"
     And a acomodação não deve ser publicada
+    And o sistema não deve gerar um ID para a acomodação
 
-  Scenario: Publicar acomodação sem fotos
-    Given que eu sou um usuário autenticado
-    When eu acesso a opção de publicar acomodação
-    And eu insiro a quantidade de quartos como 2
-    And eu insiro a quantidade máxima de hóspedes como 4
-    And eu insiro a quantidade de banheiros como 1
-    And eu insiro a localização como "Rua Exemplo, 123, Cidade Exemplo"
-    And eu insiro o preço por noite como '$150'
-    And eu não adiciono fotos da acomodação
-    And eu confirmo a publicação
-    Then eu devo ver uma mensagem de erro indicando que ao menos uma foto é obrigatória
+SERVICE:
+
+  Scenario: Publicar uma acomodação com sucesso via Serviço
+    Given que eu tenha os seguintes dados da acomodação:
+      | Nome da acomodação | Chalé do porto |
+      | Quantidade de quartos | 3 |
+      | Lotação maxima | 6 |
+      | Preço por noite | 150 |
+    When eu envio uma requisição POST para "/host/minhas_acom/publicar" com os dados da acomodação
+    Then a resposta deve ter o status "201 Created"
+    And a resposta deve conter um ID único para a acomodação
+    And a resposta deve conter os dados enviados:
+      | Nome da acomodação | Chalé do porto |
+      | Quantidade de quartos | 3 |
+      | Lotação maxima | 6 |
+      | Preço por noite | 150 |
+
+   Scenario: Tentar publicar acomodação com dados incompletos via Serviço
+    Given que eu tenha os seguintes dados da acomodação:
+      | Nome da acomodação | Chalé do porto |
+      | Quantidade de quartos | |
+      | Lotação maxima | 6 |
+      | Preço por noite | 150 |
+    When eu envio uma requisição POST para "/host/minhas_acom/publicar" com os dados da acomodação
+    Then a resposta deve ter o status "400 Bad Request"
+    And a resposta deve conter uma mensagem de erro "Quantidade de quartos é um campo obrigatório"
     And a acomodação não deve ser publicada
-
-  Scenario: Cancelar publicação da acomodação
-    Given que eu sou um usuário autenticado
-    When eu acesso a opção de publicar acomodação
-    And eu insiro a quantidade de quartos como 2
-    And eu insiro a quantidade máxima de hóspedes como 4
-    And eu insiro a quantidade de banheiros como 1
-    And eu insiro a localização como "Rua Exemplo, 123, Cidade Exemplo"
-    And eu insiro o preço por noite como 150
-    And eu adiciono fotos da acomodação
-    And eu decido cancelar a publicação
-    Then a acomodação não deve ser publicada
-    And os dados inseridos não devem ser salvos
+    And o sistema não deve gerar um ID para a acomodação
