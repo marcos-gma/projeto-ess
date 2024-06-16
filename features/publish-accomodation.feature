@@ -1,4 +1,4 @@
-Feature: Publicar Reserva
+Feature: Publicar Acomodação
   Como um usuário comum
   Eu quero publicar uma acomodação
   Para que outras pessoas possam reservar meu espaço
