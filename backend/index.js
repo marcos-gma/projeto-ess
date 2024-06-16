@@ -12,7 +12,7 @@ app.use(cookieParser())
 
 import authRoutes from './routes/auth.routes.js';
 import pingRoutes from './routes/ping.routes.js';
-import promoRoutes from './routes/promoRoutes.js';
+import promoRoutes from './routes/promo.routes.js';
 
 app.use('/ping', pingRoutes)
 app.use('/auth', authRoutes)

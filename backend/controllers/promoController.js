@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const { v4: uuidv4 } = require('uuid'); 
+import { v4 as uuidv4 } from 'uuid';
 
 function withDiscount(hotel, desconto) {
     return (desconto / 100) * hotel.valor; // retorna o novo valor com base no desconto
@@ -24,7 +24,7 @@ var data = JSON.parse(fs.readFileSync(path.resolve('./samples/hotels.json'), 'ut
 
 
 // criar promoção
-exports.createPromo = (req, res) => {
+export const createPromo = (req, res) => {
     try {
         const { idHotel, desconto, promoName, promoId, data_inicio, data_fim } = req.body; // pega os dados da requisição
         const hotelIndex = data.findIndex(hotel => hotel.idHotel === idHotel); // encontra o hotel pelo id
@@ -60,7 +60,7 @@ exports.createPromo = (req, res) => {
 };
 
 // listar promoções
-exports.listPromos = (req, res) => {
+export const listPromos = (req, res) => {
     try {
         const promos = data.filter(hotel => hotel.promoName); // filtra os hotéis que possuem promoção
         res.status(200).json(promos); // retorna todas as promoções
@@ -71,7 +71,7 @@ exports.listPromos = (req, res) => {
 };
 
 // deletar promoção
-exports.deletePromo = (req, res) => {
+export const deletePromo = (req, res) => {
     try {
         const { idHotel } = req.params; // pega o id do hotel
         const hotelIndex = data.findIndex(hotel => hotel.idHotel === idHotel); // encontra o hotel pelo id
@@ -95,7 +95,7 @@ exports.deletePromo = (req, res) => {
 };
 
 // editar promoção
-exports.editPromo = (req, res) => {
+export const editPromo = (req, res) => {
     try {
         const { idHotel } = req.params; // pega o id do hotel
         const { desconto, promoName, data_inicio, data_fim } = req.body; // pega os dados da requisição
