@@ -1,3 +1,10 @@
+CAMINHOS:
+/promocoes_cadastradas: tela de promoções
+/cadastrar_promocao: tela de cadastro de promoções
+/promocoes: tela de hoteis com promocoes (usuario)
+
+--------------------
+
 Feature: Cadastro e manutenção de promoções (inserir, remover, atualizar)
 As a administrador do sistema 
 I want to ser capaz de criar, remover e atualizar promoções
