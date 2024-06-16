@@ -10,7 +10,7 @@ class Promo {
         this.promoId = uuidv4(); 
         this.nomeProp = nomeProp;
         this.desconto = desconto;
-        this.promoName = promoName;
+        this.promoName = promo  Name;
         this.data_inicio = data_inicio;
         this.data_fim = data_fim;
     }
