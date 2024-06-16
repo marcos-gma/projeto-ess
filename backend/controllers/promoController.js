@@ -74,9 +74,11 @@ export const listPromos = (req, res) => {
 export const deletePromo = (req, res) => {
     try {
         const { idHotel } = req.params; // pega o id do hotel
-        const hotelIndex = data.findIndex(hotel => hotel.idHotel === idHotel); // encontra o hotel pelo id
+        console.log(`Deleting promo for hotel with id: ${idHotel}`); // log the id for debugging
+        const hotelIndex = data.findIndex(hotel => String(hotel.idHotel) === String(idHotel));
 
         if (hotelIndex === -1) { // verifica se o hotel existe
+            console.log(`Hotel with id: ${idHotel} not found`); // log the error for debugging
             return res.status(404).json({ error: 'Hotel not found.' });
         }
 
@@ -87,9 +89,11 @@ export const deletePromo = (req, res) => {
         delete hotel.data_fim;
         hotel.valor = noDiscount(hotel); 
         data[hotelIndex] = hotel; // atualiza o hotel no banco de dados
+        console.log(`Promo deleted for hotel with id: ${idHotel}`); // log the success for debugging
         res.status(200).json({ message: 'Promo deleted successfully.' });
     
     } catch (error) {
+        console.log(`Error deleting promo for hotel with id: ${idHotel}: ${error.message}`); // log the error for debugging
         return res.status(400).send({ message: error.message });
     }
 };
