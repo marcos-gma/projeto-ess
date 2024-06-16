@@ -99,11 +99,10 @@ export const deletePromo = (req, res) => {
 };
 
 // editar promoção
-export const editPromo = (req, res) => {
+export const editPromo = (req, res) => { 
     try {
-        const { idHotel } = req.params; // pega o id do hotel
-        const { desconto, promoName, data_inicio, data_fim } = req.body; // pega os dados da requisição
-        const hotelIndex = data.findIndex(hotel => hotel.idHotel === idHotel); // encontra o hotel pelo id
+        const { idHotel, desconto, promoName, data_inicio, data_fim } = req.body; // pega os dados da requisição
+        const hotelIndex = data.findIndex(hotel => hotel.idHotel === idHotel);
 
         if (hotelIndex === -1) { // verifica se o hotel existe
             return res.status(404).json({ error: 'Hotel not found.' });
@@ -128,6 +127,7 @@ export const editPromo = (req, res) => {
         hotel.data_inicio = data_inicio;
         hotel.data_fim = data_fim;
         hotel.valor = newDiscountValue; 
+        
         data[hotelIndex] = hotel; // atualiza o hotel no banco de dados
         res.status(200).json(hotel); // retorna o hotel atualizado
     
@@ -135,3 +135,23 @@ export const editPromo = (req, res) => {
         return res.status(400).send({ message: error.message });
     }
 };
+
+// input post:
+// {
+//     "idHotel": 3,
+//     "desconto": 10,
+//     "promoName": "Promoção metade",
+//     "data_inicio": "2021-10-01",
+//     "data_fim": "2021-10-31"
+// }
+
+
+
+// input edit:
+// {
+//     "idHotel": 1,
+//     "desconto": 20,
+//     "promoName": "Nova Promoção",
+//     "data_inicio": "2022-01-01",
+//     "data_fim": "2022-01-31"
+// }
