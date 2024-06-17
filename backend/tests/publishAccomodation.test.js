@@ -16,17 +16,17 @@ defineFeature(feature, test => {
       this.nome = nome;
     });
 
-    and(/^preencho "Quantidade de quartos" com (\d+)$/, (quartos) => {
+    and(/^preencho "Quantidade de quartos" com "(\d+)"$/, (quartos) => {
       // Simular preenchimento do campo quantidade de quartos
       this.quartos = quartos;
     });
 
-    and(/^preencho "Lotação maxima" com (\d+)$/, (lotacaoMaxima) => {
+    and(/^preencho "Lotação maxima" com "(\d+)"$/, (lotacaoMaxima) => {
       // Simular preenchimento do campo lotação máxima
       this.lotacaoMaxima = lotacaoMaxima;
     });
 
-    and(/^preencho "Preço por noite" com (\d+)$/, (preco) => {
+    and(/^preencho "Preço por noite" com "(\d+)"$/, (preco) => {
       // Simular preenchimento do campo preço por noite
       this.preco = preco;
     });
