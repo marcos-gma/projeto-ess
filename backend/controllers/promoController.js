@@ -109,10 +109,15 @@ export const deletePromo = (req, res) => {
 export const editPromo = (req, res) => { 
     try {
         const { id, desconto, promoName, data_inicio, data_fim } = req.body; // pega os dados da requisição
+
+        if (!id || !desconto || !promoName || !data_inicio || !data_fim) { // verifica se todos os campos foram preenchidos
+            return res.status(400).json({ error: 'All fields are required.' });
+        }
+
         const hotelIndex = data.findIndex(hotel => String(hotel.id) === String(id));
 
         if (hotelIndex === -1) { // verifica se o hotel existe
-            return res.status(404).json({ error: 'Hotel not found.' });
+            return res.status(404).json({ error: 'Promotion not found.' });
         }
 
         const hotel = data[hotelIndex]; // obtém o hotel encontrado

@@ -444,34 +444,110 @@ Scenario: Excluir promoção sem sucesso por ausência de promoção cadastrada
 
 
 Scenario: Editar promoção com sucesso
-    Given há as seguintes promoções cadastradas no sistema:
-    | id  | nomeProp       | desconto | promoName       | data_inicio | data_fim    |
-    |  1  | Casa em Porto  | 20       | Dia das mães    | 12/05/2024  | 20/05/2024  |
-    When "Maria" faz uma requisição PUT para o endpoint "/promocoes_cadastradas/1" (ID da promoção) com o corpo:
-      {
-        "nomeProp": "Casa em Porto",
-        "desconto": 25, # mudou aqui
-        "promoName": "Dia das mães",
-        "data_inicio": "12/05/2024",
-        "data_fim": "20/05/2024"
-      }
+    Given há as seguintes promoções cadastradas no endpoint "/promocoes_cadastradas":
+    [
+        {
+            "id": "3",
+            "nome": "Propriedade 3",
+            "quantidadeQuartos": 4,
+            "lotacaoMaxima": 8,
+            "precoPorNoite": 90,
+            "userId": "123",
+            "desconto": 10,
+            "promoName": "Promoção 3",
+            "promoId": "3",
+            "data_inicio": "2021-10-01",
+            "data_fim": "2021-10-31"
+        },
+        {
+            "id": "4",
+            "nome": "Propriedade 4",
+            "quantidadeQuartos": 4,
+            "lotacaoMaxima": 10,
+            "precoPorNoite": 200,
+            "userId": "123",
+            "desconto": 20,
+            "promoName": "Promoção 4",
+            "promoId": "4",
+            "data_inicio": "2021-10-05",
+            "data_fim": "2021-10-25"
+        }
+    ]
+    When "Maria" faz uma requisição PUT para o endpoint "/promocoes_cadastradas/3" (ID da promoção) com o corpo:
+    {
+        "id": 3,
+        "desconto": 50,
+        "promoName": "Nova Promoção",
+        "data_inicio": "2022-01-01",
+        "data_fim": "2022-01-31"
+    }
     Then o sistema retorna o código de resposta "200" # ok
-    And o sistema retorna a promoção atualizada com o corpo:
-      {
-        "id": 1,
-        "nomeProp": "Casa em Porto",
-        "desconto": 25,
-        "promoName": "Dia das mães",
-        "data_inicio": "12/05/2024",
-        "data_fim": "20/05/2024"
-      }
+    And uma mensagem é mostrada com o corpo:
+    {
+        "message": "Promo edited successfully."
+    }
+    And ao fazer uma requisição GET para o endpoint "/promocoes_cadastradas", o corpo que aparece é:
+    [
+        {
+            "id": "3",
+            "nome": "Propriedade 3",
+            "quantidadeQuartos": 4,
+            "lotacaoMaxima": 8,
+            "precoPorNoite": 50,
+            "userId": "123",
+            "desconto": 50,
+            "promoName": "Nova Promoção",
+            "promoId": "3",
+            "data_inicio": "2021-10-01",
+            "data_fim": "2021-10-31"
+        },
+        {
+            "id": "4",
+            "nome": "Propriedade 4",
+            "quantidadeQuartos": 4,
+            "lotacaoMaxima": 10,
+            "precoPorNoite": 200,
+            "userId": "123",
+            "desconto": 20,
+            "promoName": "Promoção 4",
+            "promoId": "4",
+            "data_inicio": "2021-10-05",
+            "data_fim": "2021-10-25"
+        }
+    ] 
 
 
-Scenario: Editar promoção sem sucesso
-    Given há as seguintes promoções cadastradas no sistema:
-    | id  | nomeProp       | desconto | promoName       | data_inicio | data_fim    |
-    |  1  | Casa em Porto  | 20       | Dia das mães    | 12/05/2024  | 20/05/2024  |
-    When "Maria" faz uma requisição PUT para o endpoint "/promocoes_cadastradas/1" (ID da promoção) com o corpo:
+Scenario: Editar promoção sem sucesso devido à ausência de informações
+    Given há as seguintes promoções cadastradas no endpoint "/promocoes_cadastradas":
+    [
+        {
+            "id": "3",
+            "nome": "Propriedade 3",
+            "quantidadeQuartos": 4,
+            "lotacaoMaxima": 8,
+            "precoPorNoite": 90,
+            "userId": "123",
+            "desconto": 10,
+            "promoName": "Promoção 3",
+            "promoId": "3",
+            "data_inicio": "2021-10-01",
+            "data_fim": "2021-10-31"
+        },
+        {
+            "id": "4",
+            "nome": "Propriedade 4",
+            "quantidadeQuartos": 4,
+            "lotacaoMaxima": 10,
+            "precoPorNoite": 200,
+            "userId": "123",
+            "desconto": 20,
+            "promoName": "Promoção 4",
+            "promoId": "4",
+            "data_inicio": "2021-10-05",
+            "data_fim": "2021-10-25"
+        }
+    ]
+    When "Maria" faz uma requisição PUT para o endpoint "/promocoes_cadastradas/3" (ID da promoção) com o corpo:
       {
         "nomeProp": "Casa em Porto",
         "desconto": 20,
@@ -480,7 +556,54 @@ Scenario: Editar promoção sem sucesso
         "data_fim": "20/05/2024"
       }
     Then o sistema retorna o código de resposta "400" # bad request
-    And o sistema retorna uma mensagem de erro indicando o preenchimento inadequado das informações
+    And o sistema retorna uma mensagem de erro indicando o preenchimento inadequado das informações com o corpo:
+    {
+        "error": "All fields are required."
+    }
+
+Scenario: Editar promoção sem sucesso devido à ausência de promoção cadastrada
+    Given há as seguintes promoções cadastradas no endpoint "/promocoes_cadastradas":
+    [
+        {
+            "id": "3",
+            "nome": "Propriedade 3",
+            "quantidadeQuartos": 4,
+            "lotacaoMaxima": 8,
+            "precoPorNoite": 90,
+            "userId": "123",
+            "desconto": 10,
+            "promoName": "Promoção 3",
+            "promoId": "3",
+            "data_inicio": "2021-10-01",
+            "data_fim": "2021-10-31"
+        },
+        {
+            "id": "4",
+            "nome": "Propriedade 4",
+            "quantidadeQuartos": 4,
+            "lotacaoMaxima": 10,
+            "precoPorNoite": 200,
+            "userId": "123",
+            "desconto": 20,
+            "promoName": "Promoção 4",
+            "promoId": "4",
+            "data_inicio": "2021-10-05",
+            "data_fim": "2021-10-25"
+        }
+    ]
+    When "Maria" faz uma requisição PUT para o endpoint "/promocoes_cadastradas/5" (ID da promoção) com o corpo:
+    {
+        "id": 5,
+        "desconto": 50,
+        "promoName": "Nova Promoção",
+        "data_inicio": "2021-10-05",
+        "data_fim": "2021-10-25"
+    }
+    Then o sistema retorna o código de resposta "400" # bad request
+    And o sistema retorna uma mensagem de erro indicando o preenchimento inadequado das informações com o corpo:
+    {
+        "error": "Promotion not found."
+    }
 
 --------------------
 SOBRE O HOME:
