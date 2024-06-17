@@ -155,3 +155,5 @@ export const editPromo = (req, res) => {
 //     "data_inicio": "2022-01-01",
 //     "data_fim": "2022-01-31"
 // }
+
+// substituir hotels.json por amodacoes.json
