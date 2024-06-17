@@ -5,13 +5,13 @@ import path from 'path';
 
 import { v4 as uuidv4 } from 'uuid';
 
-function withDiscount(originalValue, discountPercentage) {
-    return originalValue * ((100 - discountPercentage) / 100);
+function withDiscount(original, desconto) {
+    return original * (1 - (desconto/100)); // retorna o valor com desconto
 }
 
-function noDiscount(hotel) {
+function noDiscount(original, desconto) {
     // se o desconto era de 10%, e o precoPorNoite q tá lá eh 90, o precoPorNoite original era 100 -> retorna 100
-    return (hotel.precoPorNoite * 100) / (100 - hotel.desconto); // retorna o precoPorNoite original com base no desconto
+    return (original / (1 - (desconto/100))); // retorna o precoPorNoite original com base no desconto
 }
 
 function validateDate(data_inicio, data_fim) {
@@ -54,7 +54,7 @@ export const createPromo = (req, res) => {
         hotel.data_fim = data_fim;
 
         data[hotelIndex] = hotel; // atualiza o hotel no banco de dados
-        res.status(201).json(hotel); // retorna o hotel atualizado
+        res.status(200).json({ message: 'Promo created successfully.' }); // retorna o hotel atualizado
     
     } catch (error) {
         return res.status(400).send({ message: error.message });
@@ -104,7 +104,7 @@ export const deletePromo = (req, res) => {
 export const editPromo = (req, res) => { 
     try {
         const { id, desconto, promoName, data_inicio, data_fim } = req.body; // pega os dados da requisição
-        const hotelIndex = data.findIndex(hotel => hotel.id === id);
+        const hotelIndex = data.findIndex(hotel => String(hotel.id) === String(id));
 
         if (hotelIndex === -1) { // verifica se o hotel existe
             return res.status(404).json({ error: 'Hotel not found.' });
@@ -115,24 +115,23 @@ export const editPromo = (req, res) => {
         if (!validateDiscount(desconto)) { 
             return res.status(400).json({ error: 'Invalid discount. It should be between 1 and 100.' });
         }
-
-        const newDiscountValue = withDiscount(hotel, desconto); 
-
-        // atualiza os dados do hotel
-        hotel.desconto = desconto;
-        hotel.promoName = promoName;
-
+        
+        
         if (!validateDate(data_inicio, data_fim)) { 
             return res.status(400).json({ error: 'Invalid date. Final date should be after the beginning promotion date.' });
         }
-
+        
+        // atualiza os dados do hotel
+        hotel.promoName = promoName;
         hotel.data_inicio = data_inicio;
         hotel.data_fim = data_fim;
-        hotel.precoPorNoite = newDiscountValue; 
+        const precoSemDesconto = noDiscount(hotel.precoPorNoite, hotel.desconto);
+        hotel.desconto = desconto;
+        const precoComDesconto = withDiscount(precoSemDesconto, hotel.desconto);
+        hotel.precoPorNoite = precoComDesconto; 
         
         data[hotelIndex] = hotel; // atualiza o hotel no banco de dados
-        res.status(200).json(hotel); // retorna o hotel atualizado
-    
+        res.status(200).json({ message: 'Promo edited successfully.' }); // retorna o hotel atualizado
     } catch (error) {
         return res.status(400).send({ message: error.message });
     }
