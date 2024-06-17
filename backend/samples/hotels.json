@@ -1,0 +1,40 @@
+[
+    {
+        "idHotel": 1,
+        "nomeProp": "Nome da Propriedade 1",
+        "valor": 100,
+        "quartos": 2,
+        "localizacao": "Localização 1"
+    },
+    {
+        "idHotel": 2,
+        "nomeProp": "Nome da Propriedade 2",
+        "valor": 2000,
+        "quartos": 10,
+        "localizacao": "Localização 2"
+    },
+    {
+        "idHotel": 3,
+        "nomeProp": "Nome da Propriedade 3",
+        "valor": 90,
+        "quartos": 1,
+        "localizacao": "Localização 3",
+        "desconto": 10,
+        "promoName": "Promoção 3",
+        "promoId": "0003",
+        "data_inicio": "2021-10-01",
+        "data_fim": "2021-10-31"
+    },
+    {
+        "idHotel": 3,
+        "nomeProp": "Nome da Propriedade 35",
+        "valor": 90,
+        "quartos": 1,
+        "localizacao": "Localização 3",
+        "desconto": 10,
+        "promoName": "Promoção 3",
+        "promoId": "0004",
+        "data_inicio": "2021-10-01",
+        "data_fim": "2021-10-31"
+    }
+]
