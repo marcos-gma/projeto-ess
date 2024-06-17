@@ -14,6 +14,11 @@ import pingRoutes from './routes/ping.routes.js'
 import authRoutes from './routes/auth.routes.js'
 import emailRoutes from './routes/email.routes.js'
 
+//accomodation routes
+import accommodationRoutes from './routes/accommodationRoutes.js';
+    //@TODO doublecheck routes
+app.use('/user/host', accommodationRoutes);
+
 app.use('/ping', pingRoutes)
 app.use('/auth', authRoutes)
 app.use('/email', emailRoutes)
