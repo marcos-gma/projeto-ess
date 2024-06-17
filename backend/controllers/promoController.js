@@ -22,13 +22,18 @@ function validateDiscount(desconto) {
     return desconto > 0 && desconto <= 100; // retorna true se o desconto for entre 1 e 100%
 }
 
-var data = JSON.parse(fs.readFileSync(path.resolve('./samples/accommodations.json'), 'utf8'))
+var data = JSON.parse(fs.readFileSync(path.resolve('./samples/accommodations.json'), 'utf8'));
 
 
 // criar promoção
 export const createPromo = (req, res) => {
     try {
         const { id, desconto, promoName, data_inicio, data_fim } = req.body; // pega os dados da requisição
+        
+        if (!id || !desconto || !promoName || !data_inicio || !data_fim) { // verifica se todos os campos foram preenchidos
+            return res.status(400).json({ error: 'All fields are required.' });
+        }
+
         const hotelIndex = data.findIndex(hotel => String(hotel.id) === String(id)); // encontra o hotel pelo id
         
         if (hotelIndex === -1) { // verifica se o hotel existe
@@ -89,7 +94,7 @@ export const deletePromo = (req, res) => {
         delete hotel.promoName;
         delete hotel.data_inicio;
         delete hotel.data_fim;
-        hotel.precoPorNoite = noDiscount(hotel); 
+        hotel.precoPorNoite = noDiscount(hotel.precoPorNoite, hotel.desconto); 
         data[hotelIndex] = hotel; // atualiza o hotel no banco de dados
         console.log(`Promo deleted for hotel with id: ${id}`); // log the success for debugging
         res.status(200).json({ message: 'Promo deleted successfully.' });
