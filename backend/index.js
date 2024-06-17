@@ -19,3 +19,5 @@ app.use('/auth', authRoutes)
 app.use('/email', emailRoutes)
 
 app.listen(5001)
+
+export default app;
