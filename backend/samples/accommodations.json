@@ -1,0 +1,18 @@
+[
+    {
+      "id": "012",
+      "nome": "Chalé do Porto",
+      "quantidadeQuartos": 3,
+      "lotacaoMaxima": 6,
+      "precoPorNoite": 150,
+      "userId": "123"
+    },
+    {
+      "id": "2",
+      "nome": "Apartamento Central",
+      "quantidadeQuartos": 2,
+      "lotacaoMaxima": 4,
+      "precoPorNoite": 200,
+      "userId": "123"
+    }
+]
