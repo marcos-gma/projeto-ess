@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/promocoes_cadastradas', listPromos);
 router.post('/cadastrar_promocao', createPromo);
-router.delete('/deletar_promocao/:idHotel', deletePromo);
-router.put('/editar_promocao/:idHotel', editPromo);
+router.delete('/deletar_promocao/:id', deletePromo);
+router.put('/editar_promocao/:id', editPromo);
 
 export default router;
