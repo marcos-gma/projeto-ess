@@ -488,7 +488,6 @@ Scenario: Excluir promoção sem sucesso por ausência de promoção cadastrada
         }
     ]  
 
-
 Scenario: Editar promoção com sucesso
     Given há as seguintes promoções cadastradas no endpoint "/promocoes_cadastradas":
     [
@@ -561,7 +560,6 @@ Scenario: Editar promoção com sucesso
             "data_fim": "2021-10-25"
         }
     ] 
-
 
 Scenario: Editar promoção sem sucesso devido à ausência de informações
     Given há as seguintes promoções cadastradas no endpoint "/promocoes_cadastradas":
@@ -651,7 +649,6 @@ Scenario: Editar promoção sem sucesso devido à ausência de promoção cadast
         "error": "Promotion not found."
     }
 
-
 Scenario: Editar promoção sem sucesso devido à preenchimento inadequado do campo "desconto"
     Given há as seguintes promoções cadastradas no endpoint "/promocoes_cadastradas":
     [
@@ -696,7 +693,7 @@ Scenario: Editar promoção sem sucesso devido à preenchimento inadequado do ca
         "error": "Invalid discount. It should be between 1 and 100."
     }
 
-Scenario: Editar promoção sem sucesso devido à preenchimento inadequado do campo "desconto"
+Scenario: Editar promoção sem sucesso devido à preenchimento inadequado do campo "data_inicio" e "data_fim"
     Given há as seguintes promoções cadastradas no endpoint "/promocoes_cadastradas":
     [
         {
