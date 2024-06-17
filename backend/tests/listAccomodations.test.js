@@ -1,6 +1,6 @@
 const { defineFeature, loadFeature } = require('jest-cucumber');
 const axios = require('axios');
-const feature = loadFeature('./tests/features/listarAcomodacoesGUI.feature');
+const feature = loadFeature('./tests/host/features/listAccomodations.feature');
 
 defineFeature(feature, test => {
   let response;
