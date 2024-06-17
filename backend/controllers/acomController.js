@@ -62,3 +62,99 @@ export const publishAccommodation = async (req, res) => {
         });
     }
 };
+
+// Função para editar uma acomodação
+export const editAccommodation = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { nome, quantidadeQuartos, lotacaoMaxima, precoPorNoite } = req.body;
+
+        // validações
+        if (!nome || !quantidadeQuartos || !lotacaoMaxima || !precoPorNoite) {
+            console.log("All fields are required");
+            return res.status(400).json({
+                error: "All fields are required"
+            });
+        }
+
+        if (isNaN(quantidadeQuartos) || quantidadeQuartos <= 0) {
+            console.log("Quantity of rooms must be a positive number");
+            return res.status(400).json({
+                error: "Quantity of rooms must be a positive number"
+            });
+        }
+
+        if (isNaN(lotacaoMaxima) || lotacaoMaxima <= 0) {
+            console.log("Maximum occupancy must be a positive number");
+            return res.status(400).json({
+                error: "Maximum occupancy must be a positive number"
+            });
+        }
+
+        if (isNaN(precoPorNoite) || precoPorNoite <= 0) {
+            console.log("Price per night must be a positive number");
+            return res.status(400).json({
+                error: "Price per night must be a positive number"
+            });
+        }
+
+        var data = JSON.parse(fs.readFileSync(path.resolve('./samples/accommodations.json'), 'utf8'));
+
+        const accommodationIndex = data.findIndex(accommodation => accommodation.id === id);
+        if (accommodationIndex === -1) {
+            console.log("Accommodation not found");
+            return res.status(404).json({
+                error: "Accommodation not found"
+            });
+        }
+
+        data[accommodationIndex] = {
+            ...data[accommodationIndex],
+            nome,
+            quantidadeQuartos,
+            lotacaoMaxima,
+            precoPorNoite
+        };
+
+        fs.writeFileSync(path.resolve('./samples/accommodations.json'), JSON.stringify(data, null, 2));
+
+        res.status(200).json({
+            message: "Accommodation edited successfully",
+            accommodation: data[accommodationIndex]
+        });
+
+    } catch (error) {
+        console.log("Error in editAccommodation controller:", error.message);
+        res.status(500).json({
+            error: "Internal Server Error"
+        });
+    }
+};
+
+// Função para listar acomodações publicadas por um usuário
+export const listPublishedAccommodations = async (req, res) => {
+    try {
+        const { userId } = req.query;
+
+        if (!userId) {
+            console.log("User ID is required");
+            return res.status(400).json({
+                error: "User ID is required"
+            });
+        }
+
+        var data = JSON.parse(fs.readFileSync(path.resolve('./samples/accommodations.json'), 'utf8'));
+
+        const userAccommodations = data.filter(accommodation => accommodation.userId === userId);
+
+        res.status(200).json({
+            accommodations: userAccommodations.map(({ id, nome }) => ({ id, nome }))
+        });
+
+    } catch (error) {
+        console.log("Error in listPublishedAccommodations controller:", error.message);
+        res.status(500).json({
+            error: "Internal Server Error"
+        });
+    }
+};

@@ -15,9 +15,16 @@ import authRoutes from './routes/auth.routes.js'
 import emailRoutes from './routes/email.routes.js'
 
 //accomodation routes
-import accommodationRoutes from './routes/accommodationRoutes.js';
+import accommodationRoutes from './routes/acom.routes.js';
     //@TODO doublecheck routes
-app.use('/user/host', accommodationRoutes);
+app.use('/user', accommodationRoutes);
+
+//reservation routes
+import reservationRoutes from './routes/reservation.routes.js';
+    //@TODO doublecheck routes
+app.use('/user', reservationRoutes);
+
+
 
 app.use('/ping', pingRoutes)
 app.use('/auth', authRoutes)
