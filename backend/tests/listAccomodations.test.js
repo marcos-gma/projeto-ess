@@ -8,7 +8,7 @@ defineFeature(feature, test => {
   test('Ver lista de acomodações publicadas via GUI', ({ given, and, when, then }) => {
     given(/^Given que estou logado no sistema com o ID do usuário "(\d+)"$/, async (userId) => {
       // Simular autenticação do usuário
-      this.userId = userId
+      this.userId = userId;
     });
 
     and('eu estou na página "Minhas Acomodações"', () => {

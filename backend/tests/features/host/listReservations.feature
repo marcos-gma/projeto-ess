@@ -6,7 +6,7 @@ Feature: Listar Reservas na Acomodação
     GUI:
 
         Scenario: Ver lista de reservas confirmadas na acomodação via GUI
-            Given que estou logado no sistema
+            Given que estou logado no sistema com ID de usuário "1"
             And eu estou na página "Minhas Acomodações"
             When eu clico no botão "Listar Reservas" para a acomodação com ID "012"
             Then eu devo ver uma lista de reservas confirmadas para a acomodação com ID "012"
