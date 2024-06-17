@@ -219,7 +219,6 @@ Scenario: Lista de promoções cadastradas não vazia
         }
     ]
 
-
 Scenario: Lista de promoções cadastradas vazia
     Given há as seguintes promoções cadastradas no endpoint "/promocoes_cadastradas":
     []
@@ -227,7 +226,6 @@ Scenario: Lista de promoções cadastradas vazia
     And o código de resposta é "200"
     Then o sistema retorna:
     []
-
 
 Scenario: Cadastro com sucesso de nova promoção
     Given o administrador "João" deseja cadastrar uma nova promoção
@@ -269,7 +267,6 @@ Scenario: Cadastro com sucesso de nova promoção
             "data_fim": "2021-10-31"
         }
     ]
-
 
 Scenario: Cadastro falho de nova promoção devido à ausência de acomodação cadastrada
     Given o administrador "João" deseja cadastrar uma nova promoção
@@ -320,7 +317,6 @@ Scenario: Cadastro falho de nova promoção devido à ausência de informações
     {
         "error": "All fields are required."
     }
-
 
 Scenario: Cadastro falho de nova promoção devido ao preenchimento inadequado do campo "desconto"
     Given o administrador "João" deseja cadastrar uma nova promoção
@@ -599,11 +595,11 @@ Scenario: Editar promoção sem sucesso devido à ausência de informações
     ]
     When "Maria" faz uma requisição PUT para o endpoint "/promocoes_cadastradas/3" (ID da promoção) com o corpo:
       {
-        "nomeProp": "Casa em Porto",
+        "id": 3
         "desconto": 20,
         "promoName": "",
-        "data_inicio": "12/05/2024",
-        "data_fim": "20/05/2024"
+        "data_inicio": "2021-10-05",
+        "data_fim": "2021-10-25"
       }
     Then o sistema retorna o código de resposta "400" # bad request
     And o sistema retorna uma mensagem de erro indicando o preenchimento inadequado das informações com o corpo:
@@ -655,6 +651,94 @@ Scenario: Editar promoção sem sucesso devido à ausência de promoção cadast
         "error": "Promotion not found."
     }
 
+
+Scenario: Editar promoção sem sucesso devido à preenchimento inadequado do campo "desconto"
+    Given há as seguintes promoções cadastradas no endpoint "/promocoes_cadastradas":
+    [
+        {
+            "id": "3",
+            "nome": "Propriedade 3",
+            "quantidadeQuartos": 4,
+            "lotacaoMaxima": 8,
+            "precoPorNoite": 90,
+            "userId": "123",
+            "desconto": 10,
+            "promoName": "Promoção 3",
+            "promoId": "3",
+            "data_inicio": "2021-10-01",
+            "data_fim": "2021-10-31"
+        },
+        {
+            "id": "4",
+            "nome": "Propriedade 4",
+            "quantidadeQuartos": 4,
+            "lotacaoMaxima": 10,
+            "precoPorNoite": 200,
+            "userId": "123",
+            "desconto": 20,
+            "promoName": "Promoção 4",
+            "promoId": "4",
+            "data_inicio": "2021-10-05",
+            "data_fim": "2021-10-25"
+        }
+    ]
+    When "Maria" faz uma requisição PUT para o endpoint "/promocoes_cadastradas/3" (ID da promoção) com o corpo:
+      {
+        "id": 3,
+        "desconto": 0,
+        "promoName": "Natal",
+        "data_inicio": "12/05/2024",
+        "data_fim": "20/05/2024"
+      }
+    Then o sistema retorna o código de resposta "400" # bad request
+    And o sistema retorna uma mensagem de erro indicando o preenchimento inadequado das informações com o corpo:
+    {
+        "error": "Invalid discount. It should be between 1 and 100."
+    }
+
+Scenario: Editar promoção sem sucesso devido à preenchimento inadequado do campo "desconto"
+    Given há as seguintes promoções cadastradas no endpoint "/promocoes_cadastradas":
+    [
+        {
+            "id": "3",
+            "nome": "Propriedade 3",
+            "quantidadeQuartos": 4,
+            "lotacaoMaxima": 8,
+            "precoPorNoite": 90,
+            "userId": "123",
+            "desconto": 10,
+            "promoName": "Promoção 3",
+            "promoId": "3",
+            "data_inicio": "2021-10-01",
+            "data_fim": "2021-10-31"
+        },
+        {
+            "id": "4",
+            "nome": "Propriedade 4",
+            "quantidadeQuartos": 4,
+            "lotacaoMaxima": 10,
+            "precoPorNoite": 200,
+            "userId": "123",
+            "desconto": 20,
+            "promoName": "Promoção 4",
+            "promoId": "4",
+            "data_inicio": "2021-10-05",
+            "data_fim": "2021-10-25"
+        }
+    ]
+    When "Maria" faz uma requisição PUT para o endpoint "/promocoes_cadastradas/3" (ID da promoção) com o corpo:
+      {
+        "id": 3,
+        "desconto": 1,
+        "promoName": "Natal",
+        "data_inicio": "2021-11-05",
+        "data_fim": "2021-10-25"
+      }
+    Then o sistema retorna o código de resposta "400" # bad request
+    And o sistema retorna uma mensagem de erro indicando o preenchimento inadequado das informações com o corpo:
+    {
+        "error": "Invalid date. Final date should be after the beginning promotion date."
+    }
 --------------------
 SOBRE O HOME:
 
