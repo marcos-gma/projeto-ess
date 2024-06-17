@@ -130,3 +130,31 @@ export const editAccommodation = async (req, res) => {
         });
     }
 };
+
+// Função para listar acomodações publicadas por um usuário
+export const listPublishedAccommodations = async (req, res) => {
+    try {
+        const { userId } = req.query;
+
+        if (!userId) {
+            console.log("User ID is required");
+            return res.status(400).json({
+                error: "User ID is required"
+            });
+        }
+
+        var data = JSON.parse(fs.readFileSync(path.resolve('./samples/accommodations.json'), 'utf8'));
+
+        const userAccommodations = data.filter(accommodation => accommodation.userId === userId);
+
+        res.status(200).json({
+            accommodations: userAccommodations.map(({ id, nome }) => ({ id, nome }))
+        });
+
+    } catch (error) {
+        console.log("Error in listPublishedAccommodations controller:", error.message);
+        res.status(500).json({
+            error: "Internal Server Error"
+        });
+    }
+};
