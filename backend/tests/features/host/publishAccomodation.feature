@@ -19,7 +19,7 @@ Feature: Publicar Acomodação
   Scenario: Tentar publicar acomodação com dados incompletos
     Given que estou na página "Publicar Acomodação"
     When eu preencho "Nome da acomodação" com "Chalé do porto"
-    And eu deixo o campo "Quantidade de quartos" vazio
+    And eu preencho "Quantidade de quartos" com ""
     And eu preencho "Lotação maxima" com "6"
     And eu preencho "Preço por noite" com "150"
     And eu clico no botão "Publicar"
