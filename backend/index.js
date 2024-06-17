@@ -13,6 +13,11 @@ app.use(cookieParser())
 import pingRoutes from './routes/ping.routes.js'
 import authRoutes from './routes/auth.routes.js'
 
+//accomodation routes
+import accommodationRoutes from './routes/accommodationRoutes.js';
+    //@TODO doublecheck routes
+app.use('/user/host', accommodationRoutes);
+
 app.use('/ping', pingRoutes)
 app.use('/auth', authRoutes)
 
