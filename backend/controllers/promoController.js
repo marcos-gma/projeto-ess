@@ -86,7 +86,7 @@ export const deletePromo = (req, res) => {
 
         if (hotelIndex === -1) { // verifica se o hotel existe
             console.log(`Hotel with id: ${id} not found`); // log the error for debugging
-            return res.status(404).json({ error: 'Hotel not found.' });
+            return res.status(404).json({ error: 'Promotion not found.' });
         }
 
         const hotel = data[hotelIndex]; // obtém o hotel encontrado

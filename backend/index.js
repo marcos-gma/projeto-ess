@@ -9,9 +9,9 @@ dotenv.config()
 app.use(cookieParser())
 
 //routes imports
-import pingRoutes from './routes/ping.routes.js'
-import authRoutes from './routes/auth.routes.js'
-import emailRoutes from './routes/email.routes.js'
+import authRoutes from './routes/auth.routes.js';
+import emailRoutes from './routes/email.routes.js';
+import pingRoutes from './routes/ping.routes.js';
 import promoRoutes from './routes/promo.routes.js';
 
 //accomodation routes
