@@ -52,9 +52,10 @@ export const createPromo = (req, res) => {
         hotel.promoName = promoName;
         hotel.promoId = uuidv4(); 
         
-        if (!validateDate(data_inicio, data_fim)) { // verifica se a data de início é menor que a data de fim
-            return res.status(400).json({ error: 'Invalid date.' });
+        if (!validateDate(data_inicio, data_fim)) { 
+            return res.status(400).json({ error: 'Invalid date. Final date should be after the beginning promotion date.' });
         }
+        
         hotel.data_inicio = data_inicio;
         hotel.data_fim = data_fim;
 

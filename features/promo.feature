@@ -322,6 +322,56 @@ Scenario: Cadastro falho de nova promoção devido à ausência de informações
     }
 
 
+Scenario: Cadastro falho de nova promoção devido ao preenchimento inadequado do campo "desconto"
+    Given o administrador "João" deseja cadastrar uma nova promoção
+    And somente a acomodação "Apartamento Central" está cadastrada no endpoint "/accommodation.json" com o corpo:
+    {
+        "id": "2",
+        "nome": "Apartamento Central",
+        "quantidadeQuartos": 2,
+        "lotacaoMaxima": 4,
+        "precoPorNoite": 200,
+        "userId": "123"
+    }
+    When "João" faz uma requisição POST para o endpoint "/cadastrar_promocao" com o corpo:
+    {
+        "id": 2,
+        "desconto": 150,
+        "promoName": "Black Friday",
+        "data_inicio": "2021-10-01",
+        "data_fim": "2021-10-31"
+    }
+    Then o sistema retorna o código de resposta "400" # bad request
+    And o sistema retorna uma mensagem de erro indicando o mal preenchimento dos campos:
+    {
+        "error": "Invalid discount. It should be between 1 and 100"
+    }
+
+Scenario: Cadastro falho de nova promoção devido ao preenchimento inadequado do campo "data_inicio" e "data_fim"
+    Given o administrador "João" deseja cadastrar uma nova promoção
+    And somente a acomodação "Apartamento Central" está cadastrada no endpoint "/accommodation.json" com o corpo:
+    {
+        "id": "2",
+        "nome": "Apartamento Central",
+        "quantidadeQuartos": 2,
+        "lotacaoMaxima": 4,
+        "precoPorNoite": 200,
+        "userId": "123"
+    }
+    When "João" faz uma requisição POST para o endpoint "/cadastrar_promocao" com o corpo:
+    {
+        "id": 2,
+        "desconto": 50,
+        "promoName": "Black Friday",
+        "data_inicio": "2021-11-01",
+        "data_fim": "2021-10-31"
+    }
+    Then o sistema retorna o código de resposta "400" # bad request
+    And o sistema retorna uma mensagem de erro indicando o mal preenchimento dos campos:
+    {
+        "error": "Invalid date. Final date should be after the beginning promotion date."
+    }
+
 Scenario: Excluir promoção com sucesso
     Given há as seguintes promoções cadastradas no endpoint "/promocoes_cadastradas":
     [
