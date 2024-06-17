@@ -55,7 +55,7 @@ export const createPromo = (req, res) => {
         if (!validateDate(data_inicio, data_fim)) { 
             return res.status(400).json({ error: 'Invalid date. Final date should be after the beginning promotion date.' });
         }
-        
+
         hotel.data_inicio = data_inicio;
         hotel.data_fim = data_fim;
 
@@ -71,7 +71,14 @@ export const createPromo = (req, res) => {
 export const listPromos = (req, res) => {
     try {
         const promos = data.filter(hotel => hotel.promoName); // filtra os hotéis que possuem promoção
-        res.status(200).json(promos); // retorna todas as promoções
+
+        if (promos.length === 0) { // verifica se há promoções
+            return res.status(404).json({ error: 'No promotions found.' });
+        } else {
+            res.status(200).json(promos); // retorna todas as promoções
+        }
+        // console.log(promos.length)
+
     
     } catch (error) {
         return res.status(400).send({ message: error.message });

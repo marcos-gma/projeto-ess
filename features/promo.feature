@@ -224,8 +224,10 @@ Scenario: Lista de promoções cadastradas vazia
     []
     When uma nova requisição GET é feita para o endpoint "/promocoes_cadastradas"
     And o código de resposta é "200"
-    Then o sistema retorna:
-    []
+    Then o sistema retorna uma mensagem indicando a ausência de promoções cadastradas com o corpo:
+    {
+        "error": "No promotions found."
+    }
 
 Scenario: Cadastro com sucesso de nova promoção
     Given o administrador "João" deseja cadastrar uma nova promoção
@@ -737,31 +739,113 @@ Scenario: Editar promoção sem sucesso devido à preenchimento inadequado do ca
         "error": "Invalid date. Final date should be after the beginning promotion date."
     }
 --------------------
-SOBRE O HOME:
+SOBRE O HOME: usuário
 
 Scenario: Há promoções ativas
-    Given o administrador "Gabriel" cadastrou uma nova promoção com sucesso para a propriedade com nomeProp "Quarto em Paulista"
+    Given há as seguintes promoções cadastradas no endpoint "/promocoes_cadastradas":
+    [
+        {
+            "id": "3",
+            "nome": "Propriedade 3",
+            "quantidadeQuartos": 4,
+            "lotacaoMaxima": 8,
+            "precoPorNoite": 100,
+            "userId": "123",
+            "desconto": 10,
+            "promoName": "Promoção 3",
+            "promoId": "3",
+            "data_inicio": "2021-10-01",
+            "data_fim": "2021-10-31"
+        },
+        {
+            "id": "4",
+            "nome": "Propriedade 4",
+            "quantidadeQuartos": 4,
+            "lotacaoMaxima": 10,
+            "precoPorNoite": 200,
+            "userId": "123",
+            "desconto": 20,
+            "promoName": "Promoção 4",
+            "promoId": "4",
+            "data_inicio": "2021-10-05",
+            "data_fim": "2021-10-25"
+        }
+    ]
     And "Matheus" está no endpoint "/home"
     When "Matheus" faz uma requisição GET para o endpoint "/promocoes_ativas"
-    Then o sistema retorna a promoção com nomeProp "Quarto em Paulista" no header da tela "Home"
+    Then o sistema retorna a lista de promoções cadastradas, que tem o corpo:
+    [
+        {
+            "id": "3",
+            "nome": "Propriedade 3",
+            "quantidadeQuartos": 4,
+            "lotacaoMaxima": 8,
+            "precoPorNoite": 100,
+            "userId": "123",
+            "desconto": 10,
+            "promoName": "Promoção 3",
+            "promoId": "3",
+            "data_inicio": "2021-10-01",
+            "data_fim": "2021-10-31"
+        },
+        {
+            "id": "4",
+            "nome": "Propriedade 4",
+            "quantidadeQuartos": 4,
+            "lotacaoMaxima": 10,
+            "precoPorNoite": 200,
+            "userId": "123",
+            "desconto": 20,
+            "promoName": "Promoção 4",
+            "promoId": "4",
+            "data_inicio": "2021-10-05",
+            "data_fim": "2021-10-25"
+        }
+    ]
 
 
 Scenario: Não há promoções ativas
     Given a lista de promoções cadastradas é vazia
     And "Matheus" está no endpoint "/home"
     When "Matheus" faz uma requisição GET para o endpoint "/promocoes_ativas"
-    Then o sistema retorna uma mensagem indicando a ausência de promoções cadastradas
+    Then o sistema retorna uma mensagem indicando a ausência de promoções cadastradas com o corpo:
+    {
+        "error": "No promotions found."
+    }
 
 
 Scenario: Usuário reserva propriedade em promoção
-    Given as seguintes promoções estão ativas no sistema:
-      | nomeProp            | desconto | promoName      | data_inicio | data_fim   |
-      | "Park Hotel Caruaru"| 20    | "Dia das mães" | "12/05/2024"| "20/05/2024" |
-      | "Casa em Gravatá"   | 15    | "Black Friday" | "24/11/2024"| "28/11/2024" |
-      | "Chalé MG"          | 30    | "Natal"        | "20/12/2024"| "26/12/2024" |
-
+    Given há as seguintes promoções cadastradas no endpoint "/promocoes_cadastradas":
+    [
+        {
+            "id": "3",
+            "nome": "Propriedade 3",
+            "quantidadeQuartos": 4,
+            "lotacaoMaxima": 8,
+            "precoPorNoite": 100,
+            "userId": "123",
+            "desconto": 10,
+            "promoName": "Promoção 3",
+            "promoId": "3",
+            "data_inicio": "2021-10-01",
+            "data_fim": "2021-10-31"
+        },
+        {
+            "id": "4",
+            "nome": "Propriedade 4",
+            "quantidadeQuartos": 4,
+            "lotacaoMaxima": 10,
+            "precoPorNoite": 200,
+            "userId": "123",
+            "desconto": 20,
+            "promoName": "Promoção 4",
+            "promoId": "4",
+            "data_inicio": "2021-10-05",
+            "data_fim": "2021-10-25"
+        }
+    ]
     And "Duda" está no endpoint "/promocoes_ativas"
-    When "Duda" faz uma requisição POST para o endpoint "/realizar_reserva/1"
+    When "Duda" faz uma requisição POST para o endpoint "/realizar_reserva/3"
     Then o sistema o código de resposta "200"
 
 
