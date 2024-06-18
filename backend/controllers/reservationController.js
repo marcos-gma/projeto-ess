@@ -82,10 +82,10 @@ export const cancelReservation = async (req, res) => {
 
 export const createReservation = async (req, res) => {
     try {
-        const { acomId } = req.params
+        const { acomId, userId } = req.params
         // reservation.json variáveis puxadas da acommodation => accommodationName,numRooms,capacity, 
-        const { checkin, rates, numRooms, capacity, userId } = req.body;
-        if (!checkin || !rates || !numRooms || !capacity || !userId) {
+        const { checkin, rates, numRooms, capacity } = req.body;
+        if (!checkin || !rates || !numRooms || !capacity) {
             console.log("All fields are required");
             return res.status(400).json({
                 error: "All fields are required"
@@ -114,9 +114,6 @@ export const createReservation = async (req, res) => {
 
         //push em reservationsId [] em users.json
         userData[userIndex].reservationsId.push(newReservation.id)
-        //
-
-        console.log(userData[userIndex])
 
         data.push(newReservation)
 
