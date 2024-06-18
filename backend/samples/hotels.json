@@ -21,11 +21,11 @@
     "name": "Morada do Mar",
     "location": "Fernando de Noronha",
     "availableRooms": 1,
-    "petFriendly": false,
+    "petFriendly": true,
     "rooms": [
       {
         "beds": 2,
-        "price": 1000,
+        "price": 1500,
         "freeDates": [
           "21/05",
           "24/05"

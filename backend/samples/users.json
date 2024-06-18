@@ -1,24 +1,5 @@
 [
   {
-    "id": "1",
-    "fullName": "José Maria",
-    "birthday": "05/15/2000",
-    "email": "JS@email.com",
-    "cellphone": "81998138209",
-    "password": "$2a$10$C0zPbFvhQTGIUjYIMIKp3O/gNa.CQUwPAYRm4zKId9xqrrQAmPp.a",
-    "reservationsId": [
-      "1"
-    ],
-    "accommodationsId": [],
-    "liked": [
-      "1"
-    ],
-    "saved": [
-      "2"
-    ],
-    "cards": []
-  },
-  {
     "id": "2",
     "fullName": "José Roberto",
     "birthday": "09/09/1998",
@@ -69,5 +50,22 @@
     "liked": [],
     "saved": [],
     "cards": []
+  },
+  {
+    "id": "1",
+    "fullName": "José Maria",
+    "birthday": "05/15/2000",
+    "email": "mfp2@cin.ufpe.br",
+    "cellphone": "81998138209",
+    "password": "$2a$10$C0zPbFvhQTGIUjYIMIKp3O/gNa.CQUwPAYRm4zKId9xqrrQAmPp.a",
+    "reservationsId": [
+      "1"
+    ],
+    "accommodationsId": [],
+    "liked": [],
+    "saved": [
+      "1",
+      "2"
+    ]
   }
 ]
