@@ -11,7 +11,8 @@
     ],
     "accommodationsId": [],
     "liked": [],
-    "saved": []
+    "saved": [],
+    "cards": []
   },
   {
     "id": "2",
@@ -23,7 +24,8 @@
     "reservationsId": [],
     "accommodationsId": [],
     "liked": [],
-    "saved": []
+    "saved": [],
+    "cards": []
   },
   {
     "id": "5e3ff57b-3917-4092-83ed-9c2b696bac69",
@@ -35,7 +37,8 @@
     "reservationsId": [],
     "accommodationsId": [],
     "liked": [],
-    "saved": []
+    "saved": [],
+    "cards": []
   },
   {
     "id": "e24a615d-19c8-4109-950d-4a2cf462f642",
@@ -47,6 +50,7 @@
     "reservationsId": [],
     "accommodationsId": [],
     "liked": [],
-    "saved": []
+    "saved": [],
+    "cards": []
   }
 ]
