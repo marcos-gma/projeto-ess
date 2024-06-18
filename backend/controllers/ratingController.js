@@ -3,8 +3,8 @@ import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 
 function finalGrade(nota1, nota2, nota3, nota4, nota5) {
-    soma = (nota1 + nota2 + nota3 + nota4 + nota5)
-    media = soma / 5
+    let soma = (nota1 + nota2 + nota3 + nota4 + nota5)
+    let media = soma / 5
     return media.toFixed(2)
 }
 
@@ -28,8 +28,7 @@ export const createRating = async (req, res) => {
         const acomName = acomData.nome
         const acomId = acomData.id
         const resId = reserveData.id
-        const notaFinal = finalGrade(confortoGrade, checkinGrade, comunicacaoGrade, localizacaoGrade, limpezaGrade)
-        comment = "";
+
 
         const newRating = {
             id,
@@ -39,7 +38,7 @@ export const createRating = async (req, res) => {
             comunicacaoGrade,
             localizacaoGrade,
             limpezaGrade,
-            notaFinal,
+            notaFinal: finalGrade(confortoGrade, checkinGrade, comunicacaoGrade, localizacaoGrade, limpezaGrade),
             comment,
             acomId,
             resId
@@ -48,7 +47,7 @@ export const createRating = async (req, res) => {
         const acomAvaliada = acomData.findIndex(acom => String(acom.id) === String(id))
         //acomAvaliada retorna o index no JSON da acomodação avaliada
 
-        acomodation = acomData[acomAvaliada]
+        const acomodation = acomData[acomAvaliada]
 
         acomodation.ratingsId.push(id)
 
