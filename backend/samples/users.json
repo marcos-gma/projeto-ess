@@ -6,16 +6,17 @@
     "email": "mfp2@cin.ufpe.br",
     "cellphone": "81998138209",
     "password": "$2a$10$C0zPbFvhQTGIUjYIMIKp3O/gNa.CQUwPAYRm4zKId9xqrrQAmPp.a",
-    "reservationsId": [ "1" ],
+    "reservationsId": [
+      "1"
+    ],
     "accommodationsId": [],
     "liked": [
       "1"
     ],
     "saved": [
       "2"
-    ]
+    ],
     "cards": []
-    
   },
   {
     "id": "2",
@@ -50,6 +51,19 @@
     "email": "aloualou@email.com",
     "cellphone": "81998138209",
     "password": "$2a$10$MF0CJlbCrD8X7uJ0kt.NUOf1udXRtvTrAvX0qjTXzCItSyLBVW6uW",
+    "reservationsId": [],
+    "accommodationsId": [],
+    "liked": [],
+    "saved": [],
+    "cards": []
+  },
+  {
+    "id": "6d57bb6b-7c4a-47e9-9790-284b072afb35",
+    "fullName": "Matheus Pinheiro",
+    "birthday": "01/01/2000",
+    "email": "muitobom@email.com",
+    "cellphone": "81998138209",
+    "password": "$2a$10$0VUs7OoJvJbjSIOYdVb5j.IzuER6bmCkCsucxCc7EZf9Cju1XjNxm",
     "reservationsId": [],
     "accommodationsId": [],
     "liked": [],
