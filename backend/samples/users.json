@@ -6,16 +6,17 @@
     "email": "mfp2@cin.ufpe.br",
     "cellphone": "81998138209",
     "password": "$2a$10$C0zPbFvhQTGIUjYIMIKp3O/gNa.CQUwPAYRm4zKId9xqrrQAmPp.a",
-    "reservationsId": [ "1" ],
+    "reservationsId": [
+      "1"
+    ],
     "accommodationsId": [],
     "liked": [
       "1"
     ],
     "saved": [
       "2"
-    ]
+    ],
     "cards": []
-    
   },
   {
     "id": "2",
