@@ -1,14 +1,24 @@
 [
   {
+    "id": "012",
+    "nome": "Chalé do Porto",
+    "quantidadeQuartos": 3,
+    "lotacaoMaxima": 6,
+    "precoPorNoite": 150,
+    "userId": "123",
+    "ratingsId": [],
+    "finalGrade": null
+  },
+  {
     "id": "3",
     "nome": "Propriedade 3",
     "quantidadeQuartos": 4,
     "lotacaoMaxima": 8,
-    "precoPorNoite": 12.5,
+    "precoPorNoite": 100,
     "userId": "123",
-    "desconto": "50",
-    "promoName": "Promoção metade",
-    "promoId": "6a574f34-fb58-4516-9815-c4f4b69fe293",
+    "desconto": 10,
+    "promoName": "Promoção 3",
+    "promoId": "3",
     "data_inicio": "2021-10-01",
     "data_fim": "2021-10-31"
   },

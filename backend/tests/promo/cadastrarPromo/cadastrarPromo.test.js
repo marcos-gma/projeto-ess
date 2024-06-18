@@ -15,9 +15,9 @@ defineFeature(feature, (test) => {
             // Nada a ser implementado aqui para este exemplo
         });
 
-        given('uma acomodação com id: "3" está cadastrada no sistema', () => {
+        given('uma acomodação com id: "2" está cadastrada no sistema', () => {
             let data = JSON.parse(fs.readFileSync(path.resolve('./samples/accommodations.json'), 'utf8'));
-            data = data.filter(accommodation => accommodation.id !== "3");
+            data = data.filter(accommodation => accommodation.id !== "2");
             console.log('Dados atualizados de acomodações:', data);
             fs.writeFileSync(path.resolve('./samples/accommodations.json'), JSON.stringify(data, null, 2));
         });
