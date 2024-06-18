@@ -100,13 +100,10 @@ export const deletePromo = (req, res) => {
             return res.status(404).json({ error: 'Promotion not found.' });
         }
 
-        const hotel = data[hotelIndex]; // obtém o hotel encontrado
-        delete hotel.desconto;
-        delete hotel.promoName;
-        delete hotel.data_inicio;
-        delete hotel.data_fim;
-        hotel.precoPorNoite = noDiscount(hotel.precoPorNoite, hotel.desconto); 
-        data[hotelIndex] = hotel; // atualiza o hotel no banco de dados
+        let newData = data.filter(hotel => hotel.id !== id); // declare the newData variable
+        console.log(newData)
+        fs.writeFileSync(path.resolve('./samples/accommodations.json'), JSON.stringify(newData, null, 2))
+
         console.log(`Promo deleted for hotel with id: ${id}`); // log the success for debugging
         res.status(200).json({ message: 'Promo deleted successfully.' });
     

@@ -13,25 +13,7 @@
     "quantidadeQuartos": 2,
     "lotacaoMaxima": 4,
     "precoPorNoite": 25,
-    "userId": "123",
-    "desconto": 50,
-    "promoName": "Black Friday",
-    "promoId": "98b06e95-6525-4eae-aba9-86307c7df43c",
-    "data_inicio": "2021-10-01",
-    "data_fim": "2021-10-31"
-  },
-  {
-    "id": "3",
-    "nome": "Propriedade 3",
-    "quantidadeQuartos": 4,
-    "lotacaoMaxima": 8,
-    "precoPorNoite": 100,
-    "userId": "123",
-    "desconto": 10,
-    "promoName": "Promoção 3",
-    "promoId": "3",
-    "data_inicio": "2021-10-01",
-    "data_fim": "2021-10-31"
+    "userId": "123"
   },
   {
     "id": "4",
