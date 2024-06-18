@@ -25,11 +25,7 @@
     "lotacaoMaxima": 8,
     "precoPorNoite": 55.55555555555556,
     "userId": "123",
-    "desconto": "50",
-    "promoName": "Nova Promoção",
-    "promoId": "3",
-    "data_inicio": "2022-01-01",
-    "data_fim": "2022-01-31"
+    "desconto": "5"
   },
   {
     "id": "4",
