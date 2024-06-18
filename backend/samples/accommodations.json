@@ -10,6 +10,20 @@
     "finalGrade": null
   },
   {
+    "id": "2",
+    "nome": "Apartamento Central",
+    "quantidadeQuartos": 2,
+    "lotacaoMaxima": 4,
+    "precoPorNoite": 0.390625,
+    "ratingsId": {},
+    "finalGrade": null,
+    "desconto": "50",
+    "promoName": "Promoção metade",
+    "promoId": "265ae010-f5e3-49cc-9f58-c2c626020b51",
+    "data_inicio": "2021-10-01",
+    "data_fim": "2021-10-31"
+  },
+  {
     "id": "3",
     "nome": "Propriedade 3",
     "quantidadeQuartos": 4,
