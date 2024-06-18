@@ -56,5 +56,18 @@
     "liked": [],
     "saved": [],
     "cards": []
+  },
+  {
+    "id": "6d57bb6b-7c4a-47e9-9790-284b072afb35",
+    "fullName": "Matheus Pinheiro",
+    "birthday": "01/01/2000",
+    "email": "muitobom@email.com",
+    "cellphone": "81998138209",
+    "password": "$2a$10$0VUs7OoJvJbjSIOYdVb5j.IzuER6bmCkCsucxCc7EZf9Cju1XjNxm",
+    "reservationsId": [],
+    "accommodationsId": [],
+    "liked": [],
+    "saved": [],
+    "cards": []
   }
 ]
