@@ -12,25 +12,25 @@ defineFeature(feature, test => {
   let acomodacaoOriginal;
 
   test('Editar uma acomodação com sucesso via GUI', ({ given, when, and, then }) => {
-    given(/^que estou na página "Editar Acomodação" para a acomodação com ID "([^"]*)"$/, async (acomodacaoId) => {
+    given(/^que estou na página "Editar Acomodação" para a acomodação com ID "(.*)"$/, async (acomodacaoId) => {
       // Simular a busca dos dados originais da acomodação
       const res = await request.get(`http://localhost:5000/host/accommodations/${acomodacaoId}`);
       acomodacaoOriginal = res.data;
     });
 
-    when(/^eu altero "Nome da acomodação" para "([^"]*)"$/, (novoNome) => {
+    when(/^eu altero "Nome da acomodação" para "(.*)"$/, (novoNome) => {
       acomodacaoOriginal.nome = novoNome;
     });
 
-    and(/^eu altero "Quantidade de quartos" para "([^"]*)"$/, (novaQuantidadeQuartos) => {
+    and(/^eu altero "Quantidade de quartos" para "(.*)"$/, (novaQuantidadeQuartos) => {
       acomodacaoOriginal.quartos = novaQuantidadeQuartos;
     });
 
-    and(/^eu altero "Lotação maxima" para "([^"]*)"$/, (novaLotacaoMaxima) => {
+    and(/^eu altero "Lotação maxima" para "(.*)"$/, (novaLotacaoMaxima) => {
       acomodacaoOriginal.lotacaoMaxima = novaLotacaoMaxima;
     });
 
-    and(/^eu altero "Preço por noite" para "([^"]*)"$/, (novoPreco) => {
+    and(/^eu altero "Preço por noite" para "(.*)"$/, (novoPreco) => {
       acomodacaoOriginal.preco = novoPreco;
     });
 
@@ -61,13 +61,13 @@ defineFeature(feature, test => {
   });
 
   test('Tentar editar uma acomodação com dados incompletos via GUI', ({ given, when, and, then }) => {
-    given(/^que estou na página "Editar Acomodação" para a acomodação com ID "([^"]*)"$/, async (acomodacaoId) => {
+    given(/^que estou na página "Editar Acomodação" para a acomodação com ID "(.*)"$/, async (acomodacaoId) => {
       // Simular a busca dos dados originais da acomodação
-      const res = await request.get(`http://localhost:5000/user/host/accommodations/${acomodacaoId}`);
+      const res = await request.get(`http://localhost:5000/host/accommodations/${acomodacaoId}`);
       acomodacaoOriginal = res.data;
     });
 
-    when(/^eu altero "Nome da acomodação" para "([^"]*)"$/, (novoNome) => {
+    when(/^eu altero "Nome da acomodação" para "(.*)"$/, (novoNome) => {
       acomodacaoOriginal.nome = novoNome;
     });
 
@@ -75,11 +75,11 @@ defineFeature(feature, test => {
       acomodacaoOriginal.quartos = ''; // Deixar o campo vazio
     });
 
-    and(/^eu altero "Lotação maxima" para "([^"]*)"$/, (novaLotacaoMaxima) => {
+    and(/^eu altero "Lotação maxima" para "(.*)"$/, (novaLotacaoMaxima) => {
       acomodacaoOriginal.lotacaoMaxima = novaLotacaoMaxima;
     });
 
-    and(/^eu altero "Preço por noite" para "([^"]*)"$/, (novoPreco) => {
+    and(/^eu altero "Preço por noite" para "(.*)"$/, (novoPreco) => {
       acomodacaoOriginal.preco = novoPreco;
     });
 
