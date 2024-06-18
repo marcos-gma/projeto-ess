@@ -1,6 +1,11 @@
-const { defineFeature, loadFeature } = require('jest-cucumber');
-const axios = require('axios');
+import { defineFeature, loadFeature } from  'jest-cucumber';
+import supertest from 'supertest';
+import app from '../..';
+import fs from 'fs';
+import path from 'path'
+
 const feature = loadFeature('./tests/features/host/publishAccomodation.feature');
+const request = supertest(app);
 
 defineFeature(feature, test => {
   let response;
@@ -40,7 +45,7 @@ defineFeature(feature, test => {
         precoPorNoite : this.preco
       };
 
-      response = await axios.post('http://localhost:5000/host/accommodations', novaAcomodacao);
+      response = await request.post('http://localhost:5000/host/accommodations').send(novaAcomodacao);
       acomodacaoId = response.data.id;
     });
 
@@ -90,7 +95,7 @@ defineFeature(feature, test => {
       };
 
       try {
-        response = await axios.post('http://localhost:5000/api/accommodations', novaAcomodacao);
+        response = await request.post('http://localhost:5000/host/accommodations').send(novaAcomodacao);
       } catch (error) {
         response = error.response;
       }
