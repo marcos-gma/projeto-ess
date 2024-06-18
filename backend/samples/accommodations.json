@@ -5,15 +5,18 @@
     "quantidadeQuartos": 3,
     "lotacaoMaxima": 6,
     "precoPorNoite": 150,
-    "userId": "123"
+    "userId": "123",
+    "ratingsId": [],
+    "finalGrade": null
   },
   {
     "id": "2",
     "nome": "Apartamento Central",
     "quantidadeQuartos": 2,
     "lotacaoMaxima": 4,
-    "precoPorNoite": 25,
-    "userId": "123"
+    "precoPorNoite": 200,
+    "ratingsId": {},
+    "finalGrade": null
   },
   {
     "id": "3",
@@ -35,6 +38,8 @@
     "lotacaoMaxima": 10,
     "precoPorNoite": 200,
     "userId": "123",
+    "ratingsId": [],
+    "finalGrade": null,
     "desconto": 20,
     "promoName": "Promoção 4",
     "promoId": "4",
