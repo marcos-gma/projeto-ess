@@ -3,10 +3,10 @@
     "id": "1",
     "fullName": "José Maria",
     "birthday": "05/15/2000",
-    "email": "JS@email.com",
+    "email": "mfp2@cin.ufpe.br",
     "cellphone": "81998138209",
     "password": "$2a$10$C0zPbFvhQTGIUjYIMIKp3O/gNa.CQUwPAYRm4zKId9xqrrQAmPp.a",
-    "reservationsId": [],
+    "reservationsId": [ "1" ],
     "accommodationsId": [],
     "liked": [
       "1"
