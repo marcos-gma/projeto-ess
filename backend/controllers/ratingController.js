@@ -1,13 +1,20 @@
 import fs from 'fs';
 import path from 'path';
-import { check } from 'prisma';
 import { v4 as uuidv4 } from 'uuid';
 
+function finalGrade(nota1, nota2, nota3, nota4, nota5) {
+    let soma = (nota1 + nota2 + nota3 + nota4 + nota5)
+    let media = soma / 5
+    return media.toFixed(2)
+}
+
+var data = JSON.parse(fs.readFileSync(path.resolve('./samples/rating.json'), 'utf8'))
+var acomData = JSON.parse(fs.readFileSync(path.resolve('./samples/accommodations.json'), 'utf8'))
+var reserveData = JSON.parse(fs.readFileSync(path.resolve('./samples/reservation.json'), 'utf8'))
 
 export const createRating = async (req, res) => {
     try {
-        const { confortoGrade, checkinGrade, comunicacaoGrade, localizacaoGrade, limpezaGrade, finalGrade, comment, accommodationId, reservationId } = req.body;
-
+        const { confortoGrade, checkinGrade, comunicacaoGrade, localizacaoGrade, limpezaGrade, comment } = req.body;
         if (!confortoGrade || !checkinGrade || !comunicacaoGrade || !localizacaoGrade || !limpezaGrade || !comment) {
             console.log("All fields are required");
             return res.status(400).json({
@@ -17,35 +24,39 @@ export const createRating = async (req, res) => {
 
         //Verificação de validade das notas será realizada no front a partir de categorização das respostas
 
-        const idRating = uuidv4();
+        const id = uuidv4();
+        const acomName = acomData.nome
+        const acomId = acomData.id
+        const resId = reserveData.id
 
-        var reservationsData = JSON.parse(fs.readFileSync(path.resolve('./samples/reservation.json'), 'utf8'));
-        var accommodationsData = JSON.parse(fs.readFileSync(path.resolve('./samples/accommodations.json'), 'utf8'));
 
         const newRating = {
-            idRating: idRating,
-            accommodationName: reservationsData.accommodationName,
+            id,
+            acomName,
             confortoGrade,
             checkinGrade,
             comunicacaoGrade,
             localizacaoGrade,
             limpezaGrade,
-            finalGrade,
+            notaFinal: finalGrade(confortoGrade, checkinGrade, comunicacaoGrade, localizacaoGrade, limpezaGrade),
             comment,
-            accommodationId: accommodationsData.id,
-            reservationId: reservationsData.id
+            acomId,
+            resId
         }
 
-        accommodationsData.push(newRating);
+        const acomAvaliada = acomData.findIndex(acom => String(acom.id) === String(id))
+        //acomAvaliada retorna o index no JSON da acomodação avaliada
 
-        fs.writeFileSync(path.resolve('./samples/accommodations.json'), JSON.stringify(data, null, 2));
+        const acomodation = acomData[acomAvaliada]
 
-        res.status(201).json({
-            message: "Accommodation published successfully",
-            id: accommodationId
-        });
+        acomodation.ratingsId.push(id)
+
+        data.push(newRating)
+
+        res.status(201).json(newRating)
+
     } catch (error) {
-        console.log("Error in publishAccommodation controller:", error.message);
+        console.log("Error in ratingController:", error.message);
         res.status(500).json({
             error: "Internal Server Error"
         });
