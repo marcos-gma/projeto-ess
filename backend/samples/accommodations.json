@@ -23,13 +23,13 @@
     "nome": "Propriedade 3",
     "quantidadeQuartos": 4,
     "lotacaoMaxima": 8,
-    "precoPorNoite": 100,
+    "precoPorNoite": 55.55555555555556,
     "userId": "123",
-    "desconto": 10,
-    "promoName": "Promoção 3",
+    "desconto": "50",
+    "promoName": "Nova Promoção",
     "promoId": "3",
-    "data_inicio": "2021-10-01",
-    "data_fim": "2021-10-31"
+    "data_inicio": "2022-01-01",
+    "data_fim": "2022-01-31"
   },
   {
     "id": "4",
