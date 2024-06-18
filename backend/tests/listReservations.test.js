@@ -9,6 +9,7 @@ const request = supertest(app);
 
 defineFeature(feature, test => {
   let response;
+  let userId;
 
   test('Ver lista de reservas confirmadas na acomodação via GUI', ({ given, when, then }) => {
     given(/^que estou logado no sistema com ID de usuário "(.*)"$/, async (arg0) => {
