@@ -4,11 +4,12 @@ import cookieParser from 'cookie-parser';
 
 const app = express();
 
-app.use(express.json())
-dotenv.config()
-app.use(cookieParser())
+app.use(express.json());
+dotenv.config();
+app.use(cookieParser());
 
 //routes imports
+import paymentMethodsRoutes from './routes/paymentMethods.routes.js';
 
 import pingRoutes from './routes/ping.routes.js'
 import authRoutes from './routes/auth.routes.js'
@@ -33,9 +34,7 @@ app.use('/user', accommodationRoutes);
 app.use('/user', reservationRoutes);
 app.use('/ping', pingRoutes);
 app.use('/auth', authRoutes);
-app.use('/email', emailRoutes);
-app.use('/promo', promoRoutes);
-app.use('/user', rateRoutes);
+app.use('/payment-methods', paymentMethodsRoutes);
 
 app.listen(5001, () => {
     console.log("\nServer is listening on port 5001");
