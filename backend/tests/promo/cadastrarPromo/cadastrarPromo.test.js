@@ -93,5 +93,43 @@ defineFeature(feature, (test) => {
             expect(response.body.error).toBe(mensagem);
 
         });
+    
+        test('Cadastro falho de nova promoção devido à ausência de informações', ({ given, when, then }) => {
+            let response;
+            
+            given('o administrador João que deseja cadastrar uma nova promoção', () => {
+                // Nada a ser implementado aqui para este exemplo
+            });
+    
+            given('uma acomodação com id: "2" está cadastrada no sistema', () => {
+                let data = JSON.parse(fs.readFileSync(path.resolve('./samples/accommodations.json'), 'utf8'));
+                data = data.filter(accommodation => accommodation.id !== "2");
+                console.log('Dados atualizados de acomodações:', data);
+                fs.writeFileSync(path.resolve('./samples/accommodations.json'), JSON.stringify(data, null, 2));
+            });
+    
+            when(/^o administrador preenche os dados id: (\d+), desconto: (\d+), promoName: "(.*)", data_inicio: "(.*)", data_fim: "(.*)" e confirma$/, async (id, desconto, promoName, data_inicio, data_fim) => {
+                const url = '/promo/cadastrar_promocao';
+                response = await request.post(url).send({
+                    id: id,
+                    desconto: desconto,
+                    promoName: promoName,
+                    data_inicio: data_inicio,
+                    data_fim: data_fim
+                });
+                console.log('Resposta da requisição:', response.status, response.body);
+                console.log('Dados da requisição:', id, desconto, promoName, data_inicio, data_fim);
+            });
+    
+            then('o sistema dá um código de retorno', () => {
+                console.log('Status da resposta:', response.status);
+                expect(response.status).toBe(400);
+            });
+    
+            then(/^o sistema retorna a mensagem "(.*)"$/, (mensagem) => {
+                console.log('Mensagem da resposta:', mensagem);
+                expect(response.body.error).toBe(mensagem);
+            });
+        });
     });
 });
