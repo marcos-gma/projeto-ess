@@ -3,13 +3,12 @@
     "id": "1",
     "fullName": "José Maria",
     "birthday": "05/15/2000",
-    "email": "mfp2@cin.ufpe.br",
+    "email": "JS@email.com",
     "cellphone": "81998138209",
     "password": "$2a$10$C0zPbFvhQTGIUjYIMIKp3O/gNa.CQUwPAYRm4zKId9xqrrQAmPp.a",
-    "reservationsId": [
-      "1"
-    ],
-    "accommodationsId": []
+    "reservationsId": [],
+    "accommodationsId": [],
+    "cards": []
   },
   {
     "id": "2",
@@ -19,7 +18,8 @@
     "cellphone": "81995532312",
     "password": "$2a$10$C0zPbFvhQTGIUjYIMIKp3O/gNa.CQUwPAYRm4zKId9xqrrQAmPp.a",
     "reservationsId": [],
-    "accommodationsId": []
+    "accommodationsId": [],
+    "cards": []
   },
   {
     "id": "5e3ff57b-3917-4092-83ed-9c2b696bac69",
@@ -29,6 +29,7 @@
     "cellphone": "81998138209",
     "password": "$2a$10$V0tEX8rXO3KBTzuq/mqU0e.0Oal23wuK.7l2E.4l/1a0rhHAkwMMS",
     "reservationsId": [],
-    "accommodationsId": []
+    "accommodationsId": [],
+    "cards": []
   }
 ]
