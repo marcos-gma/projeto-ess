@@ -148,7 +148,8 @@ export const editPromo = (req, res) => {
         const precoComDesconto = withDiscount(precoSemDesconto, hotel.desconto);
         hotel.precoPorNoite = precoComDesconto; 
         
-        data[hotelIndex] = hotel; // atualiza o hotel no banco de dados
+        // data[hotelIndex] = hotel; // atualiza o hotel no banco de dados
+        fs.writeFileSync(path.resolve('./samples/accommodations.json'), JSON.stringify(data, null, 2))
         res.status(200).json({ message: 'Promo edited successfully.' }); // retorna o hotel atualizado
     } catch (error) {
         return res.status(400).send({ message: error.message });

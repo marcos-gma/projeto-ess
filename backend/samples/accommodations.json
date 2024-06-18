@@ -16,6 +16,19 @@
     "userId": "123"
   },
   {
+    "id": "3",
+    "nome": "Propriedade 3",
+    "quantidadeQuartos": 4,
+    "lotacaoMaxima": 8,
+    "precoPorNoite": 100,
+    "userId": "123",
+    "desconto": 10,
+    "promoName": "Promoção 3",
+    "promoId": "3",
+    "data_inicio": "2021-10-01",
+    "data_fim": "2021-10-31"
+  },
+  {
     "id": "4",
     "nome": "Propriedade 4",
     "quantidadeQuartos": 4,
