@@ -14,7 +14,7 @@ defineFeature(feature, test => {
   test('Editar uma acomodação com sucesso via GUI', ({ given, when, and, then }) => {
     given(/^que estou na página "Editar Acomodação" para a acomodação com ID "([^"]*)"$/, async (acomodacaoId) => {
       // Simular a busca dos dados originais da acomodação
-      const res = await request.get(`http://localhost:5000/user/host/accommodations/${acomodacaoId}`);
+      const res = await request.get(`http://localhost:5000/host/accommodations/${acomodacaoId}`);
       acomodacaoOriginal = res.data;
     });
 
