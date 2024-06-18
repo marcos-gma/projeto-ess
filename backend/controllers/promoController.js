@@ -59,7 +59,10 @@ export const createPromo = (req, res) => {
         hotel.data_inicio = data_inicio;
         hotel.data_fim = data_fim;
 
-        data[hotelIndex] = hotel; // atualiza o hotel no banco de dados
+        // data[hotelIndex] = hotel;
+        // delete data[hotelIndex];
+        // data.push(hotel);
+        fs.writeFileSync(path.resolve('./samples/accommodations.json'), JSON.stringify(data, null, 2))
         res.status(200).json({ message: 'Promo created successfully.' }); // retorna o hotel atualizado
     
     } catch (error) {
