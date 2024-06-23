@@ -127,3 +127,19 @@ export const createReservation = async (req, res) => {
         });
     }
 }
+export const getReservation = async (req, res) => {
+    try {
+        const { acomId } = req.params
+
+        const reserve = data.find(res => String(res.accommodationId) === String(acomId));
+        res.status(200).json(reserve);
+
+    } catch (error) {
+
+        console.log("Error in reservationController:", error.message);
+        res.status(500).json({
+            error: "Internal Server Error (Get Reservation)"
+        });
+
+    }
+}

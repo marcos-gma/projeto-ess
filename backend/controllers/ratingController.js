@@ -62,8 +62,8 @@ export const createRating = async (req, res) => {
 export const listRating = async (req, res) => {
     try {
         const { acomId } = req.params
-        const ratings = data.filter(acom => String(acom.accommodationId) === String(acomId)); // filtra os hotéis que possuem promoção
-        res.status(200).json(ratings); // retorna todas as promoções
+        const ratings = data.filter(acom => String(acom.accommodationId) === String(acomId));
+        res.status(200).json(ratings);
 
     } catch (error) {
         console.log("Error in ratingController:", error.message);
