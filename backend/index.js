@@ -9,7 +9,7 @@ dotenv.config();
 app.use(cookieParser());
 
 //routes imports
-import paymentMethodsRoutes from './routes/paymentMethods.routes.js';
+import paymentMethodsRoutes from './routes/pagamento.routes.js';
 
 import pingRoutes from './routes/ping.routes.js'
 import authRoutes from './routes/auth.routes.js'
