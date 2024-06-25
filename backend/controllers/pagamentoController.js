@@ -29,7 +29,7 @@ export const visualize = async (req, res) => {
 
 export const add =  async (req, res) => {
     try {
-        const { id, cardNumber, name, expireDate, type, cvv } = req.body;
+        const { email, cardNumber, name, expireDate, type, cvv } = req.body;
 
         // Validation
         // Empty field
@@ -78,8 +78,8 @@ export const add =  async (req, res) => {
 
         // isUnique
         var data = JSON.parse(fs.readFileSync(path.resolve('./samples/users.json'), 'utf8'));
-        const user = data.find(element => element.id == id);
-        if (user && user.cards) {
+        const user = data.find(element => element.email == email);
+        if (user.cards) {
             const existingCard = user.cards.find(element => element.cardNumber == cardNumber && element.type == type);
             if (existingCard) {
                 console.log("Card already registered");
@@ -136,31 +136,3 @@ export const remove = async (req, res) => {
         });
     };
 };
-
-export const select = async (req, res) => {
-    try {
-        const { id, cardNumber, type } = req.body;
-        var data = JSON.parse(fs.readFileSync(path.resolve('./samples/users.json'), 'utf8'));
-        const user = data.filter(element => element.id === id);
-
-        // Validation
-        // Existing card
-        const existingCard = user.cards.find(card => card.cardNumber == cardNumber && card.type == type);
-
-        if (!existingCard) {
-            console.log("Card does not exist and can not be selected");
-            res.status(400).json({
-                error: "Card does not exist and can not be selected"
-            })
-        }
-
-        // Select card
-
-    }
-    catch (error) {
-        console.log("Error in select controller: ", error.message);
-        res.status(500).json({
-            error: "Internal Server Error"
-        });
-    };
-}

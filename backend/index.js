@@ -18,4 +18,11 @@ app.use('/ping', pingRoutes);
 app.use('/auth', authRoutes);
 app.use('/payment-methods', pagamentoRoutes);
 
-app.listen(5001);
+
+export default app;
+
+if (require.main === module) {
+    app.listen(5001, () => {
+        console.log('Server is running on port 5001');
+    });
+}

@@ -31,5 +31,16 @@
     "reservationsId": [],
     "accommodationsId": [],
     "cards": []
+  },
+  {
+    "id": "10",
+    "fullName": "Iasmin Gomes",
+    "birthday": "01/01/2000",
+    "email": "iasmin@protonmail.com",
+    "cellphone": "81988888888",
+    "password": "wtf2000",
+    "reservationsId": [],
+    "accommodationsId": [],
+    "cards": []
   }
 ]
