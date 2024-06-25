@@ -79,7 +79,7 @@ export const add =  async (req, res) => {
         // isUnique
         var data = JSON.parse(fs.readFileSync(path.resolve('./samples/users.json'), 'utf8'));
         const user = data.find(element => element.email == email);
-        if (user.cards) {
+        if (user && user.cards) {
             const existingCard = user.cards.find(element => element.cardNumber == cardNumber && element.type == type);
             if (existingCard) {
                 console.log("Card already registered");

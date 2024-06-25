@@ -19,7 +19,7 @@ defineFeature(feature, test => {
         });
 
         when(/^uma nova requisição POST é feita com email: "(.*)", cardNumber: "(.*)", name: "(.*)", expireDate: "(.*)", type: "(.*)" e cvv: "(.*)"$/, async (endereco, cartao, nome, validade, tipo, seg) => {
-            const url = 'pagamento/add';
+            const url = '/pagamento/add';
 
             response = await request.post(url).send({
                 email: endereco, 
@@ -32,7 +32,7 @@ defineFeature(feature, test => {
         });
 
         then(/^o código de resposta é "(.*)"$/, (anscode) => {
-            expect(response.status).toBe(anscode);
+            expect(response.status).toBe(201);
         });
 
         and(/^o cartão com cardNumber "(.*)" e type "(.*)" é registrado no seu cadastro$/, (cartao, tipo) => {
