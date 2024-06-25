@@ -18,28 +18,28 @@ defineFeature(feature, test => {
 
         });
 
-        when(/^uma nova requisição POST é feita para o endpoint "(.*)" com email: "(.*)", cardNumber: "(.*)", name: "(.*)", expireDate: "(.*)", type: "(.*)" e cvv: "(.*)"$/, async (endpoint, email, cardNumber, name, expireDate, type, cvv) => {
-            //const url = endpoint;
+        when(/^uma nova requisição POST é feita com email: "(.*)", cardNumber: "(.*)", name: "(.*)", expireDate: "(.*)", type: "(.*)" e cvv: "(.*)"$/, async (endereco, cartao, nome, validade, tipo, seg) => {
+            const url = 'pagamento/add';
 
-            response = await request.post(endpoint).send({
-                email, 
-                cardNumber, 
-                name, 
-                expireDate, 
-                type, 
-                cvv
+            response = await request.post(url).send({
+                email: endereco, 
+                cardNumber: cartao, 
+                name: nome, 
+                expireDate: validade, 
+                type: tipo, 
+                cvv: seg
             });
         });
 
-        then(/^o cartão com cardNumber "(.*)" e type "(.*)" é registrado no seu cadastro$/, (cardNumber, type) => {
-            const { cardNumber_, type_ } = response.body;
-
-            expect(cardNumber).toBe(cardNumber);
-            expect(type).toBe(type);
+        then(/^o código de resposta é "(.*)"$/, (anscode) => {
+            expect(response.status).toBe(anscode);
         });
 
-        and(/^o código de resposta é "(.*)"$/, (anscode) => {
-            expect(response.status).toBe(anscode);
+        and(/^o cartão com cardNumber "(.*)" e type "(.*)" é registrado no seu cadastro$/, (cartao, tipo) => {
+            const { cardNumber, type } = response.body;
+
+            expect(cardNumber).toBe(cartao);
+            expect(type).toBe(tipo);
         });
     });
 });
