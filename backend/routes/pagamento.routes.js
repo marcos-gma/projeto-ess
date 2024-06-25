@@ -1,5 +1,5 @@
 import express from 'express';
-import { visualize, add, remove, select } from '../controllers/paymentMethodsController.js';
+import { visualize, add, remove, select } from '../controllers/pagamentoController.js';
 
 
 const router = express.Router();
