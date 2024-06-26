@@ -31,34 +31,30 @@ defineFeature(feature, (test) => {
         });
     });
 
-    // test('Excluir promoção inexistente', ({ given, when, then }) => {
-    //     let response;
+    test('Excluir promoção inexistente', ({ given, when, then }) => {
+        let response;
 
-    //     given(/^não existe uma promoção associada ao id: (.*) cadastrada no endpoint "\/promocoes_cadastradas"$/, (id) => {
-    //         let data = JSON.parse(fs.readFileSync(path.resolve('./samples/accommodations.json'), 'utf8'));
-    //         data = data.filter(accommodation => accommodation.id !== id);
-    //         console.log('Dados atualizados de acomodações:', data);
-    //         fs.writeFileSync(path.resolve('./samples/accommodations.json'), JSON.stringify(data, null, 2));
-    //     });
+        given(/^não existe uma promoção associada ao id: (.*) cadastrada no endpoint "\/promocoes_cadastradas"$/, (id) => {
+            let data = JSON.parse(fs.readFileSync(path.resolve('./samples/accommodations.json'), 'utf8'));
+            data = data.filter(accommodation => accommodation.id !== id);
+            console.log('Dados atualizados de acomodações:', data);
+            fs.writeFileSync(path.resolve('./samples/accommodations.json'), JSON.stringify(data, null, 2));
+        });
 
-    //     when(/^Iasmin faz uma requisição DELETE para o endpoint "(.*)"$/, async (url) => {
-    //         const id = url.split("/").pop();
-    //         console.log('ID da promoção:', id);
-    //         response = await request.delete(`/promo/deletar_promocao/${id}`);
-    //     });
+        when(/^Iasmin faz uma requisição DELETE para o endpoint "(.*)"$/, async (url) => {
+            const id = url.split("/").pop();
+            console.log('ID da promoção:', id);
+            response = await request.delete(`/promo/deletar_promocao/${id}`);
+        });
 
-    //     then('o sistema retorna o código de resposta', () => {
-    //         // se o id tá lá, mas n tem promoName, retorna 200, else 404
-    //         if ((response.body.promoName).toBeDefined()) {
-    //             expect(response.status).toBe(200);
-    //         } else {
-    //             expect(response.status).toBe(404);
-    //         }
+        then('o sistema retorna o código de resposta', () => {
+            // se o id tá lá, mas n tem promoName, retorna 200, else 404
+            expect(response.status).toBe(404);
         
-    //     });
+        });
 
-    //     then(/^o sistema retorna a mensagem (.*)$/, () => {
-    //         expect(response.body.error).toBe('Promotion not found.');
-    //     });
-    // });
+        then(/^o sistema retorna a mensagem (.*)$/, () => {
+            expect(response.body.error).toBe('Hotel not found.');
+        });
+    });
 });
