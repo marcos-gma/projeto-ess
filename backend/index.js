@@ -38,7 +38,6 @@ app.use('/add', pagamentoRoutes);
 
 app.use('/promo', promoRoutes);
 
-
 app.listen(5001, () => {
     console.log("\nServer is listening on port 5001");
 });
