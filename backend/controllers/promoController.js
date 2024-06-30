@@ -124,16 +124,15 @@ export const editPromo = (req, res) => {
         const { id, desconto, promoName, data_inicio, data_fim } = req.body; // pega os dados da requisição
 
         if (!id || !desconto || !promoName || !data_inicio || !data_fim) { // verifica se todos os campos foram preenchidos
+            // retorna qual campo está faltando
             return res.status(400).json({ error: 'All fields are required.' });
         }
 
-        const hotelIndex = data.findIndex(hotel => String(hotel.id) === String(id));
+        const hotel = data.find(hotel => String(hotel.id) === String(id)); // encontra o hotel pelo id
 
-        if (hotelIndex === -1) { // verifica se o hotel existe
-            return res.status(404).json({ error: 'Promotion not found.' });
+        if (!hotel) { // verifica se o hotel existe
+            return res.status(404).json({ error: 'Hotel not found.' });
         }
-
-        const hotel = data[hotelIndex]; // obtém o hotel encontrado
 
         if (!validateDiscount(desconto)) { 
             return res.status(400).json({ error: 'Invalid discount. It should be between 1 and 100.' });
@@ -144,16 +143,13 @@ export const editPromo = (req, res) => {
             return res.status(400).json({ error: 'Invalid date. Final date should be after the beginning promotion date.' });
         }
         
-        // atualiza os dados do hotel
+        // atualiza os dados
+        hotel.desconto = parseInt(desconto);
         hotel.promoName = promoName;
         hotel.data_inicio = data_inicio;
         hotel.data_fim = data_fim;
-        const precoSemDesconto = noDiscount(hotel.precoPorNoite, hotel.desconto);
-        hotel.desconto = desconto;
-        const precoComDesconto = withDiscount(precoSemDesconto, hotel.desconto);
-        hotel.precoPorNoite = precoComDesconto; 
         
-        // data[hotelIndex] = hotel; // atualiza o hotel no banco de dados
+        // escreve no arquivo
         fs.writeFileSync(path.resolve('./samples/accommodations.json'), JSON.stringify(data, null, 2))
         res.status(200).json({ message: 'Promo edited successfully.' }); // retorna o hotel atualizado
     } catch (error) {
