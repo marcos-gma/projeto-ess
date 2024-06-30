@@ -22,6 +22,10 @@ function validateDiscount(desconto) {
     return desconto > 0 && desconto <= 100; // retorna true se o desconto for entre 1 e 100%
 }
 
+function temPromo(hotel) {
+    return hotel.promoName; // retorna true se o hotel tiver promoção
+}
+
 var data = JSON.parse(fs.readFileSync(path.resolve('./samples/accommodations.json'), 'utf8'));
 
 
@@ -34,16 +38,16 @@ export const createPromo = (req, res) => {
             return res.status(400).json({ error: 'All fields are required.' });
         }
 
-        const hotelIndex = data.findIndex(hotel => String(hotel.id) === String(id)); // encontra o hotel pelo id
-        
-        if (hotelIndex === -1) { // verifica se o hotel existe
-            return res.status(404).json({ error: 'Hotel not found.' });
-        }
+        const hotel = data.find(hotel => String(hotel.id) === String(id)); // encontra o hotel pelo id
 
-        const hotel = data[hotelIndex]; // obtém o hotel encontrado
+        // se o hotel n tiver promo, retorna promo not found
+        if (!temPromo(hotel)) {
+            return res.status(200).json({ error: 'Promo not found.' });
+        } 
+
         if (!validateDiscount(desconto)) { // verifica se o desconto é válido
             return res.status(400).json({ error: 'Invalid discount. It should be between 1 and 100' });
-        }
+        } 
 
         const newDiscountValue = withDiscount(hotel.precoPorNoite, desconto); // calcula o novo precoPorNoite com base no desconto
         hotel.precoPorNoite = newDiscountValue; // atualiza o precoPorNoite com o novo precoPorNoite calculado
@@ -133,6 +137,11 @@ export const editPromo = (req, res) => {
         if (!hotel) { // verifica se o hotel existe
             return res.status(404).json({ error: 'Hotel not found.' });
         }
+
+        // se o hotel n tiver promo, retorna promo not found
+        if (!temPromo(hotel)) {
+            return res.status(200).json({ error: 'Promo not found.' });
+        } 
 
         if (!validateDiscount(desconto)) { 
             return res.status(400).json({ error: 'Invalid discount. It should be between 1 and 100.' });
