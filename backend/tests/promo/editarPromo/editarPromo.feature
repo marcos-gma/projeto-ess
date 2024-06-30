@@ -17,3 +17,10 @@ Feature: Editar promoção
         Then o sistema retorna o código de resposta "200"
         Then o sistema retorna a mensagem "Promo not found."
         Then a promoção de id: "12" não é atualizada no sistema com desconto: "50", promoName: "Nova Promoção", data_inicio: "2022-01-01", data_fim: "2022-01-31"
+
+    Scenario: Editar promoção com erro de desconto inválido
+        Given existe uma promoção cadastrada no sistema para o hotel com id: "10"
+        When o administrador faz uma requisição PUT para o endpoint "/promo/editar_promocao/10" com desconto: "-50", promoName: "Nova Promoção", data_inicio: "2022-01-01", data_fim: "2022-01-31"
+        Then o sistema retorna o código de resposta "400"
+        Then o sistema retorna a mensagem "Invalid discount. It should be between 1 and 100."
+        Then a promoção de id: "10" não é atualizada no sistema com desconto: "-50", promoName: "Nova Promoção 2", data_inicio: "2022-01-02", data_fim: "2022-01-30"
