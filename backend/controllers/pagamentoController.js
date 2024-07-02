@@ -1,13 +1,14 @@
 import fs from 'fs';
+import { type } from 'os';
 import path from 'path';
 
 
 export const visualize = async (req, res) => {
     try {
-        const { id } = req.body;
+        const { email } = req.body;
 
         var data = JSON.parse(fs.readFileSync(path.resolve('./samples/users.json'), 'utf8'));
-        const user = data.find(element => element.id == id);
+        const user = data.find(element => element.email == email);
 
         if (user.cards.length > 0) {
             user.cards.forEach(element => {
@@ -57,7 +58,7 @@ export const add =  async (req, res) => {
             });
         }
 
-        // mm/dd/yyy format and isDigit
+        // mm/dd/yyyy format and isDigit
         const dateRegex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$/;
         const currentDate = new Date();
         const inputDate = new Date(expireDate);
