@@ -62,7 +62,12 @@
     "accommodationsId": [],
     "liked": [],
     "saved": [],
-    "cards": []
+    "cards": [
+      {
+        "cardNumber": "5555555555555555",
+        "type": "debit"
+      }
+    ]
   },
   {
     "id": "1",

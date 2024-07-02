@@ -1,13 +1,14 @@
 import fs from 'fs';
+import { type } from 'os';
 import path from 'path';
 
 
 export const visualize = async (req, res) => {
     try {
-        const { id } = req.body;
+        const { email } = req.body;
 
         var data = JSON.parse(fs.readFileSync(path.resolve('./samples/users.json'), 'utf8'));
-        const user = data.find(element => element.id == id);
+        const user = data.find(element => element.email == email);
 
         if (user.cards.length > 0) {
             user.cards.forEach(element => {

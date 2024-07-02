@@ -1,10 +1,10 @@
 import express from 'express';
-import { add, remove } from '../controllers/pagamentoController.js';
+import { add, remove, visualize } from '../controllers/pagamentoController.js';
 
 
 const router = express.Router();
 
-//router.get('/visualize', visualize);
+router.get('/visualize', visualize);
 router.post('/add', add);
 router.delete('/remove', remove);
 //router.put('/select', select);
