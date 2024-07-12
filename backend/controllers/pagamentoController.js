@@ -8,7 +8,7 @@ export const visualize = async (req, res) => {
         const { email } = req.body;
 
         var data = JSON.parse(fs.readFileSync(path.resolve('./samples/users.json'), 'utf8'));
-        const user = data.find(element => element.email == email);
+        const user = data.find(element => element.email === email);
 
         if (user.cards.length > 0) {
             user.cards.forEach(element => {
@@ -79,9 +79,11 @@ export const add =  async (req, res) => {
 
         // isUnique
         var data = JSON.parse(fs.readFileSync(path.resolve('./samples/users.json'), 'utf8'));
-        const user = data.find(element => element.email == email);
+        const user = data.find(element => element.email === email);
+
         if (user && user.cards) {
-            const existingCard = user.cards.find(element => element.cardNumber == cardNumber && element.type == type);
+            const existingCard = user.cards.find(card => card.cardNumber === cardNumber && card.type === type);
+            
             if (existingCard) {
                 console.log("Card already registered");
                 return res.status(400).json({
@@ -97,7 +99,6 @@ export const add =  async (req, res) => {
             cardNumber,
             type
         });
-
     }
     catch (error) {
         console.log("Error in add controller: ", error.message);
