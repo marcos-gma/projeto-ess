@@ -9,24 +9,23 @@ export const visualize = async (req, res) => {
 
         var data = JSON.parse(fs.readFileSync(path.resolve('./samples/users.json'), 'utf8'));
         const user = data.find(element => element.email === email);
-
-        if (user.cards.length > 0) {
-            user.cards.forEach(element => {
-                console.log(element.cardNumber);
-                console.log(element.type);
-            });
-        }
-        else console.log("");
-        res.status(200).json();
+        
+        if (user) {
+            res.status(200).json(user.cards);
+        } 
+        else {
+            console.log("User not found");
+            res.status(404).json({ message: "User not found" });
+        }        
     }
     catch (error) {
         console.log("Error in visualize controller: ", error.message);
         res.status(500).json({
             error: "Internal Server Error"
         });
-    };
-    
+    }; 
 };
+
 
 export const add =  async (req, res) => {
     try {
@@ -107,6 +106,7 @@ export const add =  async (req, res) => {
         });
     };
 };
+
 
 export const remove = async (req, res) => {
     try {
