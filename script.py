@@ -12,3 +12,5 @@ frontend_command = f'start cmd /k "cd /d {frontend_dir} && npm start"'
 # Executando os comandos e abrindo em diferentes terminais
 subprocess.Popen(backend_command, shell=True)
 subprocess.Popen(frontend_command, shell=True)
+
+print("\nFrontend and Backend are running...\n\n")
