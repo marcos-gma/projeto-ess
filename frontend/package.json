@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
     "start": "react-scripts start",
     "dev": "vite",
     "testing": "vite --mode testing",
