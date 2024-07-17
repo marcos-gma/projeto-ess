@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
+    "pretty": "npx prettier --write src/index.js",
     "start": "react-scripts start",
     "dev": "vite",
     "testing": "vite --mode testing",
@@ -50,6 +51,7 @@
     "eslint-plugin-react-refresh": "^0.4.8",
     "husky": "^8.0.3",
     "jsdom": "^22.1.0",
+    "prettier": "^3.3.3",
     "start-server-and-test": "^2.0.0",
     "typescript": "^5.0.2",
     "vite": "^4.3.2",
