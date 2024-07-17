@@ -8,25 +8,24 @@ export const visualize = async (req, res) => {
         const { email } = req.body;
 
         var data = JSON.parse(fs.readFileSync(path.resolve('./samples/users.json'), 'utf8'));
-        const user = data.find(element => element.email == email);
-
-        if (user.cards.length > 0) {
-            user.cards.forEach(element => {
-                console.log(element.cardNumber);
-                console.log(element.type);
-            });
-        }
-        else console.log("");
-        res.status(200).json();
+        const user = data.find(element => element.email === email);
+        
+        if (user) {
+            res.status(200).json(user.cards);
+        } 
+        else {
+            console.log("User not found");
+            res.status(404).json({ message: "User not found" });
+        }        
     }
     catch (error) {
         console.log("Error in visualize controller: ", error.message);
         res.status(500).json({
             error: "Internal Server Error"
         });
-    };
-    
+    }; 
 };
+
 
 export const add =  async (req, res) => {
     try {
@@ -79,9 +78,11 @@ export const add =  async (req, res) => {
 
         // isUnique
         var data = JSON.parse(fs.readFileSync(path.resolve('./samples/users.json'), 'utf8'));
-        const user = data.find(element => element.email == email);
+        const user = data.find(element => element.email === email);
+
         if (user && user.cards) {
-            const existingCard = user.cards.find(element => element.cardNumber == cardNumber && element.type == type);
+            const existingCard = user.cards.find(card => card.cardNumber === cardNumber && card.type === type);
+            
             if (existingCard) {
                 console.log("Card already registered");
                 return res.status(400).json({
@@ -97,7 +98,6 @@ export const add =  async (req, res) => {
             cardNumber,
             type
         });
-
     }
     catch (error) {
         console.log("Error in add controller: ", error.message);
@@ -106,6 +106,7 @@ export const add =  async (req, res) => {
         });
     };
 };
+
 
 export const remove = async (req, res) => {
     try {
