@@ -13,7 +13,7 @@ interface HomeContextProps {
 }
 
 export const HomeContext = createContext<HomeContextProps>(
-  {} as HomeContextProps
+  {} as HomeContextProps,
 );
 
 interface HomeProviderProps {
@@ -37,7 +37,7 @@ export const HomeProvider = ({ children }: HomeProviderProps) => {
         apiService,
         dispatch,
       }),
-    [apiService]
+    [apiService],
   );
 
   return (

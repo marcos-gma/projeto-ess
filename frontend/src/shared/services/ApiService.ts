@@ -40,7 +40,7 @@ export class ApiService {
 
   public async get(
     path: string,
-    queryParams?: any
+    queryParams?: any,
   ): Promise<Result<BaseApiResponseModel>> {
     try {
       const response = await this.httpClient.get(path, {
@@ -60,7 +60,7 @@ export class ApiService {
 
   public async post(
     path: string,
-    body: any
+    body: any,
   ): Promise<Result<BaseApiResponseModel>> {
     try {
       const response = await this.httpClient.post(path, body, {
@@ -79,7 +79,7 @@ export class ApiService {
 
   public async update(
     path: string,
-    body: any
+    body: any,
   ): Promise<Result<BaseApiResponseModel>> {
     try {
       const response = await this.httpClient.put(path, body, {
@@ -98,7 +98,7 @@ export class ApiService {
 
   public async delete(
     path: string,
-    queryParams?: any
+    queryParams?: any,
   ): Promise<Result<BaseApiResponseModel>> {
     try {
       const response = await this.httpClient.delete(path, {

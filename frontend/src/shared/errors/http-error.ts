@@ -10,7 +10,7 @@ abstract class HttpError extends AppError {
     slug: string,
     message: string,
     stackTrace: string,
-    statusCode = -1
+    statusCode = -1,
   ) {
     super(slug, message, stackTrace);
     this.statusCode = statusCode;
@@ -25,7 +25,7 @@ abstract class HttpError extends AppError {
 
     if (error.response?.data) {
       const baseApiResponseModel = new BaseApiResponseModel(
-        error.response?.data as any
+        error.response?.data as any,
       );
 
       msg = HttpError.mapMsgCodeToMessage(baseApiResponseModel.msgCode);

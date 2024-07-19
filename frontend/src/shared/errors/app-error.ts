@@ -17,7 +17,7 @@ export class AppUnknownError extends AppError {
   constructor(
     slug = "app_unknown_error",
     message = "Unknown error",
-    stackTrace = ""
+    stackTrace = "",
   ) {
     super(slug, message, stackTrace);
   }
@@ -36,7 +36,7 @@ export class EntityNotFitError extends AppError {
   constructor(
     slug = "entity_error",
     message = "Entity error",
-    stackTrace = ""
+    stackTrace = "",
   ) {
     super(slug, message, stackTrace);
   }

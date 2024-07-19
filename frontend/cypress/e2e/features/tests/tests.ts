@@ -8,7 +8,7 @@ When(
   (field: string, value: string, button: string) => {
     cy.getDataCy(field).type(value);
     cy.getDataCy(button).click();
-  }
+  },
 );
 
 Then("o usuário deve ver a mensagem {string}", (text: string) => {
@@ -24,14 +24,14 @@ When(
   "o usuário não preenche o campo {string} e clica no botão {string}",
   (_: string, button: string) => {
     cy.getDataCy(button).click();
-  }
+  },
 );
 
 Then(
   "o usuário deve ver a mensagem {string} do campo {string}",
   (text: string, field: string) => {
     cy.getDataCy(`${field}-error`).should("contain", text);
-  }
+  },
 );
 
 // Scenario: Visualizar tests
@@ -39,7 +39,7 @@ Given(
   "o usuário está na página {string} com o test {string} criado",
   (page: string) => {
     cy.visit(page);
-  }
+  },
 );
 
 When("o usuário clica no botão {string}", (button: string) => {
@@ -51,5 +51,5 @@ Then(
   (page: string, test: string) => {
     cy.url().should("include", page);
     cy.getDataCy(`test-item-${test}`).should("contain", test);
-  }
+  },
 );
