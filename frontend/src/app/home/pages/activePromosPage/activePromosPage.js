@@ -1,6 +1,6 @@
 import React from "react";
 
-const ActivePromosPage: React.FC = () => {
+const ActivePromosPage = () => {
   return (
     <div>
       <h1>Active Promos Page</h1>

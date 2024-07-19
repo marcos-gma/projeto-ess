@@ -1,0 +1,27 @@
+div {
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+header {
+    background-color: #f4f4f4;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+  }
+
+p {
+    margin: 50px 0;
+}
+
+ul li {
+    display: inline;
+    margin-right: 20px;
+    list-style: none;
+}
+
+ul li:hover {
+    color: #f00;
+    cursor: pointer;
+}
