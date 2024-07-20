@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const ActivePromosPage = () => {
   return (
@@ -6,7 +6,7 @@ const ActivePromosPage = () => {
       <h1>Active Promos Page</h1>
       <p>Welcome to the Active Promos Page!</p>
     </div>
-  );
-};
+  )
+}
 
-export default ActivePromosPage;
+export default ActivePromosPage
