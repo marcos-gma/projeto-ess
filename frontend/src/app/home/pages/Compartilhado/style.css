@@ -44,14 +44,14 @@ nav {
     color: #a23b72;
   }
   
-  .navbar-button {
+  button {
     background-color: #bbb891;
     cursor: pointer;
     font-size: 16px;
     padding: 10px 20px;
   }
   
-  .navbar-button:hover {
+  button:hover {
     background-color: #a23b72;
     color: #fff;
   }
