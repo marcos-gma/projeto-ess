@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import ListarPromo from '../../services/promo/listarPromo.js';
-import NavBar from '../Compartilhado/navbar.js';
+import ListarPromo from '../../../services/promo/listarPromo.js';
+import NavBar from '../../Compartilhado/navbar.js';
 import './style.css';
 
 const ActivePromosPage = () => {
