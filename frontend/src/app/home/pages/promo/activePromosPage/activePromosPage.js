@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import ListarPromo from '../../services/promo/listarPromo.js';
-import NavBar from '../Compartilhado/navbar.js';
+import ListarPromo from '../../../services/promo/listarPromo.js';
+import NavBar from '../../Compartilhado/navbar.js';
 import './style.css';
 
 const ActivePromosPage = () => {
@@ -39,7 +39,10 @@ const ActivePromosPage = () => {
           ) : (
             promos.map((promo) => (
               <div key={promo.promoId} className="promo-card">
-                <h2>{promo.promoName}</h2>
+                <br></br>
+                <img src='https://www.blumarturismo.com.br/blog/wp-content/uploads/2022/11/1.jpg-1-840x500.png' alt='Hotel exemplo' />
+                <h3>{promo.promoName}</h3>
+                <p>{promo.nome}</p>
                 <p>{promo.desconto}</p>
                 <p>{promo.data_inicio}</p>
                 <p>{promo.data_fim}</p>
