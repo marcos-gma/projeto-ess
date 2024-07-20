@@ -19,6 +19,7 @@ const NavBar = () => {
         <ul className='navbar-links'>
           <li onClick={() => navigate('/')}>Home</li>
           <li onClick={() => navigate('/active-promos')}>Promoções Ativas</li>
+          <li onClick={() => navigate('/my-accommodations')}>Minhas Acomodações</li>
         </ul>
         <button className='navbar-button' onClick={() => navigate('/login')}>
           Login
