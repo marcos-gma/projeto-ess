@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ListarPromo from '../../../services/promo/listarPromo.js';
+import Button from '../../Compartilhado/button.js';
 import NavBar from '../../Compartilhado/navbar.js';
 
 const MyPromos = () => {
@@ -51,6 +52,7 @@ const MyPromos = () => {
             ))
           )}
         </div>
+        <Button nome="Criar Promoção" destino="/new-promo" />
       </div>
     </div>
   );
