@@ -55,3 +55,12 @@ nav {
   background-color: #a23b72;
   color: #fff;
 }
+
+.main {
+  margin: 50px;
+}
+
+.main h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}	
