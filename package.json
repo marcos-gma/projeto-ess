@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write .",
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "project": "python -u script.py"
   },
   "dependencies": {
     "cors": "^2.8.5"
