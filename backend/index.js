@@ -38,6 +38,7 @@ app.use('/ping', pingRoutes);
 app.use('/auth', authRoutes);
 app.use('/email', emailRoutes);
 app.use('/add', pagamentoRoutes);
+app.use('/pagamento', pagamentoRoutes);
 app.use('/promo', promoRoutes);
 
 app.listen(5001, () => {
