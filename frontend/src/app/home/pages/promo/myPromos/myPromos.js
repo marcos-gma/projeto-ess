@@ -1,67 +1,66 @@
 // aqui vai ser onde o usuário vai ver as promoções que ele criou, criar outras, editar e deletar
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import deletarPromo from '../../../services/promo/deletarPromo.js';
-import ListarPromo from '../../../services/promo/listarPromo.js';
-import NavBar from '../../Compartilhado/navbar.js';
-import PopUp from '../../Compartilhado/popUp.js';
-import ModalCadastrar from './modalCadastrar.js';
-import ModalEditarPromo from './modalEditarPromo.js';
-
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import deletarPromo from '../../../services/promo/deletarPromo.js'
+import ListarPromo from '../../../services/promo/listarPromo.js'
+import NavBar from '../../Compartilhado/navbar.js'
+import PopUp from '../../Compartilhado/popUp.js'
+import ModalCadastrar from './modalCadastrar.js'
+import ModalEditarPromo from './modalEditarPromo.js'
 
 const MyPromos = () => {
-  const [promos, setPromos] = useState([]);
+  const [promos, setPromos] = useState([])
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await ListarPromo();
-        console.log('Fetched data:', data); // Adicione isto para ver o formato dos dados
+        const data = await ListarPromo()
+        console.log('Fetched data:', data) // Adicione isto para ver o formato dos dados
         if (Array.isArray(data)) {
-          setPromos(data);
+          setPromos(data)
         } else {
-          console.error('Expected an array but got:', data);
-          setPromos([]);
+          console.error('Expected an array but got:', data)
+          setPromos([])
         }
       } catch (error) {
-        console.error('Error fetching promotions:', error);
-        setPromos([]);
+        console.error('Error fetching promotions:', error)
+        setPromos([])
       }
     }
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   const handleDeletePromo = async (id) => {
     try {
-      const response = await deletarPromo(id);
-      console.log('Response:', response);
-      alert(response.message || 'Promoção deletada com sucesso!');
+      const response = await deletarPromo(id)
+      console.log('Response:', response)
+      alert(response.message || 'Promoção deletada com sucesso!')
       if (response === 'Promoção deletada com sucesso!') {
-        window.location.reload();
+        window.location.reload()
       }
     } catch (error) {
-      console.error('Error deleting promotion:', error);
-      alert('Erro ao deletar promoção');
+      console.error('Error deleting promotion:', error)
+      alert('Erro ao deletar promoção')
     }
   }
 
   const handleUpdatePromo = (updatedPromo) => {
-    setPromos(promos.map(promo => promo.promoId === updatedPromo.id ? { ...promo, ...updatedPromo } : promo));
-};
-  
+    setPromos(promos.map((promo) => (promo.promoId === updatedPromo.id ? { ...promo, ...updatedPromo } : promo)))
+  }
+
   return (
     <div>
       <NavBar />
-      <div className="main">
+      <div className='main'>
         <h1>My Promos Page</h1>
         <p>Criar, editar e deletar promoções</p>
 
-        <div className="promo-list">
+        <div className='promo-list'>
           {promos.length === 0 ? (
             <p>No promotions available.</p>
           ) : (
             promos.map((promo) => (
-              <div key={promo.promoId} className="promo-card">
+              <div key={promo.promoId} className='promo-card'>
                 <br></br>
                 <img src='https://www.blumarturismo.com.br/blog/wp-content/uploads/2022/11/1.jpg-1-840x500.png' alt='Hotel exemplo' />
                 <h3>{promo.promoName}</h3>
@@ -73,19 +72,19 @@ const MyPromos = () => {
                 <p>Fim: {promo.data_fim}</p>
                 <Link to={`/promo/${promo.promoId}`}>Ver detalhes</Link>
                 <button onClick={() => handleDeletePromo(promo.promoId)}>Deletar Promoção</button>
-                <PopUp title="Editar Promoção">
-                                    <ModalEditarPromo promo={promo} onClose={() => window.location.reload()} onUpdate={handleUpdatePromo} />
-                                </PopUp>
+                <PopUp title='Editar Promoção'>
+                  <ModalEditarPromo promo={promo} onClose={() => window.location.reload()} onUpdate={handleUpdatePromo} />
+                </PopUp>
               </div>
             ))
           )}
         </div>
-        <PopUp title="Cadastrar Promoção">
+        <PopUp title='Cadastrar Promoção'>
           <ModalCadastrar />
         </PopUp>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MyPromos;
+export default MyPromos
