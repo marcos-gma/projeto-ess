@@ -40,8 +40,8 @@ export const createPromo = (req, res) => {
         const hotel = data.find(hotel => String(hotel.id) === String(id)); // encontra o hotel pelo id
 
         // se o hotel n tiver promo, retorna promo not found
-        if (!temPromo(hotel)) {
-            return res.status(200).json({ error: 'Promo not found.' });
+        if (temPromo(hotel)) {
+            return res.status(200).json({ error: 'Hotel already have a Promo, if you want to, edit it.' });
         } 
 
         if (!validateDiscount(desconto)) { // verifica se o desconto é válido
@@ -63,7 +63,8 @@ export const createPromo = (req, res) => {
         hotel.data_fim = data_fim;
 
         fs.writeFileSync(path.resolve('./samples/accommodations.json'), JSON.stringify(data, null, 2))
-        res.status(200).json({ message: 'Promo created successfully.' }); // retorna o hotel atualizado
+        return res.status(200).json({ message: 'Promo created successfully.' }); // retorna o hotel atualizado
+        
     
     } catch (error) {
         return res.status(400).send({ message: error.message });
