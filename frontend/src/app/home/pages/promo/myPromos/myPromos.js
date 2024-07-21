@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import ListarPromo from '../../../services/promo/listarPromo.js';
 import NavBar from '../../Compartilhado/navbar.js';
 import PopUp from '../../Compartilhado/popUp.js';
-import ModalContent_CadastrarPromo from './modalCadastrar.js';
+import ModalCadastrar from './modalCadastrar.js';
 
 
 const MyPromos = () => {
@@ -56,7 +56,7 @@ const MyPromos = () => {
           )}
         </div>
         <PopUp title="Cadastrar Nova Promoção">
-          <ModalContent_CadastrarPromo />
+          <ModalCadastrar />
         </PopUp>
       </div>
     </div>

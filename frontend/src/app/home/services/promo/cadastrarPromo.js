@@ -1,18 +1,11 @@
-import api from "../api.js";
+import api from '../api.js';
 
-export default async function cadastrarPromo(id, desconto, promoName, data_inicio, data_fim) {
+export default async function CadastrarPromo(data) {
     try {
-        const data = {
-            id: id,
-            desconto: desconto,
-            promoName: promoName,
-            data_inicio: data_inicio,
-            data_fim: data_fim
-        };
-        const response = await api.post('/promos/cadastrar_promo', data);
+        const response = await api.post('/promo/cadastrar_promocao', data);
         return response.data;
     } catch (error) {
-        console.error(error);
-        return [];
+        console.error('Error creating promotion:', error);
+        return 'Erro ao criar promoção';
     }
 }
