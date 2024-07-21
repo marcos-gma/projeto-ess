@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ListarPromo from '../../../services/promo/listarPromo.js';
 import NavBar from '../../Compartilhado/navbar.js';
+import PopUp from '../../Compartilhado/popUp.js';
+import ModalCadastrar from './modalCadastrar.js';
+
 
 const MyPromos = () => {
   const [promos, setPromos] = useState([]);
@@ -42,15 +45,19 @@ const MyPromos = () => {
                 <br></br>
                 <img src='https://www.blumarturismo.com.br/blog/wp-content/uploads/2022/11/1.jpg-1-840x500.png' alt='Hotel exemplo' />
                 <h3>{promo.promoName}</h3>
-                <p>{promo.nome}</p>
-                <p>{promo.desconto}</p>
-                <p>{promo.data_inicio}</p>
-                <p>{promo.data_fim}</p>
+                <p>Propriedade: {promo.nome}</p>
+                <p>ID: {promo.id}</p>
+                <p>Desconto: {promo.desconto}</p>
+                <p>Início: {promo.data_inicio}</p>
+                <p>Fim: {promo.data_fim}</p>
                 <Link to={`/promo/${promo.promoId}`}>Ver detalhes</Link>
               </div>
             ))
           )}
         </div>
+        <PopUp title="Cadastrar Nova Promoção">
+          <ModalCadastrar />
+        </PopUp>
       </div>
     </div>
   );
