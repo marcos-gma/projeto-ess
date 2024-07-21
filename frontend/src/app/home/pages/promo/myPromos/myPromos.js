@@ -4,6 +4,44 @@ import { Link } from 'react-router-dom';
 import ListarPromo from '../../../services/promo/listarPromo.js';
 import Button from '../../Compartilhado/button.js';
 import NavBar from '../../Compartilhado/navbar.js';
+import PopUp from '../../Compartilhado/popUp.js';
+
+const ModalContent = () => {
+    return (
+        <div>
+            <h1>Cadastrar Nova Promoção</h1>
+            <form>
+                <label>
+                    Nome da Promoção:
+                    <input type="text" name="promoName"  required/>
+                </label>
+                <br />
+                <label>
+                    Nome do Hotel:
+                    <input type="text" name="nome" required />
+                </label>
+                <br />
+                <label>
+                    Desconto:
+                    <input type="number" name="desconto" required/>
+                </label>
+                <br />
+                <label>
+                    Data de Início:
+                    <input type="date" name="data_inicio" required/>
+                </label>
+                <br />
+                <label>
+                    Data de Fim:
+                    <input type="date" name="data_fim" required/>
+                </label>
+                <br />
+                <Button nome="Finalizar e Criar" destino="/my-promos" />
+            </form>
+        </div>
+    );
+}
+
 
 const MyPromos = () => {
   const [promos, setPromos] = useState([]);
@@ -52,7 +90,9 @@ const MyPromos = () => {
             ))
           )}
         </div>
-        <Button nome="Criar Promoção" destino="/new-promo" />
+        <PopUp title="Cadastrar Nova Promoção">
+          <ModalContent />
+        </PopUp>
       </div>
     </div>
   );
