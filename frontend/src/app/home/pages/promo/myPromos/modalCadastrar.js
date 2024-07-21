@@ -24,6 +24,7 @@ const ModalCadastrar = ({ onClose }) => {
             alert(response.message || 'Promoção cadastrada com sucesso!');
             if (response === 'Promoção cadastrada com sucesso!') {
                 onClose();
+                window.location.reload(); 
             }
         } catch (error) {
             console.error('Error creating promotion:', error);
