@@ -47,12 +47,7 @@
     "precoPorNoite": 100,
     "userId": "123",
     "ratingsId": [],
-    "finalGrade": null,
-    "desconto": 50,
-    "promoName": "Nova Promoção",
-    "promoId": "10",
-    "data_inicio": "2022-01-01",
-    "data_fim": "2022-01-31"
+    "finalGrade": null
   },
   {
     "id": "11",
@@ -63,8 +58,8 @@
     "userId": "123",
     "ratingsId": [],
     "finalGrade": null,
-    "desconto": 20,
-    "promoName": "Promoção 4",
+    "desconto": 50,
+    "promoName": "Dia dos Filhos",
     "promoId": "11",
     "data_inicio": "2021-10-05",
     "data_fim": "2021-10-25"
