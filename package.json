@@ -9,6 +9,7 @@
     "start": "react-scripts start"
   },
   "dependencies": {
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "react-modal": "^3.16.1"
   }
 }
