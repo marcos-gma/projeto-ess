@@ -6,6 +6,7 @@ import ListarPromo from '../../../services/promo/listarPromo.js';
 import NavBar from '../../Compartilhado/navbar.js';
 import PopUp from '../../Compartilhado/popUp.js';
 import ModalCadastrar from './modalCadastrar.js';
+import ModalEditarPromo from './modalEditarPromo.js';
 
 
 const MyPromos = () => {
@@ -43,6 +44,10 @@ const MyPromos = () => {
       alert('Erro ao deletar promoção');
     }
   }
+
+  const handleUpdatePromo = (updatedPromo) => {
+    setPromos(promos.map(promo => promo.promoId === updatedPromo.id ? { ...promo, ...updatedPromo } : promo));
+};
   
   return (
     <div>
@@ -68,11 +73,14 @@ const MyPromos = () => {
                 <p>Fim: {promo.data_fim}</p>
                 <Link to={`/promo/${promo.promoId}`}>Ver detalhes</Link>
                 <button onClick={() => handleDeletePromo(promo.promoId)}>Deletar Promoção</button>
+                <PopUp title="Editar Promoção">
+                                    <ModalEditarPromo promo={promo} onClose={() => window.location.reload()} onUpdate={handleUpdatePromo} />
+                                </PopUp>
               </div>
             ))
           )}
         </div>
-        <PopUp title="Cadastrar Nova Promoção">
+        <PopUp title="Cadastrar Promoção">
           <ModalCadastrar />
         </PopUp>
       </div>
