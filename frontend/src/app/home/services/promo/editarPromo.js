@@ -1,4 +1,4 @@
-import api from "../api";
+import api from "../api.js";
 
 export default async function editarPromo(id, desconto, promoName, data_inicio, data_fim) {
     try {
