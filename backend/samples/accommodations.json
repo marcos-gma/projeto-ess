@@ -77,12 +77,7 @@
     "precoPorNoite": 60,
     "userId": "123",
     "ratingsId": [],
-    "finalGrade": null,
-    "desconto": 50,
-    "promoName": "Black Friday",
-    "promoId": 12,
-    "data_inicio": "2021-10-01",
-    "data_fim": "2021-10-31"
+    "finalGrade": null
   },
   {
     "id": "13",
