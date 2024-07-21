@@ -2,45 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ListarPromo from '../../../services/promo/listarPromo.js';
-import Button from '../../Compartilhado/button.js';
 import NavBar from '../../Compartilhado/navbar.js';
 import PopUp from '../../Compartilhado/popUp.js';
-
-const ModalContent = () => {
-    return (
-        <div>
-            <h1>Cadastrar Nova Promoção</h1>
-            <form>
-                <label>
-                    Nome da Promoção:
-                    <input type="text" name="promoName"  required/>
-                </label>
-                <br />
-                <label>
-                    Nome do Hotel:
-                    <input type="text" name="nome" required />
-                </label>
-                <br />
-                <label>
-                    Desconto:
-                    <input type="number" name="desconto" required/>
-                </label>
-                <br />
-                <label>
-                    Data de Início:
-                    <input type="date" name="data_inicio" required/>
-                </label>
-                <br />
-                <label>
-                    Data de Fim:
-                    <input type="date" name="data_fim" required/>
-                </label>
-                <br />
-                <Button nome="Finalizar e Criar" destino="/my-promos" />
-            </form>
-        </div>
-    );
-}
+import ModalContent_CadastrarPromo from './modalCadastrar.js';
 
 
 const MyPromos = () => {
@@ -81,17 +45,18 @@ const MyPromos = () => {
                 <br></br>
                 <img src='https://www.blumarturismo.com.br/blog/wp-content/uploads/2022/11/1.jpg-1-840x500.png' alt='Hotel exemplo' />
                 <h3>{promo.promoName}</h3>
-                <p>{promo.nome}</p>
-                <p>{promo.desconto}</p>
-                <p>{promo.data_inicio}</p>
-                <p>{promo.data_fim}</p>
+                <p>Propriedade: {promo.nome}</p>
+                <p>ID: {promo.id}</p>
+                <p>Desconto: {promo.desconto}</p>
+                <p>Início: {promo.data_inicio}</p>
+                <p>Fim: {promo.data_fim}</p>
                 <Link to={`/promo/${promo.promoId}`}>Ver detalhes</Link>
               </div>
             ))
           )}
         </div>
         <PopUp title="Cadastrar Nova Promoção">
-          <ModalContent />
+          <ModalContent_CadastrarPromo />
         </PopUp>
       </div>
     </div>
