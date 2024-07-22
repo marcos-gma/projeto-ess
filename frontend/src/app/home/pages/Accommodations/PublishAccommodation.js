@@ -41,28 +41,31 @@ const PublishAccommodation = () => {
     };
 
     return (
-        <div className="container">
-            <NavBar />
-            <h1>Publish Accommodation</h1>
-            <form onSubmit={handleSubmit} className="publish-form">
-                <label>
-                    Name:
-                    <input type="text" name="nome" value={formData.nome} onChange={handleChange} required />
-                </label>
-                <label>
-                    Quantidade de Quartos:
-                    <input type="number" name="quantidadeQuartos" value={formData.quantidadeQuartos} onChange={handleChange} required />
-                </label>
-                <label>
-                    Capacidade Maxima:
-                    <input type="number" name="lotacaoMaxima" value={formData.lotacaoMaxima} onChange={handleChange} required />
-                </label>
-                <label>
-                    Preço por Noite:
-                    <input type="number" name="precoPorNoite" value={formData.precoPorNoite} onChange={handleChange} required />
-                </label>
-                <button type="submit">Publish</button>
-            </form>
+        <div>
+        <NavBar />
+            <div className="container">
+                
+                <h1>Publish Accommodation</h1>
+                <form onSubmit={handleSubmit} className="publish-form">
+                    <label>
+                        Name:
+                        <input type="text" name="nome" value={formData.nome} onChange={handleChange} required />
+                    </label>
+                    <label>
+                        Quantidade de Quartos:
+                        <input type="number" name="quantidadeQuartos" value={formData.quantidadeQuartos} onChange={handleChange} required />
+                    </label>
+                    <label>
+                        Capacidade Maxima:
+                        <input type="number" name="lotacaoMaxima" value={formData.lotacaoMaxima} onChange={handleChange} required />
+                    </label>
+                    <label>
+                        Preço por Noite:
+                        <input type="number" name="precoPorNoite" value={formData.precoPorNoite} onChange={handleChange} required />
+                    </label>
+                    <button type="submit">Publish</button>
+                </form>
+            </div>
         </div>
     );
 };

@@ -40,7 +40,7 @@ const AccommodationsList = () => {
     return (
         <div>
             <NavBar />
-            <div className="container">
+            <div className="containerList">
                 <h1>My Accommodations List</h1>
                 <button className="publish-button" onClick={handlePublishClick}>
                 Publish Accommodation
