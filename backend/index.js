@@ -15,6 +15,7 @@ import reservationRoutes from './routes/reservation.routes.js';
 import saveRoutes from './routes/save.routes.js';
 import searchRoutes from './routes/search.routes.js';
 import shareRoutes from './routes/share.routes.js';
+import authenticateToken from './middleware/authentication.js';
 
 const app = express();
 
@@ -36,7 +37,9 @@ app.use('/user', accommodationRoutes);
 app.use('/user', reservationRoutes);
 app.use('/ping', pingRoutes);
 app.use('/auth', authRoutes);
-app.use('/email', emailRoutes);
+app.use('/email', authenticateToken ,emailRoutes);
+app.use('/add', pagamentoRoutes);
+app.use('/pagamento', pagamentoRoutes);
 app.use('/payment-methods', paymentRoutes);
 app.use('/promo', promoRoutes);
 

@@ -44,7 +44,7 @@
     "nome": "Propriedade 10",
     "quantidadeQuartos": 4,
     "lotacaoMaxima": 8,
-    "precoPorNoite": 100,
+    "precoPorNoite": 12.533370062499998,
     "userId": "123",
     "ratingsId": [],
     "finalGrade": null
@@ -58,7 +58,7 @@
     "userId": "123",
     "ratingsId": [],
     "finalGrade": null,
-    "desconto": 50,
+    "desconto": 55,
     "promoName": "Dia dos Filhos",
     "promoId": "11",
     "data_inicio": "2021-10-05",
@@ -115,6 +115,16 @@
     "quantidadeQuartos": 4,
     "lotacaoMaxima": 80,
     "precoPorNoite": 672,
+    "userId": "123",
+    "ratingsId": [],
+    "finalGrade": null
+  },
+  {
+    "id": 11,
+    "nome": "Ninho dos Pombinhos",
+    "quantidadeQuartos": "1",
+    "lotacaoMaxima": "2",
+    "precoPorNoite": "42",
     "userId": "123",
     "ratingsId": [],
     "finalGrade": null
