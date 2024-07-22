@@ -29,7 +29,7 @@ const PaymentPage = () => {
       <div className='main'>
         <h2>Métodos de Pagamento</h2>
 
-        <ul className='payment-list'> {/* Adicione a classe 'payment-list' para aplicar os estilos */}
+        <ul className='payment-list'>
           {paymentMethods.map((card, index) => (
             <li key={index}>
               <strong>Número do cartão:</strong> {card.cardNumber} <strong>Tipo:</strong> {card.type}
@@ -42,7 +42,7 @@ const PaymentPage = () => {
         </ul>
 
         <div className='add-button-container'>
-          <Link to='/payment-methods/add'> {/* Utilize o Link para navegar para AddPaymentPage */}
+          <Link to='/payment-methods/add'>
             <button className='add-button'>Adicionar</button>
           </Link>
         </div>

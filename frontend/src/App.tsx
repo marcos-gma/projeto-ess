@@ -15,7 +15,7 @@ import SearchPage from './app/home/pages/search/search'
 import AccommodationsList from './app/home/pages/Accommodations/AccommodationsList'
 import PublishAccommodation from './app/home/pages/Accommodations/PublishAccommodation'
 
-import PaymentPage from './app/home/pages/payment/paymentPage'
+import PaymentPage from './app/home/pages/payment/visualize/paymentPage'
 import AddPaymentPage from './app/home/pages/payment/add/addPaymentPage'
 
 

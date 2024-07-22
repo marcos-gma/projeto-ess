@@ -38,8 +38,7 @@ app.use('/user', reservationRoutes);
 app.use('/ping', pingRoutes);
 app.use('/auth', authRoutes);
 app.use('/email', authenticateToken ,emailRoutes);
-app.use('/add', pagamentoRoutes);
-app.use('/pagamento', pagamentoRoutes);
+app.use('/add', paymentRoutes);
 app.use('/payment-methods', paymentRoutes);
 app.use('/promo', promoRoutes);
 
