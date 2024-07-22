@@ -26,7 +26,7 @@ app.use(cors({
 
 app.use(express.json());
 dotenv.config();
-app.use(cookieParser());
+// app.use(cookieParser());
 
 app.use('/liking', likeRoutes);
 app.use('/searching', searchRoutes);
@@ -41,7 +41,7 @@ app.use('/payment-methods', paymentRoutes);
 app.use('/promo', promoRoutes);
 
 app.listen(5001, () => {
-    console.log("\n\nServer is listening on port 5001\n\n");
+  console.log("\n\nServer is listening on port 5001\n\n");
 });
 
 export default app;

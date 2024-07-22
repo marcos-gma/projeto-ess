@@ -5,13 +5,15 @@
     "location": "Fernando de Noronha",
     "availableRooms": 1,
     "petFriendly": false,
+    "accessibility": true,
+    "rating": 7,
     "rooms": [
       {
         "beds": 2,
         "price": 1000,
         "freeDates": [
-          "21/05",
-          "24/05"
+          "21/05/2024",
+          "24/05/2024"
         ]
       }
     ]
@@ -22,13 +24,15 @@
     "location": "Fernando de Noronha",
     "availableRooms": 1,
     "petFriendly": true,
+    "accessibility": false,
+    "rating": 9,
     "rooms": [
       {
         "beds": 2,
         "price": 1500,
         "freeDates": [
-          "21/05",
-          "24/05"
+          "21/05/2024",
+          "24/05/2024"
         ]
       }
     ]
