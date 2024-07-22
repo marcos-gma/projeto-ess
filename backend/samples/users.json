@@ -19,7 +19,9 @@
     "email": "matheus@email.com",
     "cellphone": "81998138209",
     "password": "$2a$10$V0tEX8rXO3KBTzuq/mqU0e.0Oal23wuK.7l2E.4l/1a0rhHAkwMMS",
-    "reservationsId": [],
+    "reservationsId": [
+      "a7e8aa27-07e4-41ae-8e23-55ace176fb02"
+    ],
     "accommodationsId": [],
     "liked": [],
     "saved": [],

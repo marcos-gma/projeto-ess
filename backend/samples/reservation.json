@@ -42,5 +42,16 @@
         "rates": 3,
         "accommodationId": "2",
         "userId": "1"
+    },
+    {
+        "id": "a7e8aa27-07e4-41ae-8e23-55ace176fb02",
+        "acomName": "Propriedade 10",
+        "numRooms": 2,
+        "capacity": 4,
+        "totalPaid": 300,
+        "checkin": "2024-03-02",
+        "rates": 3,
+        "acomId": "10",
+        "userId": "5e3ff57b-3917-4092-83ed-9c2b696bac69"
     }
 ]
