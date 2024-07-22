@@ -1,10 +1,12 @@
 // aqui vai ser onde o usuário vai ver as promoções que ele criou, criar outras, editar e deletar
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import deletarPromo from '../../../services/promo/deletarPromo.js';
 import ListarPromo from '../../../services/promo/listarPromo.js';
 import NavBar from '../../Compartilhado/navbar.js';
 import PopUp from '../../Compartilhado/popUp.js';
 import ModalCadastrar from './modalCadastrar.js';
+import ModalEditarPromo from './modalEditarPromo.js';
 
 
 const MyPromos = () => {
@@ -28,6 +30,24 @@ const MyPromos = () => {
     }
     fetchData();
   }, []);
+
+  const handleDeletePromo = async (id) => {
+    try {
+      const response = await deletarPromo(id);
+      console.log('Response:', response);
+      alert(response.message || 'Promoção deletada com sucesso!');
+      if (response === 'Promoção deletada com sucesso!') {
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error('Error deleting promotion:', error);
+      alert('Erro ao deletar promoção');
+    }
+  }
+
+  const handleUpdatePromo = (updatedPromo) => {
+    setPromos(promos.map(promo => promo.promoId === updatedPromo.id ? { ...promo, ...updatedPromo } : promo));
+};
   
   return (
     <div>
@@ -46,16 +66,21 @@ const MyPromos = () => {
                 <img src='https://www.blumarturismo.com.br/blog/wp-content/uploads/2022/11/1.jpg-1-840x500.png' alt='Hotel exemplo' />
                 <h3>{promo.promoName}</h3>
                 <p>Propriedade: {promo.nome}</p>
+                <p>Preço: {promo.precoPorNoite}</p>
                 <p>ID: {promo.id}</p>
                 <p>Desconto: {promo.desconto}</p>
                 <p>Início: {promo.data_inicio}</p>
                 <p>Fim: {promo.data_fim}</p>
                 <Link to={`/promo/${promo.promoId}`}>Ver detalhes</Link>
+                <button onClick={() => handleDeletePromo(promo.promoId)}>Deletar Promoção</button>
+                <PopUp title="Editar Promoção">
+                                    <ModalEditarPromo promo={promo} onClose={() => window.location.reload()} onUpdate={handleUpdatePromo} />
+                                </PopUp>
               </div>
             ))
           )}
         </div>
-        <PopUp title="Cadastrar Nova Promoção">
+        <PopUp title="Cadastrar Promoção">
           <ModalCadastrar />
         </PopUp>
       </div>
