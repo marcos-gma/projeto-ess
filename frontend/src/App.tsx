@@ -8,7 +8,7 @@ import HomePage from './app/home/pages/homePage/homePage'
 import LoginPage from './app/home/pages/loginPage/login'
 import ActivePromosPage from './app/home/pages/promo/activePromosPage/activePromosPage'
 import MyPromos from './app/home/pages/promo/myPromos/myPromos'
-import PagamentoPage from './app/home/pages/pagamento/pagamentoPage'
+import PaymentPage from './app/home/pages/payment/paymentPage'
 
 export default function App() {
   return (
@@ -21,7 +21,7 @@ export default function App() {
         <Route path='/login' element={<LoginPage />} />
         <Route path='/my-accommodations' element={<MyAccommodations />} />
         <Route path='/my-promos' element={<MyPromos />} />
-        <Route path='/pagamento' element={<PagamentoPage />} />
+        <Route path='/payment-methods' element={<PaymentPage />} />
       </Routes>
     </Router>
   )

@@ -1,7 +1,7 @@
 // visualizar.js
 import api from "../api.js";
 
-export default async function Visualizar(email) {
+export default async function Visualize(email) {
     try {
         const response = await api.get('/pagamento/visualize', {
             params: {
