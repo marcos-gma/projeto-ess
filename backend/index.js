@@ -39,9 +39,13 @@ app.use('/user', reservationRoutes);
 app.use('/user', rateRoutes);
 app.use('/ping', pingRoutes);
 app.use('/auth', authRoutes);
-app.use('/email', authenticateToken, emailRoutes);
-app.use('/payment-methods', paymentRoutes);
+app.use('/email', authenticateToken ,emailRoutes);
 app.use('/promo', promoRoutes);
+
+
+app.use('/payment-methods', paymentRoutes);
+app.use('/add', paymentRoutes);
+app.use('/remove', paymentRoutes);
 app.use('/add', paymentRoutes);
 
 app.listen(5001, () => {

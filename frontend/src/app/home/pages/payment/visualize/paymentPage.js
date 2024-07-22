@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import NavBar from '../../Compartilhado/navbar.js';
 import Visualize from '../../../services/payment/visualize.js';
+import Remove from '../../../services/payment/remove.js';
 import { Link } from 'react-router-dom';
 import './style.css'; 
 
@@ -14,14 +15,28 @@ const PaymentPage = () => {
         const email = 'iasmin@protonmail.com';
         const cards = await Visualize(email);
         setPaymentMethods(cards);
-      } 
-      catch (error) {
+      } catch (error) {
         console.error('Error fetching payment methods:', error);
       }
     };
 
     fetchPaymentMethods();
   }, []);
+
+  const handleRemove = async (cardNumber, type) => {
+    try {
+      const email = 'iasmin@protonmail.com';
+      const result = await Remove({ email, cardNumber, type });
+
+      const updatedMethods = paymentMethods.filter(
+        card => !(card.cardNumber === cardNumber && card.type === type)
+      );
+      setPaymentMethods(updatedMethods);
+    }
+    catch (error) {
+      console.error('Error removing card:', error);
+    }
+  };
 
   return (
     <div>
@@ -35,7 +50,9 @@ const PaymentPage = () => {
               <strong>Número do cartão:</strong> {card.cardNumber} <strong>Tipo:</strong> {card.type}
               <div className='button-container'>
                 <button className='select-button'>Selecionar</button>
-                <button className='remove-button'>Remover</button>
+                <button className='remove-button' onClick={() => handleRemove(card.cardNumber, card.type)}>
+                  Remover
+                </button>
               </div>
             </li>
           ))}
