@@ -142,12 +142,12 @@ export const editPromo = (req, res) => {
         } 
 
         if (!validateDiscount(desconto)) { 
-            return res.status(400).json({ error: 'Invalid discount. It should be between 1 and 100.' });
+            return res.status(400).json({ error: 'Desconto Inválido: O percentual de desconto deve ser um número entre 1 e 100.' });
         }
         
         
         if (!validateDate(data_inicio, data_fim)) { 
-            return res.status(400).json({ error: 'Invalid date. Final date should be after the beginning promotion date.' });
+            return res.status(400).json({ error: 'Datas Inválidas: A data de fim deve ser posterior a data de início.' });
         }
         
         // atualiza os dados

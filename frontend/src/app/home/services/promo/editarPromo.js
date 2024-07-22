@@ -5,7 +5,6 @@ const editarPromo = async (id, data) => {
     const response = await api.put(`/promo/editar_promocao/${id}`, data)
     return response.data
   } catch (error) {
-    console.error('Erro ao editar promoção:', error)
     throw error
   }
 }
