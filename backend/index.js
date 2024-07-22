@@ -16,6 +16,7 @@ import saveRoutes from './routes/save.routes.js';
 import searchRoutes from './routes/search.routes.js';
 import shareRoutes from './routes/share.routes.js';
 import rateRoutes from './routes/rate.routes.js'
+import authenticateToken from './middleware/authentication.js';
 
 const app = express();
 
@@ -38,9 +39,10 @@ app.use('/user', reservationRoutes);
 app.use('/user', rateRoutes);
 app.use('/ping', pingRoutes);
 app.use('/auth', authRoutes);
-app.use('/email', emailRoutes);
+app.use('/email', authenticateToken, emailRoutes);
 app.use('/payment-methods', paymentRoutes);
 app.use('/promo', promoRoutes);
+app.use('/add', paymentRoutes);
 
 app.listen(5001, () => {
   console.log("\n\nServer is listening on port 5001\n\n");
