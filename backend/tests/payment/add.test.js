@@ -5,7 +5,7 @@ import fs from 'fs';
 import path from 'path';
 
 
-const feature = loadFeature('./features/Pagamento/adicionar.feature');
+const feature = loadFeature('./features/payment/add.feature');
 const request = supertest(app);
 
 let originalUsersData;
@@ -56,7 +56,7 @@ defineFeature(feature, test => {
         });
 
         when(/^uma nova requisição POST é feita com e-mail: "(.*)", cardNumber: "(.*)", name: "(.*)", expireDate: "(.*)", type: "(.*)" e cvv: "(.*)"$/, async (email, cardNumber, name, expireDate, type, cvv) => {
-            const url = '/pagamento/add';
+            const url = '/payment-methods/add';
 
             response = await request.post(url).send({
                 email, 
@@ -114,7 +114,7 @@ defineFeature(feature, test => {
         });
 
         when(/^uma nova requisição POST é feita com e-mail: "(.*)", cardNumber: "(.*)", name: "(.*)", expireDate: "(.*)", type: "(.*)" e cvv: "(.*)"$/, async (email, cardNumber, name, expireDate, type, cvv) => {
-            const url = '/pagamento/add';
+            const url = '/payment-methods/add';
 
             response = await request.post(url).send({
                 email, 
