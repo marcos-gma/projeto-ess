@@ -19,14 +19,12 @@ const ModalEditarPromo = ({ promo, onClose, onUpdate }) => {
       data_fim
     }
     try {
-      const response = await editarPromo(promo.promoId, data)
-      console.log('Response:', response)
-      alert(response.message || 'Promoção editada com sucesso!')
+      await editarPromo(promo.promoId, data)
+      alert('Promoção editada com sucesso!')
       onUpdate(data)
       onClose()
     } catch (error) {
-      console.error('Error editing promotion:', error)
-      alert('Erro ao editar promoção')
+      alert('Erro ao editar promoção: ' + error)
     }
   }
 

@@ -44,10 +44,15 @@
     "nome": "Propriedade 10",
     "quantidadeQuartos": 4,
     "lotacaoMaxima": 8,
-    "precoPorNoite": 100,
+    "precoPorNoite": 52.200625,
     "userId": "123",
     "ratingsId": [],
-    "finalGrade": null
+    "finalGrade": null,
+    "desconto": 20,
+    "promoName": "15% OFF",
+    "promoId": "10",
+    "data_inicio": "2024-07-22",
+    "data_fim": "2024-08-22"
   },
   {
     "id": "11",
@@ -58,7 +63,7 @@
     "userId": "123",
     "ratingsId": [],
     "finalGrade": null,
-    "desconto": 50,
+    "desconto": 55,
     "promoName": "Dia dos Filhos",
     "promoId": "11",
     "data_inicio": "2021-10-05",

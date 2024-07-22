@@ -32,12 +32,9 @@ const MyPromos = () => {
 
   const handleDeletePromo = async (id) => {
     try {
-      const response = await deletarPromo(id)
-      console.log('Response:', response)
-      alert(response.message || 'Promoção deletada com sucesso!')
-      if (response === 'Promoção deletada com sucesso!') {
-        window.location.reload()
-      }
+      await deletarPromo(id)
+      alert('Promoção deletada com sucesso!')
+      window.location.reload()
     } catch (error) {
       console.error('Error deleting promotion:', error)
       alert('Erro ao deletar promoção')
@@ -80,7 +77,7 @@ const MyPromos = () => {
           )}
         </div>
         <PopUp title='Cadastrar Promoção'>
-          <ModalCadastrar />
+        <ModalCadastrar onClose={() => window.location.reload()} onUpdate={handleUpdatePromo} />
         </PopUp>
       </div>
     </div>

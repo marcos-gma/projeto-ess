@@ -2,38 +2,35 @@ import React, { useState } from 'react'
 import CadastrarPromo from '../../../services/promo/cadastrarPromo.js'
 import Button from '../../Compartilhado/button.js'
 
-const ModalCadastrar = ({ onClose }) => {
+const ModalCadastrar = ({ onClose, onUpdate }) => {
+  const [promoName, setPromoName] = useState('')
   const [id, setId] = useState('')
   const [desconto, setDesconto] = useState('')
-  const [promoName, setPromoName] = useState('')
   const [data_inicio, setData_inicio] = useState('')
   const [data_fim, setData_fim] = useState('')
 
   const handleCadastrarPromo = async (e) => {
     e.preventDefault()
     const data = {
+      promoName,
       id,
       desconto,
-      promoName,
       data_inicio,
       data_fim
     }
     try {
-      const response = await CadastrarPromo(data)
-      console.log('Response:', response)
-      alert(response.message || 'Promoção cadastrada com sucesso!')
-      if (response === 'Promoção cadastrada com sucesso!') {
-        onClose()
-        window.location.reload()
-      }
+      await CadastrarPromo(data)
+      alert('Promoção cadastrada com sucesso!')
+      onUpdate(data)
+      onClose()
     } catch (error) {
-      console.error('Error creating promotion:', error)
-      alert('Erro ao criar promoção')
+      alert('Erro ao cadastrar promoção: ' + error)
     }
   }
+
   return (
     <div>
-      <h1>Cadastrar Nova Promoção</h1>
+      <h1>Cadastrar Promoção</h1>
       <form onSubmit={handleCadastrarPromo}>
         <label>
           ID do Hotel:
@@ -56,11 +53,11 @@ const ModalCadastrar = ({ onClose }) => {
         </label>
         <br />
         <label>
-          Data de End:
+          Data de Fim:
           <input type='date' name='data_fim' value={data_fim} onChange={(e) => setData_fim(e.target.value)} required />
         </label>
         <br />
-        <Button nome='Finalizar e Cadastrar' type='submit' />
+        <Button nome="Salvar e Cadastrar" type='submit' />
       </form>
     </div>
   )
