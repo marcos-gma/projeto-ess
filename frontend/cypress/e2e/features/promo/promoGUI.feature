@@ -30,6 +30,8 @@ Scenario: Cadastrar uma promoção sem sucesso por erro no campo de data
                     o campo Data de Fim com "01/12/2024"
     When Eu clico no botão "Salvar e Cadastrar"
     Then Eu vejo a mensagem "Datas Inválidas: A data de fim deve ser posterior a data de início."
+    When Eu clico no botão "Fechar"
+    Then O modal de cadastro de promoção é fechado
     Then Eu não vejo a promoção "Promoção de Natal" na página "/my-promos"
 
 Scenario: Cadastrar uma promoção sem sucesso por erro no campo de desconto
@@ -43,8 +45,25 @@ Scenario: Cadastrar uma promoção sem sucesso por erro no campo de desconto
                     o campo Data de Fim com "03/01/2025"
     When Eu clico no botão "Salvar e Cadastrar"
     Then Eu vejo a mensagem "Desconto Inválido: O percentual de desconto deve ser um número entre 1 e 100."
+    When Eu clico no botão "Fechar"
+    Then O modal de cadastro de promoção é fechado
     Then Eu não vejo a promoção "Promoção de Natal" na página "/my-promos"
+    
 
+Scenario: Cadastrar uma promoção sem sucesso por erro no campo de ID do Hotel
+    Given Eu estou na página "/my-promos"
+    When Eu clico no botão "Cadastrar Promoção"
+    Then O modal de cadastro de promoção é aberto 
+    And Eu preencho o campo ID do Hotel com "0", 
+                    o campo Desconto com "10", 
+                    o campo Nome da Promoção com "Promoção de Ano Novo", 
+                    o campo Data de Início com "01/12/2024", 
+                    o campo Data de Fim com "03/01/2025"
+    When Eu clico no botão "Salvar e Cadastrar"
+    Then Eu vejo a mensagem "Erro: Hotel não encontrado."
+    When Eu clico no botão "Fechar"
+    Then O modal de cadastro de promoção é fechado
+    Then Eu não vejo a promoção "Promoção de Natal" na página "/my-promos"
 
 # Deletar promoção
 Scenario: Deletar uma promoção com sucesso
