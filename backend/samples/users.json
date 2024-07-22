@@ -20,7 +20,12 @@
     "cellphone": "81998138209",
     "password": "$2a$10$V0tEX8rXO3KBTzuq/mqU0e.0Oal23wuK.7l2E.4l/1a0rhHAkwMMS",
     "reservationsId": [
-      "a7e8aa27-07e4-41ae-8e23-55ace176fb02"
+      "888",
+      "555",
+      "80a533f3-bf36-43c6-b3eb-11efe66c1926",
+      "07bd9efc-3536-4294-a0b4-f9b7a31ec57c",
+      "f7b410cd-241f-436b-92f8-e8847455dfa4",
+      "d6ddf68a-208f-4858-a8ba-6265185a9fdf"
     ],
     "accommodationsId": [],
     "liked": [],
@@ -66,7 +71,8 @@
     "cellphone": "81998138209",
     "password": "$2a$10$C0zPbFvhQTGIUjYIMIKp3O/gNa.CQUwPAYRm4zKId9xqrrQAmPp.a",
     "reservationsId": [
-      "1"
+      "1",
+      "33333"
     ],
     "accommodationsId": [],
     "liked": [],
