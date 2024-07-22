@@ -8,7 +8,7 @@ function finalGrade(nota1, nota2, nota3, nota4, nota5) {
     return media.toFixed(2)
 }
 
-var data = JSON.parse(fs.readFileSync(path.resolve('./samples/rating.json'), 'utf8'))
+var rateData = JSON.parse(fs.readFileSync(path.resolve('./samples/rating.json'), 'utf8'))
 var acomData = JSON.parse(fs.readFileSync(path.resolve('./samples/accommodations.json'), 'utf8'))
 var reserveData = JSON.parse(fs.readFileSync(path.resolve('./samples/reservation.json'), 'utf8'))
 
@@ -27,12 +27,11 @@ export const createRating = async (req, res) => {
         //PRECISO DA RESID PARA VINCULAR AO RATING
 
 
-
         //Verificação de validade das notas será realizada no front a partir de categorização das respostas
 
         let reserva = reserveData.find(reserve => String(reserve.id) === String(resId))
         let acomName = reserva.accommodationName
-        let acomId = reserva.accommodationId
+        let acomId = reserva.acomId
         let userId = reserva.userId
 
         const newRating = {
@@ -50,18 +49,39 @@ export const createRating = async (req, res) => {
             userId
         }
         //Modificações em accommodations.json
-
-        let acomodacao = acomData.find(acom => acom.id === acomId)
-
+        let acomodacao = acomData.find(acom => String(acom.id) === String(acomId))
         acomodacao.ratingsId.push(newRating.id)
+
+
 
         fs.writeFileSync(path.resolve('./samples/accommodations.json'), JSON.stringify(acomData, null, 2));
 
         //Modificações em rating.json
 
-        data.push(newRating)
+        rateData.push(newRating)
 
-        fs.writeFileSync(path.resolve('./samples/rating.json'), JSON.stringify(data, null, 2));
+        //Recalcular a nota final da acomodação
+
+        let output = []
+        acomodacao.ratingsId.forEach(elemento => {
+            let procura = rateData.find(rate => String(rate.id) === String(elemento))
+            if (procura !== undefined) {
+                output.push(procura.notaFinal)
+            }
+        })
+
+        let soma = output.reduce((somador, elemento) => Number(somador) + Number(elemento), 0)
+        let media = soma / output.length
+        media = media.toFixed(2)
+
+        acomodacao.finalGrade = media
+        fs.writeFileSync(path.resolve('./samples/accommodations.json'), JSON.stringify(acomData, null, 2));
+
+
+        console.log(newRating);
+        //Sincronizar com a Database
+
+        fs.writeFileSync(path.resolve('./samples/rating.json'), JSON.stringify(rateData, null, 2));
 
         res.status(201).json(newRating)
 
@@ -77,7 +97,7 @@ export const listRating = async (req, res) => {
         const ratings = acomData.find(acom => String(acom.id) === String(acomId));
         let output = []
         ratings.ratingsId.forEach(rate => {
-            let encontra = data.find(elemento => elemento.id === rate)
+            let encontra = rateData.find(elemento => elemento.id === rate)
             if (encontra !== undefined) {
                 output.push(encontra)
             }
