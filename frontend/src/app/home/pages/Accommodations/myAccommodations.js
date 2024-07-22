@@ -1,6 +1,6 @@
-import React from 'react';
-import Button from '../Compartilhado/button.js';
-import NavBar from '../Compartilhado/navbar.js';
+import React from 'react'
+import Button from '../Compartilhado/button.js'
+import NavBar from '../Compartilhado/navbar.js'
 
   function MyAccommodations() {
     return (
@@ -8,11 +8,11 @@ import NavBar from '../Compartilhado/navbar.js';
         <NavBar />
         <div className='main'>
           <h2>My Accommodations Page</h2>
-          <p>Base pra colocar as coisas de promoção</p>
+          <p>Base pra colocar as coisas de acomodações</p>
           <Button destino='/my-promos' nome='Ver Minhas Promoções Ativas' />
-        </div>
       </div>
-    );
-  }
-  
-  export default MyAccommodations;
+    </div>
+  )
+}
+
+export default MyAccommodations
