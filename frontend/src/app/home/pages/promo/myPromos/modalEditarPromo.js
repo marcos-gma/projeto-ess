@@ -32,6 +32,7 @@ const ModalEditarPromo = ({ promo, onClose, onUpdate }) => {
   return (
     <div>
       <h1>Editar Promoção</h1>
+      <br />
       <form onSubmit={handleEditPromo}>
         <label>
           ID do Hotel:

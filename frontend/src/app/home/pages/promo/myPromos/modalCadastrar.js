@@ -1,36 +1,38 @@
-import React, { useState } from 'react'
-import CadastrarPromo from '../../../services/promo/cadastrarPromo.js'
-import Button from '../../Compartilhado/button.js'
+import React, { useState } from 'react';
+import CadastrarPromo from '../../../services/promo/cadastrarPromo.js';
+import Button from '../../Compartilhado/button.js';
 
 const ModalCadastrar = ({ onClose, onUpdate }) => {
-  const [promoName, setPromoName] = useState('')
-  const [id, setId] = useState('')
-  const [desconto, setDesconto] = useState('')
-  const [data_inicio, setData_inicio] = useState('')
-  const [data_fim, setData_fim] = useState('')
+  const [promoName, setPromoName] = useState('');
+  const [id, setId] = useState('');
+  const [desconto, setDesconto] = useState('');
+  const [data_inicio, setData_inicio] = useState('');
+  const [data_fim, setData_fim] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleCadastrarPromo = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const data = {
       promoName,
       id,
       desconto,
       data_inicio,
       data_fim
-    }
+    };
     try {
-      await CadastrarPromo(data)
-      alert('Promoção cadastrada com sucesso!')
-      onUpdate(data)
-      onClose()
+      await CadastrarPromo(data);
+      alert('to entrando aqui!');
+      onUpdate(data);
+      onClose();
     } catch (error) {
-      alert('Erro ao cadastrar promoção: ' + error)
+      setErrorMessage(error.response?.data?.error || 'Erro ao cadastrar promoção');
     }
-  }
+  };
 
   return (
     <div>
       <h1>Cadastrar Promoção</h1>
+      <br />
       <form onSubmit={handleCadastrarPromo}>
         <label>
           ID do Hotel:
@@ -57,10 +59,13 @@ const ModalCadastrar = ({ onClose, onUpdate }) => {
           <input type='date' name='data_fim' value={data_fim} onChange={(e) => setData_fim(e.target.value)} required />
         </label>
         <br />
+        <br />
+        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+        <br />
         <Button nome="Salvar e Cadastrar" type='submit' />
       </form>
     </div>
-  )
+  );
 }
 
-export default ModalCadastrar
+export default ModalCadastrar;

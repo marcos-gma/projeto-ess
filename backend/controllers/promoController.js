@@ -39,14 +39,17 @@ export const createPromo = (req, res) => {
 
         const hotel = data.find(hotel => String(hotel.id) === String(id)); // encontra o hotel pelo id
 
-        // se o hotel n tiver promo, retorna promo not found
-        if (temPromo(hotel)) {
-            return res.status(200).json({ error: 'Hotel already have a Promo, if you want to, edit it.' });
+        if (!hotel) { // verifica se o hotel existe
+            return res.status(404).json({ error: 'Erro: Hotel não encontrado.' });
+        }
+
+        if (!validateDiscount(desconto)) { 
+            return res.status(400).json({ error: 'Desconto Inválido: O percentual de desconto deve ser um número entre 1 e 100.' });
         } 
 
-        if (!validateDiscount(desconto)) { // verifica se o desconto é válido
-            return res.status(400).json({ error: 'Invalid discount. It should be between 1 and 100' });
-        } 
+        if (!validateDate(data_inicio, data_fim)) { 
+            return res.status(400).json({ error: 'Datas Inválidas: A data de fim deve ser posterior a data de início.' });
+        }
 
         const newDiscountValue = withDiscount(hotel.precoPorNoite, desconto); // calcula o novo precoPorNoite com base no desconto
         hotel.precoPorNoite = newDiscountValue; // atualiza o precoPorNoite com o novo precoPorNoite calculado
@@ -54,22 +57,16 @@ export const createPromo = (req, res) => {
         hotel.desconto = desconto;
         hotel.promoName = promoName;
         hotel.promoId = id;
-        
-        if (!validateDate(data_inicio, data_fim)) { 
-            return res.status(400).json({ error: 'Invalid date. Final date should be after the beginning promotion date.' });
-        }
-
         hotel.data_inicio = data_inicio;
         hotel.data_fim = data_fim;
 
-        fs.writeFileSync(path.resolve('./samples/accommodations.json'), JSON.stringify(data, null, 2))
+        fs.writeFileSync(path.resolve('./samples/accommodations.json'), JSON.stringify(data, null, 2));
         return res.status(200).json({ message: 'Promo created successfully.' }); // retorna o hotel atualizado
-        
-    
     } catch (error) {
         return res.status(400).send({ message: error.message });
     }
 };
+
 
 // listar promoções
 export const listPromos = (req, res) => {
@@ -133,12 +130,12 @@ export const editPromo = (req, res) => {
         const hotel = data.find(hotel => String(hotel.id) === String(id)); // encontra o hotel pelo id
 
         if (!hotel) { // verifica se o hotel existe
-            return res.status(404).json({ error: 'Hotel not found.' });
+            return res.status(404).json({ error: 'Erro: Hotel não encontrado.' });
         }
 
         // se o hotel n tiver promo, retorna promo not found
         if (!temPromo(hotel)) {
-            return res.status(200).json({ error: 'Promo not found.' });
+            return res.status(200).json({ error: 'Erro: Promoção não encontrada.' });
         } 
 
         if (!validateDiscount(desconto)) { 

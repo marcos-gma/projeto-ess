@@ -44,15 +44,10 @@
     "nome": "Propriedade 10",
     "quantidadeQuartos": 4,
     "lotacaoMaxima": 8,
-    "precoPorNoite": 52.200625,
+    "precoPorNoite": 17.904814374999997,
     "userId": "123",
     "ratingsId": [],
-    "finalGrade": null,
-    "desconto": 15,
-    "promoName": "15% OFF",
-    "promoId": "10",
-    "data_inicio": "2024-07-22",
-    "data_fim": "2024-08-22"
+    "finalGrade": null
   },
   {
     "id": "11",
