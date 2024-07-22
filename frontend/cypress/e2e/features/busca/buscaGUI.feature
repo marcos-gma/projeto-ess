@@ -1,28 +1,21 @@
 Feature: Busca
 
     Scenario: Busca bem sucedida
-        Given o hotel "Pousada Maresia" em "Fernando de Noronha" está armazenado no sistema com vagas de "21/05" a "24/05" para "2" pessoas 
-        And o hotel "Morada do Mar" em "Fernando de Noronha" está armazenado no sistema com vagas de "21/05" a "24/05" para "2" pessoas 
+        Given o usuário está na página "search"
         When o usuário preenche os campos da seguinte maneira: CheckIn : "21/05", CheckOut : "24/05", Número de Hospédes : "2" e Localização : "Fernando de Noronha"
-        Then o usuário deve ver na tela o card de "Pousada Maresia" e "Morada do Mar"
+        Then o usuário deve ver na tela o card de "Pousada Maresia", "Morada do Mar", "Hotel Paraíso", "Lar Doce Lar", "Recanto dos Corais" e "Pousada Naiepe"
 
-    Scenario: Busca errada
-        Given o hotel "Pousada Maresia" em "Fernando de Noronha" está armazenado no sistema com vagas de "21/05" a "24/05" para "2" pessoas 
-        And o hotel "Morada do Mar" em "Fernando de Noronha" está armazenado no sistema com vagas de "21/05" a "24/05" para "2" pessoas 
-        When envio uma requisição GET para "/searching/search" com os dados CheckIn : "21/05", CheckOut : "24/05", Guests : "3" e Location : ""
-        Then a resposta deve ter o status "400"
-        And a resposta contem a mensagem "All fields are required"
-
+    Scenario: Busca erada
+        Given o usuário está na página "search"
+        When o usuário preenche os campos da seguinte maneira: CheckIn : "21/05", CheckOut : "24/05", Número de Hospédes : "2" e Localização : ""
+        Then o usuário deve ver a mensagem "Preencha este campo."
+    
     Scenario: Busca mal sucedida
-        Given o hotel "Pousada Maresia" em "Fernando de Noronha" está armazenado no sistema com vagas de "21/05" a "24/05" para "2" pessoas 
-        And o hotel "Morada do Mar" em "Fernando de Noronha" está armazenado no sistema com vagas de "21/05" a "24/05" para "2" pessoas 
-        When envio uma requisição GET para "/searching/search" com os dados CheckIn : "21/05", CheckOut : "24/05", Guests : "4" e Location : "Fernando de Noronha"
-        Then a resposta deve ter o status "404"
-        And a resposta contem a mensagem "No hotels found"
+        Given o usuário está na página "search"
+        When o usuário preenche os campos da seguinte maneira: CheckIn : "21/05", CheckOut : "24/05", Número de Hospédes : "4" e Localização : "Fernando de Noronha" 
+        Then o usuário deve ver a mensagem "Sem acomodações disponíveis no momento"
     
     Scenario: Busca filtrada
-        Given o hotel "Pousada Maresia" em "Fernando de Noronha" está armazenado no sistema com vagas de "21/05" a "24/05" para "2" pessoas por "1500" reais e sendo "Pet Friendly" 
-        And o hotel "Morada do Mar" em "Fernando de Noronha" está armazenado no sistema com vagas de "21/05" a "24/05" para "2" pessoas por "1000" reais e sendo "Não Pet Friendly"
-        When envio uma requisição GET para "/searching/search" com os dados CheckIn : "21/05", CheckOut : "24/05", Guests : "2", Location : "Fernando de Noronha", maxPrice : "2000" e petFriendly : "true"
-        Then a resposta deve ter o status "200"
-        And a resposta contem "Pousada Maresia"
+        Given o usuário está na página "search"
+        When o usuário preenche os campos da seguinte maneira: CheckIn : "21/05", CheckOut : "24/05", Número de Hospédes : "4", Localização : "Fernando de Noronha" e sendo "Pet Friendly"
+        Then o usuário deve ver na tela o card de "Pousada Maresia", "Hotel Paraíso", e "Recanto dos Corais" 
