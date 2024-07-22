@@ -1,41 +1,58 @@
 [
-    {
-        "idRating": "1",
-        "accommodationName": "Exemplo",
-        "confortoGrade": 5,
-        "checkinGrade": 5,
-        "comunicacaoGrade": 5,
-        "localizacaoGrade": 5,
-        "limpezaGrade": 5,
-        "finalGrade": null,
-        "comment": "muito boa, me diverti muito!!",
-        "accommodationId": "2",
-        "reservationId": "1"
-    },
-    {
-        "idRating": "2",
-        "accommodationName": "Porto das Galinhas",
-        "confortoGrade": 5,
-        "checkinGrade": 5,
-        "comunicacaoGrade": 5,
-        "localizacaoGrade": 5,
-        "limpezaGrade": 5,
-        "finalGrade": null,
-        "comment": "muito boa, me diverti muito!!",
-        "accommodationId": "012",
-        "reservationId": "1"
-    },
-    {
-        "idRating": "3",
-        "accommodationName": "Porto das Galinhas",
-        "confortoGrade": 5,
-        "checkinGrade": 3,
-        "comunicacaoGrade": 3,
-        "localizacaoGrade": 3,
-        "limpezaGrade": 5,
-        "finalGrade": null,
-        "comment": "uhuuuuu muito bom",
-        "accommodationId": "012",
-        "reservationId": "2"
-    }
+  {
+    "idRating": "1",
+    "accommodationName": "Exemplo",
+    "confortoGrade": 5,
+    "checkinGrade": 5,
+    "comunicacaoGrade": 5,
+    "localizacaoGrade": 5,
+    "limpezaGrade": 5,
+    "finalGrade": null,
+    "comment": "muito boa, me diverti muito!!",
+    "accommodationId": "2",
+    "reservationId": "1",
+    "userId": "2222"
+  },
+  {
+    "id": "ffcfcfa0-9813-4fbd-b99a-753d8fbbc131",
+    "acomName": "terceiro",
+    "confortoGrade": 4,
+    "checkinGrade": 2,
+    "comunicacaoGrade": 3,
+    "localizacaoGrade": 5,
+    "limpezaGrade": 4,
+    "notaFinal": "3.60",
+    "comment": "muito boa, me diverti muito!!",
+    "acomId": "2",
+    "resId": "33333",
+    "userId": "1"
+  },
+  {
+    "id": "ee915242-996e-428a-b52a-f39cafd7bd9f",
+    "acomName": "terceiro",
+    "confortoGrade": 4,
+    "checkinGrade": 2,
+    "comunicacaoGrade": 3,
+    "localizacaoGrade": 5,
+    "limpezaGrade": 4,
+    "notaFinal": "3.60",
+    "comment": "muito boa, me diverti muito!!",
+    "acomId": "2",
+    "resId": "33333",
+    "userId": "1"
+  },
+  {
+    "id": "0d946ea2-ca66-42d7-a911-e2fa9db6424c",
+    "acomName": "terceiro",
+    "confortoGrade": 4,
+    "checkinGrade": 2,
+    "comunicacaoGrade": 3,
+    "localizacaoGrade": 5,
+    "limpezaGrade": 4,
+    "notaFinal": "3.60",
+    "comment": "muito boa, me diverti muito!!",
+    "acomId": "2",
+    "resId": "33333",
+    "userId": "1"
+  }
 ]

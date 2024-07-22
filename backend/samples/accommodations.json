@@ -16,7 +16,11 @@
     "lotacaoMaxima": 4,
     "precoPorNoite": 200,
     "userId": "123",
-    "ratingsId": [],
+    "ratingsId": [
+      "ffcfcfa0-9813-4fbd-b99a-753d8fbbc131",
+      "ee915242-996e-428a-b52a-f39cafd7bd9f",
+      "0d946ea2-ca66-42d7-a911-e2fa9db6424c"
+    ],
     "finalGrade": null
   },
   {
