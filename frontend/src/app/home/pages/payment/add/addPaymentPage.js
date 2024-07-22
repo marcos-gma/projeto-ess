@@ -18,6 +18,11 @@ const AddPaymentPage = () => {
       const result = await Add({ email: 'iasmin@protonmail.com', cardNumber, name, expireDate, type, cvv });
       setSuccessMessage(result.message);
       setError('');
+      setCardNumber('');
+      setName('');
+      setExpireDate('');
+      setType('');
+      setCvv('');
     } 
     catch (error) {
       setError(error.error);
