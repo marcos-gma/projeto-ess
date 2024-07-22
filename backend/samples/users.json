@@ -81,6 +81,22 @@
       {
         "cardNumber": "6666666666666666",
         "type": "credit"
+      },
+      {
+        "cardNumber": "1111111111111111",
+        "type": "debit"
+      },
+      {
+        "cardNumber": "3333333333333333",
+        "type": "debit"
+      },
+      {
+        "cardNumber": "1111111111111111",
+        "type": "credit"
+      },
+      {
+        "cardNumber": "1111111111111113",
+        "type": "credit"
       }
     ]
   }
