@@ -9,6 +9,8 @@ import LoginPage from './app/home/pages/loginPage/login'
 import ActivePromosPage from './app/home/pages/promo/activePromosPage/activePromosPage'
 import MyPromos from './app/home/pages/promo/myPromos/myPromos'
 import SearchPage from './app/home/pages/search/search'
+import AccommodationsList from './app/home/pages/Accommodations/AccommodationsList'
+import PaymentPage from './app/home/pages/payment/paymentPage'
 
 export default function App() {
   return (
@@ -22,6 +24,8 @@ export default function App() {
         <Route path='/my-accommodations' element={<MyAccommodations />} />
         <Route path='/my-promos' element={<MyPromos />} />
         <Route path='/search' element={<SearchPage />} />
+        <Route path='/my-accommodations/list' element={<AccommodationsList />} />
+        <Route path='/payment-methods' element={<PaymentPage />} />
       </Routes>
     </Router>
   )

@@ -5,7 +5,7 @@ import fs from 'fs';
 import path from 'path';
 
 
-const feature = loadFeature('./features/Pagamento/remover.feature');
+const feature = loadFeature('./features/payment/remove.feature');
 const request = supertest(app);
 
 let originalUsersData;
@@ -65,7 +65,7 @@ defineFeature(feature, test => {
         });
 
         when(/^uma nova requisição DELETE é feita com email: "(.*)", cardNumber: "(.*)" e type: "(.*)"$/, async (email, cardNumber, type) => {
-            const url = '/pagamento/remove';
+            const url = '/payment-methods/remove';
 
             response = await request.delete(url).send({
                 email,
