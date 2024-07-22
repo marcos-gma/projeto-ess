@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 // Função para listar reservas na acomodação
 var userData = JSON.parse(fs.readFileSync(path.resolve('./samples/users.json'), 'utf8'))
 var acomData = JSON.parse(fs.readFileSync(path.resolve('./samples/accommodations.json'), 'utf8'))
-var data = JSON.parse(fs.readFileSync(path.resolve('./samples/reservation.json'), 'utf8'))
+var reserveData = JSON.parse(fs.readFileSync(path.resolve('./samples/reservation.json'), 'utf8'))
 
 export const listAccommodationReservations = async (req, res) => {
     try {
@@ -115,7 +115,7 @@ export const createReservation = async (req, res) => {
         //push em reservationsId [] em users.json
         userData[userIndex].reservationsId.push(newReservation.id)
 
-        data.push(newReservation)
+        reserveData.push(newReservation)
 
         res.status(201).json(newReservation)
 
@@ -127,12 +127,30 @@ export const createReservation = async (req, res) => {
         });
     }
 }
-export const getReservation = async (req, res) => {
+export const getReservation = async (req, res) => { //puxa as reservas da pessoa daquele id
     try {
-        const { acomId } = req.params
+        const { id } = req.body
 
-        const reserve = data.find(res => String(res.accommodationId) === String(acomId));
-        res.status(200).json(reserve);
+        const lista_reservas = userData.find(user => (user.id) === (id))
+
+        if (lista_reservas === undefined) {
+            return res.status(400).json({
+                error: "User doesn't exist"
+            });
+        }
+        let output = []
+
+        lista_reservas.reservationsId.forEach(acomm => { //
+            output.push(
+                reserveData.find(idAcom => String(idAcom.id) === String(acomm))
+            )
+        });
+
+
+
+        return res.status(200).json(output);
+
+
 
     } catch (error) {
 
@@ -143,3 +161,22 @@ export const getReservation = async (req, res) => {
 
     }
 }
+
+// export const hostCancelReservation = async (req, res) => {
+//     try {
+
+//     }
+//     catch (error) {
+
+
+//     }
+// }
+
+// export const editReservation = async (req, res) => {
+//     try {
+
+//     }
+//     catch (error) {
+
+//     }
+// }

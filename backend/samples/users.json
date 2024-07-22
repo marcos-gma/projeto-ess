@@ -32,7 +32,9 @@
     "email": "aloualou@email.com",
     "cellphone": "81998138209",
     "password": "$2a$10$MF0CJlbCrD8X7uJ0kt.NUOf1udXRtvTrAvX0qjTXzCItSyLBVW6uW",
-    "reservationsId": [],
+    "reservationsId": [
+      "10"
+    ],
     "accommodationsId": [],
     "liked": [],
     "saved": [],
@@ -45,7 +47,10 @@
     "email": "muitobom@email.com",
     "cellphone": "81998138209",
     "password": "$2a$10$0VUs7OoJvJbjSIOYdVb5j.IzuER6bmCkCsucxCc7EZf9Cju1XjNxm",
-    "reservationsId": [],
+    "reservationsId": [
+      "1223",
+      "33333"
+    ],
     "accommodationsId": [],
     "liked": [],
     "saved": [],
