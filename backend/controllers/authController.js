@@ -87,7 +87,6 @@ export const signUp =  async (req, res) => {
             cards
         }
         
-        genToken(id, res)
 
         data.push(newUser)
 
