@@ -21,7 +21,7 @@ const ModalCadastrar = ({ onClose, onUpdate }) => {
     };
     try {
       await CadastrarPromo(data);
-      alert('to entrando aqui!');
+      alert('Promoção cadastrada com sucesso!');
       onUpdate(data);
       onClose();
     } catch (error) {
