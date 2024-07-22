@@ -36,6 +36,7 @@ const PopUp = ({ children, title }) => {
             transform: 'translate(-50%, -50%)'
           }
         }}
+        data-testid="modal"
       >
         {children}
       </Modal>
