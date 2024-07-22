@@ -65,7 +65,7 @@ defineFeature(feature, test => {
         });
 
         when(/^uma nova requisição GET é feita com e-mail "(.*)"$/, async (email) => {
-            const url = "/payment-methods/visualize";
+            const url = `/payment-methods/visualize?email=${encodeURIComponent(email)}`;
 
             response = await request.get(url).send({
                 email
@@ -116,7 +116,7 @@ defineFeature(feature, test => {
         });
 
         when(/^uma nova requisição GET é feita com o e-mail "(.*)"$/, async (email) => {
-            const url = "/payment-methods/visualize";
+            const url = `/payment-methods/visualize?email=${encodeURIComponent(email)}`;
 
             response = await request.get(url).send({
                 email

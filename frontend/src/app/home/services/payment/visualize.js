@@ -1,16 +1,15 @@
-// visualizar.js
-import api from "../api.js";
+import api from '../api.js';
 
-export default async function Visualize(email) {
-    try {
-        const response = await api.get('/pagamento/visualize', {
-            params: {
-                email: email
-            }
-        });
-        return response.data;
-    } catch (error) {
-        console.error('Error fetching user cards:', error);
-        throw error; // ou tratar o erro conforme necessário
-    }
-}
+
+const Visualize = async (email) => {
+  try {
+    const response = await api.get(`/payment-methods/visualize?email=${encodeURIComponent(email)}`);
+    return response.data;
+  } 
+  catch (error) {
+    console.error(error);
+    return "Error trying to access payment methods";
+  }
+};
+
+export default Visualize;
