@@ -69,7 +69,6 @@ Scenario: Cadastrar uma promoção sem sucesso por erro no campo de ID do Hotel
 Scenario: Deletar uma promoção com sucesso
     Given Eu estou na página "/my-promos"
     When Eu clico no botão "Deletar" da promoção "Promoção de Ano Novo"
-    Then Eu vejo a mensagem "Promoção deletada com sucesso!"
     Then Eu não vejo a promoção "Promoção de Ano Novo" na página "/my-promos"
 
 

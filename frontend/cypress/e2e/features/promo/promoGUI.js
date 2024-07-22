@@ -150,6 +150,17 @@ Then ('Eu não vejo a promoção {string} na lista de promoções', (promoName) 
     cy.contains(promoName).should('not.be.visible');
 });
 
+//  Scenario: Deletar uma promoção com sucesso
+When ('Eu clico no botão {string} da promoção {string}', (buttonName, promoName) => {
+    const className = promoName.replace(/\s+/g, '-').toLowerCase();
+    cy.get('button.${className}').contains(buttonName).click();
+});
+
+Then ('Eu não vejo a promoção {string} na lista de promoções', (promoName) => {
+    cy.contains(promoName).should('not.be.visible');
+});
+
+
 
 
 

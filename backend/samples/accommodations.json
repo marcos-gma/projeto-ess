@@ -44,15 +44,10 @@
     "nome": "Propriedade 10",
     "quantidadeQuartos": 4,
     "lotacaoMaxima": 8,
-    "precoPorNoite": 6.141351330624999,
+    "precoPorNoite": 4.2989459314374985,
     "userId": "123",
     "ratingsId": [],
-    "finalGrade": null,
-    "desconto": "30",
-    "promoName": "30% OFF",
-    "promoId": "10",
-    "data_inicio": "2024-02-01",
-    "data_fim": "2024-02-20"
+    "finalGrade": null
   },
   {
     "id": "11",
@@ -72,12 +67,7 @@
     "precoPorNoite": 48,
     "userId": "123",
     "ratingsId": [],
-    "finalGrade": null,
-    "desconto": "20",
-    "promoName": "Black friday",
-    "promoId": "12",
-    "data_inicio": "2003-01-22",
-    "data_fim": "2004-01-22"
+    "finalGrade": null
   },
   {
     "id": "13",
