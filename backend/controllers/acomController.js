@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export const publishAccommodation = async (req, res) => {
     try {
-        const { nome, quantidadeQuartos, lotacaoMaxima, precoPorNoite, userId } = req.query;
+        const { nome, quantidadeQuartos, lotacaoMaxima, precoPorNoite, userId } = req.body;
 
         // validações 
         if (!nome || !quantidadeQuartos || !lotacaoMaxima || !precoPorNoite || !userId) {
@@ -39,7 +39,7 @@ export const publishAccommodation = async (req, res) => {
 
         const accommodationId = data.length+1;
         const newAccommodation = {
-            accommodationId,
+            id: accommodationId,
             nome,
             quantidadeQuartos,
             lotacaoMaxima,
