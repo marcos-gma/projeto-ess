@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import NavBar from '../Compartilhado/navbar.js';
 import HotelCard from './hotelCard.js';
+import './style.css'; // Importa o CSS global
 
 const SearchPage = () => {
   const [filters, setFilters] = useState({
@@ -55,10 +56,6 @@ const SearchPage = () => {
             body: JSON.stringify(formattedFilters)
         });
 
-        if (!response.ok) {
-            throw new Error('No hotels found');
-        }
-
         const data = await response.json();
         console.log('Received data:', data);
 
@@ -69,37 +66,47 @@ const SearchPage = () => {
         setError(err.message);
         setHotels([]);
     }
-};
-
+  };
 
   return (
     <div>
       <NavBar />
       <div className="search-form">
         <form onSubmit={handleSubmit}>
-          <input type="date" name="checkIn" value={filters.checkIn} onChange={handleChange} required />
-          <input type="date" name="checkOut" value={filters.checkOut} onChange={handleChange} required />
-          <input type="number" name="guests" value={filters.guests} onChange={handleChange} required placeholder="Guests" />
-          <input type="text" name="location" value={filters.location} onChange={handleChange} required placeholder="Location" />
-          <input type="number" name="maxPrice" value={filters.maxPrice} onChange={handleChange} placeholder="Max Price" />
-          <label>
-            Pet Friendly
-            <input type="checkbox" name="petFriendly" checked={filters.petFriendly} onChange={handleChange} />
-          </label>
-          <label>
-            Accessible
-            <input type="checkbox" name="accessible" checked={filters.accessible} onChange={handleChange} />
-          </label>
-          <input type="number" name="minRating" value={filters.minRating} onChange={handleChange} placeholder="Min Rating" />
-          <input type="number" name="rooms" value={filters.rooms} onChange={handleChange} placeholder="Rooms" />
-          <button type="submit">Search</button>
+          <div className="form-row">
+            <input type="date" name="checkIn" value={filters.checkIn} onChange={handleChange} required />
+            <input type="date" name="checkOut" value={filters.checkOut} onChange={handleChange} required />
+            <input type="number" name="guests" value={filters.guests} onChange={handleChange} required placeholder="Número de Hospédes" />
+            <input type="text" name="location" value={filters.location} onChange={handleChange} required placeholder="Localização" />
+            <button type="submit">Buscar</button>
+          </div>
+          <div className="form-row">
+            <input type="number" name="rooms" value={filters.rooms} onChange={handleChange} placeholder="Número de Quartos" />
+            <input type="number" name="maxPrice" value={filters.maxPrice} onChange={handleChange} placeholder="Limite de Preço" />
+            <select name="minRating" value={filters.minRating} onChange={handleChange}>
+              <option value="">Nota Mínima</option>
+              <option value="1">⭐</option>
+              <option value="2">⭐⭐</option>
+              <option value="3">⭐⭐⭐</option>
+              <option value="4">⭐⭐⭐⭐</option>
+              <option value="5">⭐⭐⭐⭐⭐</option>
+            </select>
+            <label>
+              Pet Friendly
+              <input type="checkbox" name="petFriendly" checked={filters.petFriendly} onChange={handleChange} />
+            </label>
+            <label>
+              Accessível
+              <input type="checkbox" name="accessible" checked={filters.accessible} onChange={handleChange} />
+            </label>
+          </div>
         </form>
         {error && <p>{error}</p>}
       </div>
       <div className="hotel-list">
         {hotels.length > 0 ? (
-          hotels.map((hotel, index) => (
-            <HotelCard key={index} hotel={hotel} />
+          hotels.map((hotel) => (
+            <HotelCard key={hotel.id} hotel={hotel} />
           ))
         ) : (
           <p>No hotels found</p>

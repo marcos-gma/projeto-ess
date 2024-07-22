@@ -2,12 +2,25 @@
   {
     "id": "012",
     "nome": "Chalé do Porto",
+    "localização": "Porto de Galinhas",
     "quantidadeQuartos": 3,
+    "petFriendly": true,
+    "acessibilidade": true,
     "lotacaoMaxima": 6,
     "precoPorNoite": 150,
     "userId": "123",
     "ratingsId": [],
-    "finalGrade": null
+    "finalGrade": null,
+    "quartos": [
+      {
+        "beds": 2,
+        "price": 1000,
+        "freeDates": [
+          "21/05/2024",
+          "24/05/2024"
+        ]
+      }
+    ]
   },
   {
     "id": "2",
@@ -118,5 +131,39 @@
     "userId": "123",
     "ratingsId": [],
     "finalGrade": null
+  },
+  {
+    "id": "2",
+    "name": "Morada do Mar",
+    "location": "Fernando de Noronha",
+    "availableRooms": 1,
+    "petFriendly": false,
+    "rooms": [
+      {
+        "beds": 2,
+        "price": 1000,
+        "freeDates": [
+          "21/05/2024",
+          "24/05/2024"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1",
+    "name": "Pousada Maresia",
+    "location": "Fernando de Noronha",
+    "availableRooms": 1,
+    "petFriendly": true,
+    "rooms": [
+      {
+        "beds": 2,
+        "price": 1500,
+        "freeDates": [
+          "21/05/2024",
+          "24/05/2024"
+        ]
+      }
+    ]
   }
 ]
