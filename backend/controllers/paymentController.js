@@ -4,7 +4,7 @@ import path from 'path';
 
 export const visualize = async (req, res) => {
     try {
-        const { email } = req.body;
+        const { email } = req.query;
 
         var data = JSON.parse(fs.readFileSync(path.resolve('./samples/users.json'), 'utf8'));
         const user = data.find(element => element.email === email);
