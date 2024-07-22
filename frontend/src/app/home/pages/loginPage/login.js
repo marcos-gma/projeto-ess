@@ -3,7 +3,7 @@ import NavBar from '../Compartilhado/navbar.js'
 import login from '../../services/userAuth/login.js';
 import './style.css'
 import { useNavigate } from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
+
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -15,9 +15,10 @@ const LoginPage = () => {
     
     try {
       const response = await login(email, password);
-      console.log('chegou no try do handleLogin');
       if (response.token){
+        localStorage.setItem('token', response.token);
         navigate('/');
+
       }
       else {
         alert('Invalid Credentials');
