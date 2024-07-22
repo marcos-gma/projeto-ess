@@ -150,9 +150,7 @@ export const listPublishedAccommodations = async (req, res) => {
 
         const userAccommodations = data.filter(accommodation => accommodation.userId === userId);
 
-        res.status(200).json({
-            accommodations: userAccommodations.map(({ id, nome }) => ({ id, nome }))
-        });
+        res.status(200).json(userAccommodations);
 
     } catch (error) {
         console.log("Error in listPublishedAccommodations controller:", error.message);
