@@ -9,6 +9,7 @@ const ModalEditarPromo = ({ promo, onClose, onUpdate }) => {
   const [data_inicio, setData_inicio] = useState(promo.data_inicio);
   const [data_fim, setData_fim] = useState(promo.data_fim);
   const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleEditPromo = async (e) => {
     e.preventDefault();
@@ -21,9 +22,11 @@ const ModalEditarPromo = ({ promo, onClose, onUpdate }) => {
     };
     try {
       await editarPromo(promo.promoId, data);
-      alert('Promoção editada com sucesso!');
+      setSuccessMessage('Promoção editada com sucesso');
       onUpdate(data);
-      onClose();
+      setTimeout(() => {
+        onClose();
+      }, 2000);
     } catch (error) {
       setErrorMessage(error.response?.data?.error || 'Erro ao editar promoção');
     }
@@ -61,9 +64,10 @@ const ModalEditarPromo = ({ promo, onClose, onUpdate }) => {
         <br />
         <br />
         {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+        {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
         <br />
-
         <Button nome='Salvar Edição' type='submit' />
+        <button onClick={onClose}>Fechar</button>
       </form>
     </div>
   );

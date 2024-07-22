@@ -85,7 +85,7 @@ Scenario: Editar uma promoção com sucesso
     When Eu clico no botão "Salvar Edição"
     Then Eu vejo a mensagem "Promoção editada com sucesso!"
     Then O modal de edição de promoção é fechado
-    Then Eu vejo a promoção "Promoção de Natal" na página "/my-promos" com 
+    Then Eu vejo a promoção "Promoção de Natal" na página de promoções com 
         ID do Hotel "10", 
         Desconto "20", 
         Data de Início "01/12/2024", 
@@ -102,7 +102,9 @@ Scenario: Editar uma promoção sem sucesso por erro no campo de data
                     o campo Data de Fim com "01/12/2024"
     When Eu clico no botão "Salvar Edição"
     Then Eu vejo a mensagem "Datas Inválidas: A data de fim deve ser posterior a data de início."
-    Then Eu não vejo a promoção "Promoção de Natal" na página "/my-promos"
+    Whem Eu clico no botão "Fechar"
+    Then O modal de edição de promoção é fechado
+    Then A promoção "Promoção de Natal" não é alterada
 
 
 Scenario: Editar uma promoção sem sucesso por erro no campo de desconto
@@ -116,4 +118,6 @@ Scenario: Editar uma promoção sem sucesso por erro no campo de desconto
                     o campo Data de Fim com "25/12/2024"
     When Eu clico no botão "Salvar Edição"
     Then Eu vejo a mensagem "Desconto Inválido: O percentual de desconto deve ser um número entre 1 e 100."
-    Then Eu não vejo a promoção "Promoção de Natal" na página "/my-promos"
+    When Eu clico no botão "Fechar"
+    Then O modal de edição de promoção é fechado
+    Then A promoção "Promoção de Natal" não é alterada

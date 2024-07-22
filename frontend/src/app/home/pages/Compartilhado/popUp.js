@@ -6,7 +6,7 @@ import './style.css'
 
 Modal.setAppElement('#root')
 
-const PopUp = ({ children, title }) => {
+const PopUp = ({ children, title , className}) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
 
   const openModal = () => {
@@ -19,7 +19,7 @@ const PopUp = ({ children, title }) => {
 
   return (
     <div>
-      <button onClick={openModal}>{title}</button>
+      <button className={className} onClick={openModal}>{title}</button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

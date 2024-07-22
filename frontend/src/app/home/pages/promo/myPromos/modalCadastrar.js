@@ -25,7 +25,9 @@ const ModalCadastrar = ({ onClose, onUpdate }) => {
       await CadastrarPromo(data);
       setSuccessMessage('Promoção cadastrada com sucesso');
       onUpdate(data);
-      onClose();
+      setTimeout(() => {
+        onClose();
+      }, 2000);
     } catch (error) {
       setErrorMessage(error.response?.data?.error || 'Erro ao cadastrar promoção');
     }
@@ -66,7 +68,7 @@ const ModalCadastrar = ({ onClose, onUpdate }) => {
         {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
         <br />
         <Button nome="Salvar e Cadastrar" type='submit' />
-        <Button nome="Fechar" onClick = {onClose} />
+        <button onClick={onClose}>Fechar</button>
       </form>
     </div>
   );

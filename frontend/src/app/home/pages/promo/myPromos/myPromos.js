@@ -73,7 +73,7 @@ const MyPromos = () => {
                 >
                   Deletar Promoção
                 </button>
-                <PopUp title='Editar Promoção'>
+                <PopUp title='Editar Promoção' className={'${promo.promoName.replace(/\s+/g, '-').toLowerCase()}'}>
                   <ModalEditarPromo promo={promo} onClose={() => window.location.reload()} onUpdate={handleUpdatePromo} />
                 </PopUp>
               </div>
