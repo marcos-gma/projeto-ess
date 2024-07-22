@@ -38,9 +38,12 @@ app.use('/user', reservationRoutes);
 app.use('/ping', pingRoutes);
 app.use('/auth', authRoutes);
 app.use('/email', authenticateToken ,emailRoutes);
-app.use('/add', paymentRoutes);
-app.use('/payment-methods', paymentRoutes);
 app.use('/promo', promoRoutes);
+
+
+app.use('/payment-methods', paymentRoutes);
+app.use('/add', paymentRoutes);
+app.use('/remove', paymentRoutes);
 
 app.listen(5001, () => {
   console.log("\n\nServer is listening on port 5001\n\n");
