@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "cypress": "^13.13.1",
     "react-modal": "^3.16.1"
   }
 }

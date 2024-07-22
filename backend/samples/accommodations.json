@@ -44,7 +44,7 @@
     "nome": "Propriedade 10",
     "quantidadeQuartos": 4,
     "lotacaoMaxima": 8,
-    "precoPorNoite": 12.533370062499998,
+    "precoPorNoite": 8.773359043749998,
     "userId": "123",
     "ratingsId": [],
     "finalGrade": null
@@ -58,7 +58,7 @@
     "userId": "123",
     "ratingsId": [],
     "finalGrade": null,
-    "desconto": 55,
+    "desconto": 80,
     "promoName": "Dia dos Filhos",
     "promoId": "11",
     "data_inicio": "2021-10-05",
