@@ -1,13 +1,12 @@
 .main {
-    margin: 50px;
-  }
-  
-.main h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-  }	
+  margin: 50px;
+}
 
-  img {
-    width: 25%;
-  }
-  
+.main h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+img {
+  width: 25%;
+}
