@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import Modal from 'react-modal'
 import './style.css'
+import '../payment/visualize/style.css'
 
 Modal.setAppElement('#root')
 
@@ -19,7 +20,7 @@ const PopUp = ({ children, title }) => {
 
   return (
     <div>
-      <button onClick={openModal}>{title}</button>
+      <button className='select-button' onClick={openModal}>{title}</button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
