@@ -1,178 +1,152 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'; // Importar useState e useEffect
 import NavBar from '../Compartilhado/navbar.js';
-
-const hotels = [
-  {
-    "id": "2",
-    "name": "Morada do Mar",
-    "location": "Fernando de Noronha",
-    "availableRooms": 1,
-    "petFriendly": false,
-    "accessibility": true,
-    "rating": 3,
-    "rooms": [
-      {
-        "beds": 2,
-        "price": 1000,
-        "freeDates": [
-          "21/05/2024",
-          "24/05/2024"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "1",
-    "name": "Pousada Maresia",
-    "location": "Fernando de Noronha",
-    "availableRooms": 1,
-    "petFriendly": true,
-    "accessibility": false,
-    "rating": 4,
-    "rooms": [
-      {
-        "beds": 2,
-        "price": 1500,
-        "freeDates": [
-          "21/05/2024",
-          "24/05/2024"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "3",
-    "name": "Hotel Paraíso",
-    "location": "Fernando de Noronha",
-    "availableRooms": 3,
-    "petFriendly": true,
-    "accessibility": true,
-    "rating": 5,
-    "rooms": [
-      {
-        "beds": 2,
-        "price": 3000,
-        "freeDates": [
-          "21/05/2024",
-          "24/05/2024",
-          "25/05/2024"
-        ]
-      },
-      {
-        "beds": 1,
-        "price": 1500,
-        "freeDates": [
-          "21/05/2024",
-          "24/05/2024"
-        ]
-      },
-      {
-        "beds": 3,
-        "price": 4000,
-        "freeDates": [
-          "21/05/2024",
-          "24/05/2024"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "4",
-    "name": "Lar Doce Lar",
-    "location": "Fernando de Noronha",
-    "availableRooms": 1,
-    "petFriendly": false,
-    "accessibility": false,
-    "rating": 2,
-    "rooms": [
-      {
-        "beds": 2,
-        "price": 800,
-        "freeDates": [
-          "21/05/2024",
-          "24/05/2024"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "5",
-    "name": "Recanto dos Corais",
-    "location": "Fernando de Noronha",
-    "availableRooms": 2,
-    "petFriendly": true,
-    "accessibility": true,
-    "rating": 4,
-    "rooms": [
-      {
-        "beds": 2,
-        "price": 1800,
-        "freeDates": [
-          "21/05/2024",
-          "24/05/2024"
-        ]
-      },
-      {
-        "beds": 1,
-        "price": 900,
-        "freeDates": [
-          "21/05/2024",
-          "24/05/2024"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "6",
-    "name": "Pousada Naiepe",
-    "location": "Fernando de Noronha",
-    "availableRooms": 1,
-    "petFriendly": false,
-    "accessibility": true,
-    "rating": 2,
-    "rooms": [
-      {
-        "beds": 2,
-        "price": 750,
-        "freeDates": [
-          "21/05/2024",
-          "24/05/2024"
-        ]
-      }
-    ]
-  }
-];
+import './style.css'; 
+import LarDoceLar from '../../assets/LarDoceLar.jpg';
+import MoradaDoMar from '../../assets/MoradaDoMar.png';
+import Paraiso from '../../assets/Paraiso.jpg';
+import PousadaMaresia from '../../assets/PousadaMaresia.jpg';
+import Naiepe from '../../assets/PousadaNaiepe.jpg';
+import Recanto from '../../assets/Recanto.jpeg';
 
 const Detalhes = () => {
+  const [hotels, setHotels] = useState([]);
+  const [error, setError] = useState('');
+  const [liked, setLiked] = useState(false);
   const name = localStorage.getItem("hotel");
-  const hotel = hotels.find((hotel) => hotel.name === name);
-  console.log(name);
+
+  // Verifique se 'name' e 'hotels' estão definidos antes de tentar encontrar o hotel
+  const hotel = name && hotels.find(hotel => hotel.name === name);
+
+  const getData = async () => {
+    try {
+      const response = await fetch('http://localhost:5001/consult/getHotels', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      });
+
+      const data = await response.json();
+      console.log('Received data:', data);
+
+      setHotels(data.hotels || []);
+      setError('');
+    } catch (err) {
+      console.error('Error occurred:', err);
+      setError(err.message);
+      setHotels([]);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const handleLike = async () => {
+    if (!hotel) return; // Evita tentar curtir se 'hotel' for undefined
+
+    try {
+      const userId = '1'; 
+      const response = await fetch('http://localhost:5001/liking/like', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ userId, accommodationId: hotel.id })
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setLiked(true);
+        console.log('Like added:', data);
+      } else {
+        console.error('Error adding like:', data.error);
+      }
+    } catch (err) {
+      console.error('Error occurred:', err);
+    }
+    getData();
+  };
+
+  const handleUnlike = async () => {
+    if (!hotel) return; // Evita tentar descurtir se 'hotel' for undefined
+
+    try {
+      const userId = '1'; 
+      const response = await fetch('http://localhost:5001/liking/removeLike', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ userId, accommodationId: hotel.id })
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setLiked(false);
+        console.log('Like removed:', data);
+      } else {
+        console.error('Error removing like:', data.error);
+      }
+    } catch (err) {
+      console.error('Error occurred:', err);
+    }
+    getData();
+  };
+
+  let image;
+  if (hotel && hotel.name === 'Morada do Mar') {
+    image = MoradaDoMar;
+  } else if (hotel && hotel.name === 'Pousada Maresia') {
+    image = PousadaMaresia;
+  } else if (hotel && hotel.name === 'Hotel Paraíso') {
+    image = Paraiso;
+  } else if (hotel && hotel.name === 'Lar Doce Lar') {
+    image = LarDoceLar;
+  } else if (hotel && hotel.name === 'Recanto dos Corais') {
+    image = Recanto;
+  } else if (hotel && hotel.name === 'Pousada Naiepe') {
+    image = Naiepe;
+  }
 
   return (
-    <div>
+    <div className="detalhes-container">
       <NavBar />
-      <h1>Detalhes do Hotel</h1>
-      {hotel ? (
-        <div>
-          <h2>{hotel.name}</h2>
-          <p>Localização: {hotel.location}</p>
-          <p>Quartos disponíveis: {hotel.availableRooms}</p>
-          <p>Aceita animais: {hotel.petFriendly ? 'Sim' : 'Não '}</p>
-          <p>Acessibilidade: {hotel.accessibility ? 'Sim' : 'Não'}</p>
-          <p>Classificação: {hotel.rating} estrelas</p>
-          <h3>Quartos:</h3>
-          {hotel.rooms.map((room, index) => (
-            <div key={index}>
-              <p>Camas: {room.beds}</p>
-              <p>Preço: {room.price}</p>
-              <p>Datas livres: {room.freeDates.join(', ')}</p>
+      <div className="hotel-details">
+        {hotel ? (
+          <>
+            <h1 className="hotel-name">{hotel.name}</h1>
+            <img className='hotel-image' src={image} alt={hotel.name} />
+            <div className="details-wrapper">
+              <div className="details-info">
+                <h2>Detalhes do Hotel</h2>
+                <p><strong>Localização:</strong> {hotel.location}</p>
+                <p><strong>Quartos disponíveis:</strong> {hotel.availableRooms}</p>
+                <p><strong>Aceita animais:</strong> {hotel.petFriendly ? 'Sim' : 'Não'}</p>
+                <p><strong>Acessibilidade:</strong> {hotel.accessibility ? 'Sim' : 'Não'}</p>
+                <p><strong>Classificação:</strong> {`${'⭐'.repeat(hotel.rating)}`}</p>
+                <p><strong>Likes:</strong> {hotel.likes}</p>
+                <h3>Quartos:</h3>
+                {hotel.rooms.map((room, index) => (
+                  <div key={index} className="room-details">
+                    <p><strong>Camas:</strong> {room.beds}</p>
+                    <p><strong>Preço:</strong> {room.price}</p>
+                    <p><strong>Datas livres:</strong> {room.freeDates.join(', ')}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="details-actions">
+                <button className="action-button" onClick={liked ? handleUnlike : handleLike}>
+                  {liked ? 'Descurtir' : 'Curtir'}
+                </button>
+                <button className="action-button">Reservar</button>
+              </div>
             </div>
-          ))}
-        </div>
-      ) : (
-        <p>{name}</p>
-      )}
+          </>
+        ) : (
+          <p>Ops, não encontramos o hotel.</p>
+        )}
+      </div>
     </div>
   );
 };

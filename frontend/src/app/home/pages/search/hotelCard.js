@@ -13,7 +13,7 @@ const HotelCard = ({ hotel }) => {
 
   const handleClick = (name) => {
     localStorage.setItem('hotel', name);
-    navigate(`/detalhes-da-acomodacao`);
+    navigate('/detalhes-da-acomodacao');
   };
 
   if (!hotel) {
@@ -40,9 +40,7 @@ const HotelCard = ({ hotel }) => {
       <img className='hotel-card-image' src={image} alt='Hotel exemplo' />
       <div className='hotel-card-content'>
         <h2 className='hotel-card-name'>{hotel.name || 'No name available'}</h2>
-        <p className='hotel-card-price'>
-          {hotel.rooms && hotel.rooms.length > 0 ? `R$${hotel.rooms[0].price}` : 'No price available'}
-        </p>
+        <p className='hotel-card-price'>{hotel.price ? `R$${hotel.price}` : 'No price available'}</p>
       </div>
     </div>
   );
