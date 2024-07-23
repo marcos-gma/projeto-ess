@@ -4,6 +4,7 @@ import { list } from '../../services/accommodations/list.js';
 import { deleteAccommodation } from '../../services/accommodations/delete.js';
 import NavBar from '../Compartilhado/navbar.js';
 import PopUp from '../Compartilhado/popUp.js';
+import Button from '../Compartilhado/button.js'
 import EditAccommodationModal from './EditAccommodationModal.js';
 import './AccommodationsList.css';
 
@@ -64,6 +65,7 @@ const AccommodationsList = () => {
             <NavBar />
             <div className="containerList">
                 <h1>My Accommodations List</h1>
+                <Button destino='/my-promos' nome='Ver Minhas Promoções Ativas' />
                 <button className="publish-button" onClick={handlePublishClick}>
                 Publish Accommodation
                 </button>
