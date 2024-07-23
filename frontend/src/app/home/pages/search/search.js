@@ -109,7 +109,7 @@ const SearchPage = () => {
             <HotelCard key={hotel.id} hotel={hotel} />
           ))
         ) : (
-          <p>No hotels found</p>
+          <p>Sem acomodações disponíveis no momento</p>
         )}
       </div>
     </div>
