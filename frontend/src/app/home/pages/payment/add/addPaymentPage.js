@@ -15,7 +15,7 @@ const AddPaymentPage = () => {
 
   const handleSave = async () => {
     try {
-      const result = await Add({ email: 'iasmin@protonmail.com', cardNumber, name, expireDate, type, cvv });
+      const result = await Add({ id: '24', cardNumber, name, expireDate, type, cvv });
       setSuccessMessage(result.message);
       setError('');
       setCardNumber('');

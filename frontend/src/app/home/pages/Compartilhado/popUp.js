@@ -7,7 +7,7 @@ import '../payment/visualize/style.css'
 
 Modal.setAppElement('#root')
 
-const PopUp = ({ children, title }) => {
+const PopUp = ({ children, title , className}) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
 
   const openModal = () => {
@@ -37,6 +37,7 @@ const PopUp = ({ children, title }) => {
             transform: 'translate(-50%, -50%)'
           }
         }}
+        data-testid="modal"
       >
         {children}
       </Modal>
