@@ -1,9 +1,9 @@
 import api from '../api.js';
 
 
-const Visualize = async (email) => {
+const Visualize = async (id) => {
   try {
-    const response = await api.get(`/payment-methods/visualize?email=${encodeURIComponent(email)}`);
+    const response = await api.get(`/payment-methods/visualize?id=${encodeURIComponent(id)}`);
     return response.data;
   } 
   catch (error) {

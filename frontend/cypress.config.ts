@@ -1,18 +1,13 @@
-import { addCucumberPreprocessorPlugin } from '@badeball/cypress-cucumber-preprocessor';
-import { defineConfig } from 'cypress';
+const cucumber = require('cypress-cucumber-preprocessor').default
+const { defineConfig } = require('cypress')
 
-export default defineConfig({
+module.exports = defineConfig({
   e2e: {
-    setupNodeEvents(on, config) {
-      // Adiciona o plugin do pré-processador Cucumber
-      addCucumberPreprocessorPlugin(on, config);
-      return config;
+    setupNodeEvents(on) {
+      on('file:preprocessor', cucumber({
+        typescript: require.resolve('typescript')
+      }))
     },
-    specPattern: 'cypress/e2e/features/busca/buscaGUI.feature', // Padrão para localizar arquivos .feature
-    baseUrl: 'http://localhost:3000/', // URL base para os testes
-    video: false, // Desativa a gravação de vídeo
-    viewportWidth: 1280, // Largura da viewport
-    viewportHeight: 720, // Altura da viewport
-    defaultCommandTimeout: 5000, // Tempo limite padrão para comandos
-  },
-});
+    specPattern: 'cypress/e2e/features/*.feature',
+  }
+})
