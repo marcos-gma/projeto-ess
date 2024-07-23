@@ -40,6 +40,18 @@ const PaymentPage = () => {
     }
   };
 
+  // Função para mapear o tipo de cartão
+  const mapCardType = (type) => {
+    switch (type) {
+      case 'credit':
+        return 'Crédito';
+      case 'debit':
+        return 'Débito';
+      default:
+        return type;
+    }
+  };
+
   return (
     <div>
       <NavBar />
@@ -49,7 +61,12 @@ const PaymentPage = () => {
         <ul className='payment-list'>
           {paymentMethods.map((card, index) => (
             <li key={index}>
-              <strong>Número do cartão:</strong> {card.cardNumber} <strong>Tipo:</strong> {card.type}
+              <div>
+                <strong>Número do cartão:</strong> {card.cardNumber}
+              </div>
+              <div>
+                <strong>Tipo:</strong> {mapCardType(card.type)}
+              </div>
               <div className='button-container'>
                 <PopUp title='Selecionar'>
                   <Parabens />

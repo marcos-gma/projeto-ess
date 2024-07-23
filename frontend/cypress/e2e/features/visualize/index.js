@@ -1,4 +1,4 @@
-import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
+import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor/steps';
 
 Given('eu estou na página de "Home"', () => {
     cy.visit('http://localhost:3000/');
