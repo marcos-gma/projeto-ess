@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import './styles.css'; 
 
 const UserProfile = () => {
+  const id = getItem("Token")
   const user = {
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    photo: 'https://via.placeholder.com/150'
+    name: 'José Maria',
+    email: 'mfp2@cin.ufpe.br',
+    photo: 'https://f4.bcbits.com/img/a1801332551_10.jpg'
   };
 
   return (
@@ -15,8 +16,8 @@ const UserProfile = () => {
       <h2>{user.name}</h2>
       <p>{user.email}</p>
       <div className="user-links">
-        <Link to="/likes">Likes</Link>
-        <Link to="/saved-hotels">Saved Hotels</Link>
+        <Link to="/Likes">Likes</Link>
+        <Link to="/Saves">Saved Hotels</Link>
       </div>
     </div>
   );
