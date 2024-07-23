@@ -79,8 +79,7 @@
     ]
   },
   "cypress-cucumber-preprocessor": {
-    "stepDefinitions": [
-      "cypress/e2e/features/promo/*.js"
-    ]
+    "nonGlobalStepDefinitions": true,
+    "stepDefinitions": "cypress/e2e/features"
   }
 }
