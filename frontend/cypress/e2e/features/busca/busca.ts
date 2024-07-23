@@ -1,27 +1,26 @@
 import { Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 
-Given('o usuário está na página "search"', () => {
-    cy.visit('http://localhost:3000/search');
+Given('o usuário está na página {string}', (page: string) => {
+    cy.visit(page);
 });
 
 When('o usuário preenche os campos da seguinte maneira: CheckIn : {string}, CheckOut : {string}, Número de Hospédes : {string} e Localização : {string}', (checkin: string, checkout: string, guests: string, location: string) => {
-    cy.get('[data-cy="checkin"]').type(checkin);
-    cy.get('[data-cy="checkout"]').type(checkout);
-    cy.get('[data-cy="guests"]').type(guests);
-    cy.get('[data-cy="location"]').type(location);
+    cy.get('input[name=checkin]').type(checkin);
+    cy.get('input[name=checkout]').type(checkout);
+    cy.get('input[name=guests]').type(guests);
+    cy.get('input[name=location]').type(location);
 });
 
 When('o usuário preenche os campos da seguinte maneira: CheckIn : {string}, CheckOut : {string}, Número de Hospédes : {string}, Localização : {string} e sendo "Pet Friendly"', (checkin: string, checkout: string, guests: string, location: string) => {
-    cy.get('[data-cy="checkin"]').type(checkin);
-    cy.get('[data-cy="checkout"]').type(checkout);
-    cy.get('[data-cy="guests"]').type(guests);
-    cy.get('[data-cy="location"]').type(location);
-    cy.get('[data-cy="petFriendly"]').check();
+    cy.get('input[name=checkin]').type(checkin);
+    cy.get('input[name=checkout]').type(checkout);
+    cy.get('input[name=guests]').type(guests);
+    cy.get('input[name=location]').type(location);
+    cy.get('input[name=petFriendly]').check();
 });
 
-When('o usuário clica no botão "Buscar"', () => {
-    cy.get('[data-cy="searchButton"]').click();
-
+When('o usuário clica no botão {string}', (buttonName : string) => {
+    cy.get('button').contains(buttonName).click();
 }
 );
 

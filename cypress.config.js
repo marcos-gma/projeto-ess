@@ -7,6 +7,5 @@ module.exports = defineConfig({
       on('file:preprocessor', cucumber());
     },
     specPattern: 'frontend/cypress/e2e/features/*.feature',
-    supportFile: 'frontend/cypress/e2e/features/visualize/index.js', 
   },
 });

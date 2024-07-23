@@ -132,7 +132,7 @@ const Detalhes = () => {
                 <p><strong>Aceita animais:</strong> {hotel.petFriendly ? 'Sim' : 'Não'}</p>
                 <p><strong>Acessibilidade:</strong> {hotel.accessibility ? 'Sim' : 'Não'}</p>
                 <p><strong>Classificação:</strong> {`${'⭐'.repeat(hotel.rating)}`}</p>
-                <p><strong>Likes:</strong> {hotel.likes}</p>
+                <p name="Likes"><strong >Likes:</strong> {hotel.likes}</p>
                 <h3>Quartos:</h3>
                 {hotel.rooms.map((room, index) => (
                   <div key={index} className="room-details">
@@ -143,7 +143,7 @@ const Detalhes = () => {
                 ))}
               </div>
               <div className="details-actions">
-                <button className="action-button" onClick={liked ? handleUnlike : handleLike}>
+                <button name="Like" className="action-button" onClick={liked ? handleUnlike : handleLike}>
                   {liked ? 'Descurtir' : 'Curtir'}
                 </button>
                 <button className="action-button" onClick={handleReservation}>

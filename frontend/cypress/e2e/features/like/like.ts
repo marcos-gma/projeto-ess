@@ -6,7 +6,7 @@ let currentLikes: number = 0;
 let buttonText: string = 'Curtir';
 
 Given('o usuário está na página {string} de {string}', function (page: string, place: string) {
-    cy.visit('/detalhes-da-acomodacao');
+    cy.visit(page);
 });
 
 Given('{string} possui {int} likes', function (place: string, likes: number) {
@@ -14,7 +14,7 @@ Given('{string} possui {int} likes', function (place: string, likes: number) {
 });
 
 When('o usuário clica no botão {string}', function (button: string) {
-    cy.get('[data-cy="Curtir"]').click();
+    cy.get('button').contains(button).click();
 });
 
 Then('{string} possui {int} likes', function (place: string, likes: number) {
@@ -22,5 +22,5 @@ Then('{string} possui {int} likes', function (place: string, likes: number) {
 });
 
 Then('o botão virou {string}', function (expectedButtonText: string) {
-    cy.get('[data-cy="Curtir"]').should('contain', expectedButtonText);
+    cy.get('button').should('contain', expectedButtonText);
 });

@@ -78,7 +78,7 @@ const SearchPage = () => {
             <input type='date' name='checkOut' value={filters.checkOut} onChange={handleChange} required />
             <input type='number' name='guests' value={filters.guests} onChange={handleChange} required placeholder='Número de Hospédes' />
             <input type='text' name='location' value={filters.location} onChange={handleChange} required placeholder='Localização' />
-            <button type='submit'>Buscar</button>
+            <button type='submit' name='search'>Buscar</button>
           </div>
           <div className='form-row'>
             <input type='number' name='rooms' value={filters.rooms} onChange={handleChange} placeholder='Número de Quartos' />
