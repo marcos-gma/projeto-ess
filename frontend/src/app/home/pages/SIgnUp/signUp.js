@@ -4,7 +4,7 @@ import signUp from '../../services/userAuth/signUp.js'
 import './style.css'
 import { useNavigate } from 'react-router-dom'
 
-const signUpPage = () => {
+const SignUpPage = () => {
   const [name, setName] = useState('');
   const [birthday, setBirthday] = useState('');
   const [email, setEmail] = useState('');
@@ -116,4 +116,4 @@ const signUpPage = () => {
   )
 }
 
-export default signUpPage
+export default SignUpPage
