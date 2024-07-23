@@ -65,12 +65,7 @@
     "precoPorNoite": 200,
     "userId": "123",
     "ratingsId": [],
-    "finalGrade": null,
-    "desconto": 55,
-    "promoName": "Dia dos Filhos",
-    "promoId": "11",
-    "data_inicio": "2021-10-05",
-    "data_fim": "2021-10-25"
+    "finalGrade": null
   },
   {
     "id": "12",
@@ -81,7 +76,7 @@
     "userId": "123",
     "ratingsId": [],
     "finalGrade": null,
-    "desconto": "20",
+    "desconto": 50,
     "promoName": "Black friday",
     "promoId": "12",
     "data_inicio": "2003-01-22",
