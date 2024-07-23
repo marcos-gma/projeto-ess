@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'; // Importar useState e useEffect
+import React, { useEffect, useState } from 'react'; 
 import NavBar from '../Compartilhado/navbar.js';
 import './style.css'; 
+import { useNavigate } from 'react-router-dom';
 import LarDoceLar from '../../assets/LarDoceLar.jpg';
 import MoradaDoMar from '../../assets/MoradaDoMar.png';
 import Paraiso from '../../assets/Paraiso.jpg';
@@ -109,6 +110,12 @@ const Detalhes = () => {
     image = Naiepe;
   }
 
+  const navigate = useNavigate();
+
+  const handleReservation = () => {
+    navigate('/payment-methods'); // Redireciona para a página de métodos de pagamento
+  };
+
   return (
     <div className="detalhes-container">
       <NavBar />
@@ -139,7 +146,9 @@ const Detalhes = () => {
                 <button className="action-button" onClick={liked ? handleUnlike : handleLike}>
                   {liked ? 'Descurtir' : 'Curtir'}
                 </button>
-                <button className="action-button">Reservar</button>
+                <button className="action-button" onClick={handleReservation}>
+                  Reservar
+                </button>
               </div>
             </div>
           </>
