@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { list } from '../../services/accommodations/list.js';
 import { deleteAccommodation } from '../../services/accommodations/delete.js';
 import NavBar from '../Compartilhado/navbar.js';
-import './AccommodationsList.css'
+import PopUp from '../Compartilhado/popUp.js';
+import EditAccommodationModal from './EditAccommodationModal.js';
+import './AccommodationsList.css';
 
 const AccommodationsList = () => {
     const [accommodations, setAccommodations] = useState([]);
@@ -49,6 +51,14 @@ const AccommodationsList = () => {
         }
     };
 
+    const handleUpdate = (updatedAccommodation) => {
+        setAccommodations(prevState =>
+          prevState.map(accommodation =>
+            accommodation.id === updatedAccommodation.id ? updatedAccommodation : accommodation
+          )
+        );
+      };
+
     return (
         <div>
             <NavBar />
@@ -64,9 +74,12 @@ const AccommodationsList = () => {
                         <p>Rooms: {accommodation.quantidadeQuartos}</p>
                         <p>Max Occupancy: {accommodation.lotacaoMaxima}</p>
                         <p>Price per Night: ${accommodation.precoPorNoite}</p>
-                        <Link to={`/edit-accommodation/${accommodation.id}`} className="edit-button">
-                            Edit
-                        </Link>
+                        <PopUp title='Edit'>
+                        <EditAccommodationModal
+                            accommodation={accommodation} 
+                            onClose={() => window.location.reload()} 
+                            onUpdate={handleUpdate} />
+                        </PopUp>
                         <button onClick={() => handleDelete(accommodation.id)} className="delete-button">
                             Delete
                         </button>
