@@ -3,16 +3,16 @@ body {
     background-color: #f4f4f9;
     margin: 0;
     padding: 0;
-}
-
-.navbar {
-    background-color: #4CAF50;
+  }
+  
+  .navbar {
+    background-color: #4caf50;
     padding: 1em;
     color: white;
     text-align: center;
-}
-
-.search-form {
+  }
+  
+  .search-form {
     background-color: #fff;
     padding: 1em;
     margin: 2em auto;
@@ -20,23 +20,23 @@ body {
     max-width: 1200px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-}
-
-.search-form form {
+  }
+  
+  .search-form form {
     display: flex;
     flex-direction: column;
-}
-
-.search-form .form-row {
+  }
+  
+  .search-form .form-row {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-}
-
-.search-form .form-row input, 
-.search-form .form-row button,
-.search-form .form-row select {
+  }
+  
+  .search-form .form-row input,
+  .search-form .form-row button,
+  .search-form .form-row select {
     padding: 0.8em;
     margin: 0.5em;
     border: 1px solid #ddd;
@@ -45,35 +45,35 @@ body {
     background-color: #fff;
     font-family: Arial, sans-serif;
     color: #6e6d6d;
-}
-
-.search-form .form-row label {
+  }
+  
+  .search-form .form-row label {
     display: flex;
     align-items: center;
     margin: 0.5em;
     flex: 1 1 150px; /* Flex item with minimum width */
     white-space: nowrap; /* Prevent text from wrapping */
-}
-
-.search-form .form-row label input[type="checkbox"] {
+  }
+  
+  .search-form .form-row label input[type='checkbox'] {
     width: 1.5em; /* Ajuste o tamanho da caixa de seleção */
     height: 1.5em; /* Ajuste a altura da caixa de seleção */
     margin: 0 0.5em; /* Ajuste a margem para melhor alinhamento */
-}
-
-.search-form .form-row button {
-    background-color: #4CAF50;
+  }
+  
+  .search-form .form-row button {
+    background-color: #4caf50;
     color: white;
     border: none;
     cursor: pointer;
     flex: 1 1 auto; /* Flex item with auto width */
-}
-
-.search-form .form-row button:hover {
+  }
+  
+  .search-form .form-row button:hover {
     background-color: #45a049;
-}
-
-.hotel-list {
+  }
+  
+  .hotel-list {
     padding: 2em;
     margin: 0 auto; /* Centraliza horizontalmente */
     width: 90%;
@@ -83,10 +83,11 @@ body {
     gap: 1em; /* Space between items */
     justify-content: center; /* Centraliza os cartões horizontalmente */
     text-align: center; /* Centraliza o texto dos itens */
-}
-
-.hotel-list p {
+  }
+  
+  .hotel-list p {
     font-size: 1.2em;
     color: #333;
     margin: 0;
-}
+  }
+  
