@@ -75,25 +75,20 @@
     "precoPorNoite": 48,
     "userId": "123",
     "ratingsId": [],
-    "finalGrade": null,
-    "desconto": 50,
-    "promoName": "Black friday",
-    "promoId": "12",
-    "data_inicio": "2003-01-22",
-    "data_fim": "2004-01-22"
+    "finalGrade": null
   },
   {
     "id": "13",
     "nome": "Propriedade 13",
     "quantidadeQuartos": 4,
     "lotacaoMaxima": 80,
-    "precoPorNoite": 333.3333333333333,
+    "precoPorNoite": 299.99999999999994,
     "userId": "123",
     "ratingsId": [
       "e7a2449b-f91f-4abc-9085-c90929928eff"
     ],
     "finalGrade": null,
-    "desconto": 50,
+    "desconto": 55,
     "promoName": "Dia das mães",
     "promoId": "13",
     "data_inicio": "2003-01-22",
