@@ -8,7 +8,7 @@ const AddPaymentPage = () => {
   const [cardNumber, setCardNumber] = useState('');
   const [name, setName] = useState('');
   const [expireDate, setExpireDate] = useState('');
-  const [type, setType] = useState('');
+  const [type, setType] = useState('credit'); // Inicializando com 'credit'
   const [cvv, setCvv] = useState('');
   const [success, setSuccessMessage] = useState('');
   const [error, setError] = useState('');
@@ -21,10 +21,9 @@ const AddPaymentPage = () => {
       setCardNumber('');
       setName('');
       setExpireDate('');
-      setType('');
+      setType('credit'); // Resetando para 'credit' após salvar
       setCvv('');
-    } 
-    catch (error) {
+    } catch (error) {
       setError(error.error);
       setSuccessMessage('');
     }
@@ -65,12 +64,14 @@ const AddPaymentPage = () => {
           </div>
           <div className='form-group'>
             <label htmlFor='type'>Tipo:</label>
-            <input
-              type='text'
+            <select
               id='type'
               value={type}
               onChange={(e) => setType(e.target.value)}
-            />
+            >
+              <option value='credit'>Crédito</option>
+              <option value='debit'>Débito</option>
+            </select>
           </div>
           <div className='form-group'>
             <label htmlFor='cvv'>CVV:</label>
