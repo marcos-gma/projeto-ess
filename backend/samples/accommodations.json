@@ -48,7 +48,7 @@
     "nome": "Propriedade 10",
     "quantidadeQuartos": 4,
     "lotacaoMaxima": 8,
-    "precoPorNoite": 12.533370062499998,
+    "precoPorNoite": 100,
     "userId": "123",
     "ratingsId": [
       "b8ad79c7-268d-40bc-89cc-17ab330c72ed",
@@ -87,13 +87,13 @@
     "nome": "Propriedade 13",
     "quantidadeQuartos": 4,
     "lotacaoMaxima": 80,
-    "precoPorNoite": 600,
+    "precoPorNoite": 333.3333333333333,
     "userId": "123",
     "ratingsId": [
       "e7a2449b-f91f-4abc-9085-c90929928eff"
     ],
     "finalGrade": null,
-    "desconto": "50",
+    "desconto": 50,
     "promoName": "Dia das mães",
     "promoId": "13",
     "data_inicio": "2003-01-22",

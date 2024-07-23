@@ -33,10 +33,9 @@ const MyPromos = () => {
   const handleDeletePromo = async (id) => {
     try {
       await deletarPromo(id)
-      alert('Promoção deletada com sucesso!')
+      // alert('Promoção deletada com sucesso!')
       window.location.reload()
     } catch (error) {
-      console.error('Error deleting promotion:', error)
       alert('Erro ao deletar promoção')
     }
   }
@@ -68,8 +67,13 @@ const MyPromos = () => {
                 <p>Início: {promo.data_inicio}</p>
                 <p>Fim: {promo.data_fim}</p>
                 <Link to={`/promo/${promo.promoId}`}>Ver detalhes</Link>
-                <button onClick={() => handleDeletePromo(promo.promoId)}>Deletar Promoção</button>
-                <PopUp title='Editar Promoção'>
+                <button
+                  className={`${promo.promoName.replace(/\s+/g, '-').toLowerCase()}`}
+                  onClick={() => handleDeletePromo(promo.promoId)}
+                >
+                  Deletar Promoção
+                </button>
+                <PopUp title='Editar Promoção' className={'${promo.promoName.replace(/\s+/g, '-').toLowerCase()}'}>
                   <ModalEditarPromo promo={promo} onClose={() => window.location.reload()} onUpdate={handleUpdatePromo} />
                 </PopUp>
               </div>
