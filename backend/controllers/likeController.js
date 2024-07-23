@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { getUserId } from '../utils.js';
 
 export const like =  async (req, res) => {
     try {
@@ -13,6 +14,8 @@ export const like =  async (req, res) => {
                 error: "All fields are required"
             });
         }
+
+        userId = getUserId(userId);
 
         var user = user_data.find(user => user.id === userId);
         
@@ -64,6 +67,8 @@ export const removeLike =  async (req, res) => {
             });
         }
 
+        userId = getUserId(userId);
+
         var user = user_data.find(user => user.id === userId);
 
         if (!user) {
@@ -110,6 +115,8 @@ export const getLikes =  async (req, res) => {
                 error: "Log in to view your likes"
             });
         }
+
+        userId = getUserId(userId);
 
         var user = user_data.find(user => user.id === userId);
 
