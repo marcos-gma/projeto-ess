@@ -12,7 +12,7 @@ export default defineConfig({
       addCucumberPreprocessorPlugin(on, config);
       return config;
     },
-    specPattern: 'cypress/e2e/features/busca/buscaGUI.feature', // Padrão para localizar arquivos .feature
+    specPattern: 'cypress/e2e/features/visualize.feature', // Padrão para localizar arquivos .feature
     baseUrl: 'http://localhost:3000/', // URL base para os testes
     video: false, // Desativa a gravação de vídeo
     viewportWidth: 1280, // Largura da viewport
