@@ -14,8 +14,8 @@ const PaymentPage = () => {
   useEffect(() => {
     const fetchPaymentMethods = async () => {
       try {
-        const email = 'iasmin@protonmail.com';
-        const cards = await Visualize(email);
+        const id = '24';
+        const cards = await Visualize(id);
         setPaymentMethods(cards);
       } catch (error) {
         console.error('Error fetching payment methods:', error);
@@ -27,8 +27,8 @@ const PaymentPage = () => {
 
   const handleRemove = async (cardNumber, type) => {
     try {
-      const email = 'iasmin@protonmail.com';
-      const result = await Remove({ email, cardNumber, type });
+      const id = '24';
+      const result = await Remove({ id, cardNumber, type });
 
       const updatedMethods = paymentMethods.filter(
         card => !(card.cardNumber === cardNumber && card.type === type)

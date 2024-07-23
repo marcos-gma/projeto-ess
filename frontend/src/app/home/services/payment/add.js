@@ -1,10 +1,10 @@
 import api from '../api.js';
 
 
-const Add = async ({ email, cardNumber, name, expireDate, type, cvv }) => {
+const Add = async ({ id, cardNumber, name, expireDate, type, cvv }) => {
   try {
     const response = await api.post(`/payment-methods/add`, {
-        email,
+        id,
         cardNumber,
         name,
         expireDate,
