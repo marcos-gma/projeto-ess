@@ -28,7 +28,7 @@ const ModalEditarPromo = ({ promo, onClose, onUpdate }) => {
         onClose();
       }, 2000);
     } catch (error) {
-      setErrorMessage(error.response?.data?.error || 'Erro ao editar promoção');
+      setErrorMessage(error.response?.data?.error || 'Erro ao editar promoção: ' + error.message);
     }
   };
 

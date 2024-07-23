@@ -1,7 +1,7 @@
-import { defineConfig } from 'cypress'
 import cucumberPreprocessor from '@badeball/cypress-cucumber-preprocessor'
-import createBundler from '@bahmutov/cypress-esbuild-preprocessor'
 import { createEsbuildPlugin } from '@badeball/cypress-cucumber-preprocessor/esbuild'
+import createBundler from '@bahmutov/cypress-esbuild-preprocessor'
+import { defineConfig } from 'cypress'
 
 export default defineConfig({
   video: false,

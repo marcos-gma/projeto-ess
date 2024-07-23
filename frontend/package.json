@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "gui": "npx cypress open",
     "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
     "pretty": "npx prettier --write .",
     "start": "react-scripts start",
@@ -38,7 +39,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@badeball/cypress-cucumber-preprocessor": "^18.0.1",
+    "@badeball/cypress-cucumber-preprocessor": "^18.0.6",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
     "@cucumber/cucumber": "^9.2.0",
     "@cypress/code-coverage": "^3.10.7",
@@ -54,7 +55,7 @@
     "@vitejs/plugin-react": "^4.0.0",
     "@vitest/coverage-c8": "^0.31.1",
     "cypress": "^12.15.0",
-    "esbuild": "^0.18.8",
+    "esbuild": "^0.18.20",
     "eslint-plugin-react-refresh": "^0.4.8",
     "husky": "^8.0.3",
     "jsdom": "^22.1.0",
@@ -75,6 +76,11 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": [
+      "cypress/e2e/features/promo/*.js"
     ]
   }
 }
