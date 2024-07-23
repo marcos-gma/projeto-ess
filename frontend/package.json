@@ -34,9 +34,12 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.44.1",
     "react-icons": "^5.2.1",
+    "react-modal": "^3.16.1",
     "react-router-dom": "^6.25.1",
     "react-scripts": "^5.0.1",
-    "zod": "^3.21.4"
+    "typescript": "^4.9.5",
+    "zod": "^3.21.4",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^18.0.6",
@@ -61,10 +64,12 @@
     "jsdom": "^22.1.0",
     "prettier": "^3.3.3",
     "start-server-and-test": "^2.0.0",
-    "typescript": "^5.0.2",
     "vite": "^4.3.2",
     "vite-plugin-istanbul": "^4.1.0",
     "vitest": "^0.31.1"
+  },
+  "overrides": {
+    "react-refresh": "0.11.0"
   },
   "browserslist": {
     "production": [
