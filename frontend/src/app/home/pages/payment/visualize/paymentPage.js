@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import NavBar from '../../Compartilhado/navbar.js';
 import Visualize from '../../../services/payment/visualize.js';
 import Remove from '../../../services/payment/remove.js';
+import PopUp from '../../Compartilhado/popUp.js'
 import { Link } from 'react-router-dom';
 import './style.css'; 
+import Parabens from './parabens.js';
 
 
 const PaymentPage = () => {
@@ -49,7 +51,9 @@ const PaymentPage = () => {
             <li key={index}>
               <strong>Número do cartão:</strong> {card.cardNumber} <strong>Tipo:</strong> {card.type}
               <div className='button-container'>
-                <button className='select-button'>Selecionar</button>
+                <PopUp title='Selecionar'>
+                  <Parabens />
+                </PopUp>
                 <button className='remove-button' onClick={() => handleRemove(card.cardNumber, card.type)}>
                   Remover
                 </button>
